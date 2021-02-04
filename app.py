@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QWidget
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QWidget, QMessageBox
 
 from PyQt5.QtWebEngineWidgets import QWebEnginePage
 from PyQt5.QtWebEngineWidgets import QWebEngineView
@@ -33,9 +33,25 @@ class Demo(QWidget):  # 1
         self.button.setText('Stop')  # 4
         self.button.clicked.disconnect(self.change_text)  # 5
 
+        # 回调函数
+    def js_callback(self, result):
+        print("真的收到信息了$" + str(result))
+        QMessageBox.information(self, "提示", str(result))
+
     def change_my_first_text(self):
         print("哈哈哈,我终于可以开发 QT 啦,尼玛终于不用搞什么蛋疼的 C++了")
         self.button.setText("改变了文字了")
+
+        js_string = '''
+                function myFunction()
+                {
+                    return sender;
+                }
+
+                myFunction();
+                '''
+
+        self.web_view.page().runJavaScript(js_string, self.js_callback)
 
         aaChartModel = (
             AAChartModel()
