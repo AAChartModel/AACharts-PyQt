@@ -1,0 +1,222 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width = device-width, initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 3.0,user-scalable = no">
+
+                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+                    <script src="https://code.highcharts.com/modules/funnel.js"></script>
+
+        <style>
+            *{ -webkit-user-select: none;
+                user-select: none; }
+        </style>
+    </head>
+    <body style="margin:0px 0px 0px 0px;">
+        <div id="container" style="width:100%; height: 100%;">
+        </div>
+        <script>
+        var aaGlobalChart;
+        var sender = {
+          "credits" : {
+            "enabled" : false,
+          },
+          "touchEventEnabled" : true,
+          "chart" : {
+            "polar" : false,
+            "backgroundColor" : {
+              "stops" : [
+                [
+                  0,
+                  "#4F00BC"
+                ],
+                [
+                  1,
+                  "#29ABE2"
+                ]
+              ],
+              "linearGradient" : {
+                "x2" : 0,
+                "x1" : 1,
+                "y2" : 0,
+                "y1" : 1
+              }
+            },
+            "type" : "areaspline",
+            "inverted" : false,
+            "pinchType" : "none",
+            "panning" : true
+          },
+          "tooltip" : {
+            "enabled" : true
+          },
+          "xAxis" : {
+            "labels" : {
+              "style" : {
+                "color" : "white"
+              },
+              "useHTML" : false,
+              "enabled" : true
+            },
+            "reversed" : false,
+            "lineColor" : "white",
+            "gridLineColor" : "white",
+            "startOnTick" : false,
+            "opposite" : false,
+            "endOnTick" : false,
+            "gridLineDashStyle" : "Dash",
+            "gridLineWidth" : 0.5,
+            "tickmarkPlacement" : "on",
+            "tickInterval" : 1,
+            "visible" : true,
+            "tickWidth" : 0,
+            "categories" : [
+              "一月",
+              "二月",
+              "三月",
+              "四月",
+              "五月",
+              "六月",
+              "七月",
+              "八月",
+              "九月",
+              "十月",
+              "十一月",
+              "十二月"
+            ],
+            "lineWidth" : 1.5
+          },
+          "plotOptions" : {
+            "series" : {
+              "connectNulls" : false,
+              "stacking" : "normal",
+              "marker" : {
+                "radius" : 0,
+                "enabled" : true
+              },
+              "dataLabels" : {
+                "softConnector" : true,
+                "useHTML" : false,
+                "style" : {
+                  "fontSize" : "14px",
+                  "textOutline" : "0px 0px contrast",
+                  "fontWeight" : "thin",
+                  "color" : "white"
+                },
+                "allowOverlap" : false,
+                "crop" : false,
+                "enabled" : true,
+                "inside" : false
+              }
+            }
+          },
+          "series" : [
+            {
+              "fillColor" : {
+                "stops" : [
+                  [
+                    0,
+                    "rgba(256,256,256,0.3)"
+                  ],
+                  [
+                    1,
+                    "rgba(256,256,256,1.0)"
+                  ]
+                ],
+                "linearGradient" : {
+                  "x2" : 0,
+                  "x1" : 0,
+                  "y2" : 0,
+                  "y1" : 1
+                }
+              },
+              "lineWidth" : 7,
+              "name" : "Berlin Hot",
+              "data" : [
+                7,
+                6.9000000000000004,
+                2.5,
+                14.5,
+                18.199999999999999,
+                21.5,
+                5.2000000000000002,
+                26.5,
+                23.300000000000001,
+                45.299999999999997,
+                13.9,
+                9.5999999999999996
+              ],
+              "color" : "white",
+              "showInLegend" : true,
+              "allowPointSelect" : false,
+              "visible" : true
+            }
+          ],
+          "title" : {
+            "useHTML" : false,
+            "text" : ""
+          },
+          "colors" : [
+            "#1e90ff",
+            "#ef476f",
+            "#ffd066",
+            "#04d69f",
+            "#25547c"
+          ],
+          "yAxis" : {
+            "labels" : {
+              "style" : {
+                "color" : "white"
+              },
+              "useHTML" : false,
+              "enabled" : true,
+              "format" : "{value:.,0f}"
+            },
+            "reversed" : false,
+            "title" : {
+              "text" : ""
+            },
+            "gridLineColor" : "white",
+            "lineColor" : "white",
+            "startOnTick" : false,
+            "allowDecimals" : true,
+            "opposite" : false,
+            "endOnTick" : false,
+            "gridLineDashStyle" : "Dash",
+            "gridLineWidth" : 0.5,
+            "visible" : true,
+            "lineWidth" : 1.5
+          },
+          "legend" : {
+            "enabled" : true,
+            "floating" : false,
+            "itemStyle" : {
+              "fontSize" : "13px",
+              "fontWeight" : "thin",
+              "color" : "white"
+            }
+          }
+        };
+
+        loadTheHighChartView(sender);
+
+        function loadTheHighChartView(sender) {
+            var container = document.getElementById('container');
+
+<!--            var aaOptions = JSON.parse(sender);-->
+var aaOptions = sender;
+
+
+            aaGlobalChart = Highcharts.chart('container', aaOptions);
+        }
+
+
+        function updateChart(optionsStr, redraw) {
+            var options = JSON.parse(optionsStr);
+            aaGlobalChart.update(options,redraw);
+        }
+
+
+            </script>
+    </body>
+</html>
