@@ -6,7 +6,7 @@ class AAItemStyle:
      cursor: str
      pointer: str
      fontSize: str
-     fontWeight: AAChartFontWeightType
+     fontWeight: str
      
      def colorSet(self, prop: str):
           self.color = prop
@@ -26,14 +26,14 @@ class AAItemStyle:
           return self
      
      def fontWeightSet(self, prop: AAChartFontWeightType):
-          self.fontWeight = prop
+          self.fontWeight = prop.value
           return self
  
 
 class AALegend:
-    layout: AAChartLayoutType #The layout of the legend data items. Layout type: "horizontal" or "vertical" ie horizontal and vertical layout The default is: "horizontal".
-    align: AAChartAlignType #Set the horizontal alignment of the legend in the chart area. Legal values are "left", "center", and "right".  The default is: "center".
-    verticalAlign: AAChartVerticalAlignType #Set the vertical alignment of the legend in the chart area. Legal values are "top", "middle", and "bottom". The vertical position can be further set by the y option.The default is: "bottom".
+    layout: str #The layout of the legend data items. Layout type: "horizontal" or "vertical" ie horizontal and vertical layout The default is: "horizontal".
+    align: str #Set the horizontal alignment of the legend in the chart area. Legal values are "left", "center", and "right".  The default is: "center".
+    verticalAlign: str #Set the vertical alignment of the legend in the chart area. Legal values are "top", "middle", and "bottom". The vertical position can be further set by the y option.The default is: "bottom".
     enabled: bool
     borderColor: str
     borderWidth: float
@@ -49,15 +49,15 @@ class AALegend:
     floating: bool
      
     def layoutSet(self, prop: AAChartLayoutType):
-          self.layout = prop
+          self.layout = prop.value
           return self
      
     def alignSet(self, prop: AAChartAlignType):
-          self.align = prop
+          self.align = prop.value
           return self
      
     def verticalAlignSet(self, prop: AAChartVerticalAlignType):
-          self.verticalAlign = prop
+          self.verticalAlign = prop.value
           return self
      
     def enabledSet(self, prop: bool):

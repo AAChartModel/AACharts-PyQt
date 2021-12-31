@@ -60,7 +60,7 @@ class AASeriesElement:
     reversed: bool           #Only useful for pyramid chart and funnel chart
     
     def typeSet(self, prop: AAChartType):
-        self.type = prop
+        self.type = prop.value
         return self
    
     

@@ -6,6 +6,7 @@ from aacharts.aaoptionsmodel.AACrosshair import AACrosshair
 from aacharts.aaoptionsmodel.AALabels import AALabels
 from aacharts.aaoptionsmodel.AATitle import AATitle
 from aacharts.aaenum.AAEnum import AAChartAxisType
+from aacharts.aaoptionsmodel.AAXAxis import AADateTimeLabelFormats
 
 
 class AAYAxis:
@@ -13,15 +14,14 @@ class AAYAxis:
     title: AATitle
     type: AAChartAxisType
     dateTimeLabelFormats = None
-
-    # dateTimeLabelFormats: AADateTimeLabelFormats
+    dateTimeLabelFormats: AADateTimeLabelFormats
     plotBands: List
     plotLines: List
     categories: List
     reversed: bool
     gridLineWidth: float # y-axis grid line width
     gridLineColor: str # y-axis grid line color
-    gridLineDashStyle: AAChartLineDashStyleType # Grid line line style, all available line style references: Highcharts line style
+    gridLineDashStyle: str # Grid line line style, all available line style references: Highcharts line style
     gridLineInterpolation: str # Polar charts only. Whether the grid lines should draw as a polygon with straight lines between categories, or as circles. Can be either circle or polygon. The default is: null.
     labels: AALabels # Used to set the y-axis text related
     lineWidth: float # y-axis width
@@ -33,7 +33,7 @@ class AAYAxis:
     # private var minPadding: # Padding of the min value relative to the length of the axis. A padding of 0.05 will make a 100px axis 5px longer. This is useful when you don't want the lowest data value to appear on the edge of the plot area. The default is: 0.05.
     minTickInterval: int #The minimum tick interval allowed in axis values. For example on zooming in on an axis with daily data, self can be used to prevent the axis from showing hours. Defaults to the closest distance between two points on the axis.
     minorGridLineColor: str #Color of the minor, secondary grid lines.
-    minorGridLineDashStyle: AAChartLineDashStyleType #The dash or dot style of the minor grid lines.
+    minorGridLineDashStyle: str #The dash or dot style of the minor grid lines.
     minorGridLineWidth: float #Width of the minor, secondary grid lines.
     minorTickColor: str #Color for the minor tick marks.
     minorTickInterval: str #/*Specific tick interval in axis units for the minor ticks. On a linear axis, if "auto", the minor tick interval is calculated as a fifth of the tickInterval. If null or undefined, minor ticks are not shown.
@@ -67,12 +67,12 @@ class AAYAxis:
         return self
 
     def typeSet(self, prop: AAChartAxisType):
-        self.type = prop
+        self.type = prop.value
         return self
 
-    # def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
-    #     self.dateTimeLabelFormats = prop
-    #     return self
+    def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
+        self.dateTimeLabelFormats = prop
+        return self
 
     def dateTimeLabelFormatsSet(self, prop):
         self.dateTimeLabelFormats = prop
@@ -103,7 +103,7 @@ class AAYAxis:
         return self
 
     def gridLineDashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.gridLineDashStyle = prop
+        self.gridLineDashStyle = prop.value
         return self
 
     def gridLineInterpolationSet(self, prop: str):
@@ -147,7 +147,7 @@ class AAYAxis:
         return self
 
     def minorGridLineDashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.minorGridLineDashStyle = prop
+        self.minorGridLineDashStyle = prop.value
         return self
 
     def minorGridLineWidthSet(self, prop: float):

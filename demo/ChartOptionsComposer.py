@@ -1263,7 +1263,7 @@ class ChartOptionsComposer:
             .typeSet(AAChartType.spline)
             .markerSet(AAMarker()
                 .radiusSet(7)#曲线连接点半径，默认是4
-                .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                 .fillColorSet(AAColor.white)#点の填充色Set(用来设置折线连接点の填充色)
                 .lineWidthSet(3)#外沿线の宽度Set(用来设置折线连接点の轮廓描边の宽度)
                 .lineColorSet("")#外沿线の颜色Set(用来设置折线连接点の轮廓描边颜色，当值为空字符串时，默认取数据点或数据列の颜色)

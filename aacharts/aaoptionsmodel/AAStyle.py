@@ -9,7 +9,7 @@ class AAStyle:
     cursor: str
     fontFamily: str
     fontSize: str
-    fontWeight: AAChartFontWeightType
+    fontWeight: str
     height: float
     lineWidth: float
     opacity: float
@@ -60,7 +60,7 @@ class AAStyle:
         return self
 
     def fontWeightSet(self, prop: AAChartFontWeightType):
-        self.fontWeight = prop
+        self.fontWeight = prop.value
         return self
 
     def heightSet(self, prop: float):

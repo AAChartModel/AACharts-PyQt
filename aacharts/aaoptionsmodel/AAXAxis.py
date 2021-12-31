@@ -6,11 +6,55 @@ from aacharts.aaoptionsmodel.AALabels import AALabels
 from aacharts.aaoptionsmodel.AATitle import AATitle
 from aacharts.aaenum.AAEnum import AAChartAxisType
 
+
+class AADateTimeLabelFormats:
+    millisecond: str
+    second: str
+    minute: str
+    hour: str
+    day: str
+    week: str
+    month: str
+    year: str
+
+    def millisecondSet(self, prop: str):
+        self.millisecond = prop
+        return self
+
+    def secondSet(self, prop: str):
+        self.second = prop
+        return self
+
+    def minuteSet(self, prop: str):
+        self.minute = prop
+        return self
+
+    def hourSet(self, prop: str):
+        self.hour = prop
+        return self
+
+    def daySet(self, prop: str):
+        self.day = prop
+        return self
+
+    def weekSet(self, prop: str):
+        self.week = prop
+        return self
+
+    def monthSet(self, prop: str):
+        self.month = prop
+        return self
+
+    def yearSet(self, prop: str):
+        self.year = prop
+        return self
+
+
 class AAXAxis:
     alternateGridColor: str
     title: AATitle
-    type: AAChartAxisType
-    # dateTimeLabelFormats: AADateTimeLabelFormats
+    type: str
+    dateTimeLabelFormats: AADateTimeLabelFormats
     plotBands: List
     plotLines: List
     categories: List
@@ -23,7 +67,7 @@ class AAXAxis:
     minRange: int
     minTickInterval: int #The minimum tick interval allowed in axis values. For example on zooming in on an axis with daily data, self can be used to prevent the axis from showing hours. Defaults to the closest distance between two points on the axis.
     minorGridLineColor: str #Color of the minor, secondary grid lines.
-    minorGridLineDashStyle: AAChartLineDashStyleType #The dash or dot style of the minor grid lines.
+    minorGridLineDashStyle: str #The dash or dot style of the minor grid lines.
     minorGridLineWidth: float #Width of the minor, secondary grid lines.
     minorTickColor: str #Color for the minor tick marks.
     minorTickInterval: str #*Specific tick interval in axis units for the minor ticks. On a linear axis, if "auto", the minor tick interval is calculated as a fifth of the tickInterval. If null or undefined, minor ticks are not shown.
@@ -38,7 +82,7 @@ class AAXAxis:
     tickColor: str # Color of tick mark below x axis
     gridLineWidth: float # x-axis grid line width
     gridLineColor: str # x-axis grid line color
-    gridLineDashStyle: AAChartLineDashStyleType # x-axis grid line style
+    gridLineDashStyle: str # x-axis grid line style
     offset: float # x-axis vertical offset
     labels: AALabels # Used to set the x-axis text related
     visible: bool # Used to set whether the x-axis and x-axis text are displayed
@@ -64,12 +108,12 @@ class AAXAxis:
         return self
 
     def typeSet(self, prop: AAChartAxisType):
-        self.type = prop
+        self.type = prop.value
         return self
 
-    # def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
-    #     self.dateTimeLabelFormats = prop
-    #     return self
+    def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
+        self.dateTimeLabelFormats = prop
+        return self
 
     def plotBandsSet(self, prop: List):
         self.plotBands = prop
@@ -120,7 +164,7 @@ class AAXAxis:
         return self
 
     def minorGridLineDashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.minorGridLineDashStyle = prop
+        self.minorGridLineDashStyle = prop.value
         return self
 
     def minorGridLineWidthSet(self, prop: float):
@@ -160,7 +204,7 @@ class AAXAxis:
         return self
 
     def gridLineDashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.gridLineDashStyle = prop
+        self.gridLineDashStyle = prop.value
         return self
 
     def offsetSet(self, prop: float):
@@ -223,46 +267,3 @@ class AAXAxis:
 
 
 
-class AADateTimeLabelFormats:
-    millisecond: str
-    second: str
-    minute: str
-    hour: str
-    day: str
-    week: str
-    month: str
-    year: str
-
-    def millisecondSet(self, prop: str):
-        self.millisecond = prop
-        return self
-
-    def secondSet(self, prop: str):
-        self.second = prop
-        return self
-
-    def minuteSet(self, prop: str):
-        self.minute = prop
-        return self
-
-    def hourSet(self, prop: str):
-        self.hour = prop
-        return self
-
-    def daySet(self, prop: str):
-        self.day = prop
-        return self
-
-    def weekSet(self, prop: str):
-        self.week = prop
-        return self
-
-    def monthSet(self, prop: str):
-        self.month = prop
-        return self
-
-    def yearSet(self, prop: str):
-        self.year = prop
-        return self
-     
- 

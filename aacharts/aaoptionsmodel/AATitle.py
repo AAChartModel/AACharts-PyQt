@@ -7,8 +7,8 @@ from aacharts.aaoptionsmodel.AAStyle import AAStyle
 class AATitle:
     text: str
     style: AAStyle
-    align: AAChartAlignType
-    verticalAlign: AAChartVerticalAlignType
+    align: str
+    verticalAlign: str
     x: float
     y: float
     userHTML: bool
@@ -24,12 +24,12 @@ class AATitle:
    
     
     def alignSet(self, prop: AAChartAlignType):
-        self.align = prop
+        self.align = prop.value
         return self
    
     
     def verticalAlignSet(self, prop: AAChartVerticalAlignType):
-        self.verticalAlign = prop
+        self.verticalAlign = prop.value
         return self
    
     
