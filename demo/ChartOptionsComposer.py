@@ -1123,172 +1123,170 @@ class ChartOptionsComposer:
             .seriesSet([element1,element2,element3,]))
         
         return aaOptions
-    
-    
-    # @staticmethod
-    # def configureDoubleYAxesAndColumnLineMixedChart():
-    #     stopsArr = [
-    #         [0.0, AAColor.rgbaColor(156,107,211,0.5)],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #         [0.2, AAColor.rgbaColor(156,107,211,0.3)],
-    #         [1.0, AAColor.rgbaColor(156,107,211,0)]
-    #     ]
-    #
-    #     gradientColorDic1 = (AAGradientColor.linearGradient2(
-    #         AALinearGradientDirection.toBottom,
-    #         stopsArr
-    #         ))
-    #
-    #     gradientColorDic2 = (AAGradientColor.linearGradient1(
-    #         AALinearGradientDirection.toBottom,
-    #         "#956FD4",
-    #         "#3EACE5"#颜色字符串设置支持十六进制类型和 rgba 类型
-    #     ))
-    #
-    #     category = [
-    #         "市区","万州","江北","南岸","北碚","綦南","长寿","永川","璧山","江津",
-    #         "城口","大足","垫江","丰都","奉节","合川","江津区","开州","南川","彭水",
-    #         "黔江","石柱","铜梁","潼南","巫山","巫溪","武隆","秀山","酉阳","云阳",
-    #         "忠县","川东","检修"
-    #     ]
-    #
-    #     goalValuesArr = [
-    #         18092,20728,24045,28348,32808
-    #         ,36097,39867,44715,48444,50415
-    #         ,56061,62677,59521,67560,18092,20728,24045,28348,32808
-    #         ,36097,39867,44715,48444,50415,36097,39867,44715,48444,50415
-    #         ,50061,32677,49521,32808
-    #     ]
-    #
-    #     realValuesArr = [
-    #         4600,5000,5500,6500,7500
-    #         ,8500,9900,12500,14000,21500
-    #         ,23200,24450,25250,33300,4600,5000,5500,6500,7500
-    #         ,8500,9900,22500,14000,21500,8500,9900,12500,14000,21500
-    #         ,23200,24450,25250,7500
-    #     ]
-        
-        # rateValuesArr = Array<Float>())
-        
-        # for (i in 0 ... 32) 
-        #     goalValue = goalValuesArr[i]
-        #     realValue = realValuesArr[i]
-        #     rateValue = realValue / goalValue
-        #     rateValuesArr.push(rateValue))
-        #
-        #
-        # aaChart = (AAChart()
-        #     .backgroundColorSet("#191E40"))
-        #
-        # aaTitle = (AATitle()
-        #     .textSet(""))
-        #
-        # aaLabels = (AALabels()
-        #     .enabledSet(True)
-        #     .styleSet(AAStyle()
-        #         .colorSet(AAColor.lightGray)))
-        #
-        # aaXAxis = (AAXAxis()
-        #     .visibleSet(True)
-        #     .labelsSet(aaLabels)
-        #     .minSet(0)
-        #     .categoriesSet(category))
-        #
-        # aaYAxisTitleStyle = (AAStyle()
-        #     .colorSet("#1e90ff")#Title font color
-        #     .fontSizeSet(14)#Title font size
-        #     .fontWeightSet(AAChartFontWeightType.bold)#Title font weight
-        #     .textOutlineSet("0px 0px contrast"))
-        #
-        # yAxis1 = (AAYAxis()
-        #     .visibleSet(True)
-        #     .labelsSet(aaLabels)
-        #     .gridLineWidthSet(0)
-        #     .titleSet(AATitle()
-        #         .textSet("已贯通 / 计划贯通")
-        #         .styleSet(aaYAxisTitleStyle)))
-        #
-        # yAxis2 = (AAYAxis()
-        #     .visibleSet(True)
-        #     .labelsSet(aaLabels)
-        #     .gridLineWidthSet(0)
-        #     .titleSet(AATitle()
-        #         .textSet("贯通率")
-        #         .styleSet(aaYAxisTitleStyle))
-        #     .oppositeSet(True))
-        #
-        # aaTooltip = (AATooltip()
-        #     .enabledSet(True)
-        #     .sharedSet(True))
-        #
-        # aaPlotOptions = (AAPlotOptions()
-        #     .seriesSet(AASeries()
-        #         .animationSet(AAAnimation()
-        #             .easingSet(AAChartAnimationType.easeTo)
-        #             .durationSet(1000)))
-        #     .columnSet(AAColumn()
-        #         .groupingSet(False)
-        #         .pointPaddingSet(0)
-        #         .pointPlacementSet(0)))
-        #
-        # aaLegend = (AALegend()
-        #     .enabledSet(True)
-        #     .itemStyleSet(AAItemStyle()
-        #         .colorSet(AAColor.lightGray))
-        #     .floatingSet(True)
-        #     .layoutSet(AAChartLayoutType.horizontal)
-        #     .alignSet(AAChartAlignType.left)
-        #     .xSet(30).ySet(10)
-        #     .verticalAlignSet(AAChartVerticalAlignType.top)
-        #
-        
-        # goalValuesElement = (AASeriesElement()
-        #     .nameSet("计划贯通")
-        #     .typeSet(AAChartType.column)
-        #     .borderWidthSet(0)
-        #     .colorSet(gradientColorDic1)
-        #     .yAxisSet(0)
-        #     # .dataSet(goalValuesArr)
-        # )
-        
-        # realValuesElement = (AASeriesElement()
-        #     .nameSet("已贯通")
-        #     .typeSet(AAChartType.column)
-        #     .borderWidthSet(0)
-        #     .colorSet(gradientColorDic2)
-        #     .yAxisSet(0)
-        #     .dataSet(realValuesArr))
-        
-        # rateValuesElement = (AASeriesElement()
-        #     .nameSet("贯通率")
-        #     .typeSet(AAChartType.spline)
-        #     .markerSet(AAMarker()
-        #         .radiusSet(7)#曲线连接点半径，默认是4
-        #         .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-        #         .fillColorSet(AAColor.white)#点の填充色Set(用来设置折线连接点の填充色)
-        #         .lineWidthSet(3)#外沿线の宽度Set(用来设置折线连接点の轮廓描边の宽度)
-        #         .lineColorSet("")#外沿线の颜色Set(用来设置折线连接点の轮廓描边颜色，当值为空字符串时，默认取数据点或数据列の颜色)
-        # )
-        #     .colorSet("#F02FC2")
-        #     .yAxisSet(1)
-        #     .dataSet(rateValuesArr))
-        
-        # aaOptions = AAOptions().chartSet(aaChart)
-            # .titleSet(aaTitle)
-        #     .xAxisSet(aaXAxis)
-        # )
-            # .yAxisArraySet([yAxis1,yAxis2])
-            # .tooltipSet(aaTooltip)
-            # .plotOptionsSet(aaPlotOptions)
-            # .legendSet(aaLegend)
-            # .seriesSet([
-            #     goalValuesElement,
-            #     realValuesElement,
-            #     rateValuesElement
-            # ]))
-        # aaOptions = A/AOptions()
 
-        # return ""
-        # return aaOptions
+
+    @staticmethod
+    def configureDoubleYAxesAndColumnLineMixedChart():
+        stopsArr = [
+            [0.0, AAColor.rgbaColor(156, 107, 211, 0.5)],#颜色字符串设置支持十六进制类型和 rgba 类型
+            [0.2, AAColor.rgbaColor(156, 107, 211, 0.3)],
+            [1.0, AAColor.rgbaColor(156, 107, 211, 0)]
+        ]
+
+        gradientColorDic1 = AAGradientColor.linearGradient2(
+            AALinearGradientDirection.toBottom,
+            stopsArr
+            )
+
+        gradientColorDic2 = AAGradientColor.linearGradient1(
+            AALinearGradientDirection.toBottom,
+            "#956FD4",
+            "#3EACE5"#颜色字符串设置支持十六进制类型和 rgba 类型
+        )
+
+        category = [
+            "市区", "万州", "江北", "南岸", "北碚", "綦南", "长寿", "永川", "璧山", "江津",
+            "城口", "大足", "垫江", "丰都", "奉节", "合川", "江津区", "开州", "南川", "彭水",
+            "黔江", "石柱", "铜梁", "潼南", "巫山", "巫溪", "武隆", "秀山", "酉阳", "云阳",
+            "忠县", "川东", "检修"
+        ]
+
+        goalValuesArr = [
+            18092, 20728, 24045, 28348, 32808, 36097, 39867, 44715, 48444, 50415,
+            56061, 62677, 59521, 67560, 18092, 20728, 24045, 28348, 32808, 36097,
+            39867, 44715, 48444, 50415, 36097, 39867, 44715, 48444, 50415, 50061,
+            32677, 49521, 32808
+        ]
+
+        realValuesArr = [
+            4600, 5000, 5500, 6500, 750, 8500, 9900, 12500, 14000, 21500,
+            23200, 24450, 25250, 33300, 4600, 5000, 5500, 6500, 7500, 8500,
+            9900, 22500, 14000, 21500, 8500, 9900, 12500, 14000, 21500, 23200,
+            24450, 25250, 7500
+        ]
+
+        rateValuesArr = list()
+        _g = 0
+        while (_g < 32):
+            i = _g
+            _g = (_g + 1)
+            rateValue = ((realValuesArr[i] if i >= 0 and i < len(realValuesArr) else None) / (
+                goalValuesArr[i] if i >= 0 and i < len(goalValuesArr) else None))
+            rateValuesArr.append(rateValue)
+
+
+        aaChart = (AAChart()
+            .backgroundColorSet("#191E40"))
+
+        aaTitle = (AATitle()
+            .textSet(""))
+
+        aaLabels = (AALabels()
+            .enabledSet(True)
+            .styleSet(AAStyle()
+                .colorSet(AAColor.lightGray)))
+
+        aaXAxis = (AAXAxis()
+            .visibleSet(True)
+            .labelsSet(aaLabels)
+            .minSet(0)
+            .categoriesSet(category))
+
+        aaYAxisTitleStyle = (AAStyle()
+            .colorSet("#1e90ff")#Title font color
+            .fontSizeSet(14)#Title font size
+            .fontWeightSet(AAChartFontWeightType.bold)#Title font weight
+            .textOutlineSet("0px 0px contrast"))
+
+        yAxis1 = (AAYAxis()
+            .visibleSet(True)
+            .labelsSet(aaLabels)
+            .gridLineWidthSet(0)
+            .titleSet(AATitle()
+                .textSet("已贯通 / 计划贯通")
+                .styleSet(aaYAxisTitleStyle)))
+
+        yAxis2 = (AAYAxis()
+            .visibleSet(True)
+            .labelsSet(aaLabels)
+            .gridLineWidthSet(0)
+            .titleSet(AATitle()
+                .textSet("贯通率")
+                .styleSet(aaYAxisTitleStyle))
+            .oppositeSet(True))
+
+        aaTooltip = (AATooltip()
+            .enabledSet(True)
+            .sharedSet(True))
+
+        aaPlotOptions = (AAPlotOptions()
+            .seriesSet(AASeries()
+                .animationSet(AAAnimation()
+                    .easingSet(AAChartAnimationType.easeTo)
+                    .durationSet(1000)))
+            .columnSet(AAColumn()
+                .groupingSet(False)
+                .pointPaddingSet(0)
+                .pointPlacementSet(0)))
+
+        aaLegend = (AALegend()
+            .enabledSet(True)
+            .itemStyleSet(AAItemStyle()
+                .colorSet(AAColor.lightGray))
+            .floatingSet(True)
+            .layoutSet(AAChartLayoutType.horizontal)
+            .alignSet(AAChartAlignType.left)
+            .xSet(30).ySet(10)
+            .verticalAlignSet(AAChartVerticalAlignType.top)
+                    )
+
+
+        goalValuesElement = (AASeriesElement()
+            .nameSet("计划贯通")
+            .typeSet(AAChartType.column)
+            .borderWidthSet(0)
+            .colorSet(gradientColorDic1)
+            .yAxisSet(0)
+            .dataSet(goalValuesArr)
+        )
+
+        realValuesElement = (AASeriesElement()
+            .nameSet("已贯通")
+            .typeSet(AAChartType.column)
+            .borderWidthSet(0)
+            .colorSet(gradientColorDic2)
+            .yAxisSet(0)
+            .dataSet(realValuesArr))
+
+        rateValuesElement = (AASeriesElement()
+            .nameSet("贯通率")
+            .typeSet(AAChartType.spline)
+            .markerSet(AAMarker()
+                .radiusSet(7)#曲线连接点半径，默认是4
+                .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                .fillColorSet(AAColor.white)#点の填充色Set(用来设置折线连接点の填充色)
+                .lineWidthSet(3)#外沿线の宽度Set(用来设置折线连接点の轮廓描边の宽度)
+                .lineColorSet("")#外沿线の颜色Set(用来设置折线连接点の轮廓描边颜色，当值为空字符串时，默认取数据点或数据列の颜色)
+        )
+            .colorSet("#F02FC2")
+            .yAxisSet(1)
+            .dataSet(rateValuesArr))
+
+        aaOptions = (AAOptions()
+            .chartSet(aaChart)
+            .titleSet(aaTitle)
+            .xAxisSet(aaXAxis)
+            .yAxisArraySet([yAxis1,yAxis2])
+            .tooltipSet(aaTooltip)
+            .plotOptionsSet(aaPlotOptions)
+            .legendSet(aaLegend)
+            .seriesSet([
+            goalValuesElement,
+            realValuesElement,
+            rateValuesElement
+        ]))
+
+        return aaOptions
     
     
     @staticmethod
