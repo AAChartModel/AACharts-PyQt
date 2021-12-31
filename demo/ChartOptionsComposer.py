@@ -1,4 +1,9 @@
-
+from aacharts.aaoptionsmodel.AAChart import AAResetZoomButton
+from aacharts.aaoptionsmodel.AALabel import AALabel
+from aacharts.aaoptionsmodel.AAPane import AAPane
+from aacharts.aaoptionsmodel.AAPlotBandsElement import AAPlotBandsElement
+from aacharts.aaoptionsmodel.AAXAxis import AADateTimeLabelFormats
+from aacharts.aaoptionsmodel.AAZonesElement import AAZonesElement
 from aacharts.aatool.AAColor import AAColor
 from aacharts.aatool.AAGradientColor import AAGradientColor
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
@@ -17,11 +22,33 @@ from aacharts.aaoptionsmodel.AALegend import AAItemStyle
 from aacharts.aaoptionsmodel.AASeries import AAEvents
 from aacharts.aaoptionsmodel.AALang import AALang
 from aacharts.aatool.AAGradientColor import AALinearGradientDirection
+from aacharts.aaoptionsmodel.AAPlotOptions import AAColumn, AABubble
+from aacharts.aatool.AAJSArrayConverter import AAJSArrayConverter
+from aacharts.aatool.AAGradientColor import AAGradientColor
+from aacharts.aachartcreator.AASeriesElement import AASeriesElement
+from aacharts.aachartcreator.AAChartModel import AAChartModel, AAChartSymbolStyleType, AAChartSymbolType, AAChartType
+from aacharts.aaoptionsmodel.AAZonesElement import AAZonesElement
+from aacharts.aaoptionsmodel.AAPlotBandsElement import AAPlotBandsElement
+from aacharts.aaoptionsmodel.AAPlotLinesElement import AAPlotLinesElement
+from aacharts.aaoptionsmodel.AALabel import AALabel
+from aacharts.aaoptionsmodel.AALabels import AALabels
+from aacharts.aatool.AAGradientColor import AAGradientColor
+from aacharts.aachartcreator.AASeriesElement import AASeriesElement
+from aacharts.aachartcreator.AAChartModel import *
+from aacharts.aaoptionsmodel.AAMarker import AAMarker
+from aacharts.aaoptionsmodel.AADataElement import AADataElement
+from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
+from aacharts.aaoptionsmodel.AACrosshair import AACrosshair
+from aacharts.aaoptionsmodel.AAStates import AAStates, AAHover, AAHalo, AAInactive, AASelect
+from aacharts.aaoptionsmodel.AALegend import AAItemStyle
+from aacharts.aaoptionsmodel.AASeries import AAEvents, AAPoint, AAPointEvents
+from aacharts.aaoptionsmodel.AALang import AALang
+from aacharts.aatool.AAGradientColor import AALinearGradientDirection
+from aacharts.aatool.AAJSArrayConverter import AAJSArrayConverter
 from aacharts.aaoptionsmodel.AAPlotOptions import AAColumn
 
 
-
-class ChartOptionsComposer: 
+class ChartOptionsComposer:
 
     @staticmethod
     def configureLegendStyle():
@@ -589,30 +616,32 @@ class ChartOptionsComposer:
             .dataLabelsEnabledSet(False)
             .zoomTypeSet(AAChartZoomType.x)
             .categoriesSet([
-                "10-01","10-02","10-03","10-04","10-05","10-06","10-07","10-08","10-09","10-10","10-11",
-                "10-12","10-13","10-14","10-15","10-16","10-17","10-18","10-19","10-20","10-21","10-22",
-                "10-23","10-024","10-25","10-26","10-27","10-28","10-29","10-30","10-31","11-01","11-02",
-                "11-03","11-04","11-05","11-06","11-07","11-08","11-09","11-10","11-11","11-12","11-13",
-                "11-14","11-15","11-16","11-17","11-18","11-19","11-20","11-21","11-22","11-23","11-024",
-                "11-25","11-26","11-27","11-28","11-29","11-30","12-01","12-02","12-03","12-04","12-05",
-                "12-06","12-07","12-08","12-09","12-10","12-11","12-12","12-13","12-14","12-15","12-16",
-                "12-17","12-18","12-19","12-20","12-21","12-22","12-23","12-024","12-25","12-26","12-27",
-                "12-28","12-29","12-30"])
+            "10-01", "10-02", "10-03", "10-04", "10-05", "10-06", "10-07", "10-08", "10-09", "10-10", "10-11",
+            "10-12", "10-13", "10-14", "10-15", "10-16", "10-17", "10-18", "10-19", "10-20", "10-21", "10-22",
+            "10-23", "10-24", "10-25", "10-26", "10-27", "10-28", "10-29", "10-30", "10-31", "11-01", "11-02",
+            "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12", "11-13",
+            "11-14", "11-15", "11-16", "11-17", "11-18", "11-19", "11-20", "11-21", "11-22", "11-23", "11-24",
+            "11-25", "11-26", "11-27", "11-28", "11-29", "11-30", "12-01", "12-02", "12-03", "12-04", "12-05",
+            "12-06", "12-07", "12-08", "12-09", "12-10", "12-11", "12-12", "12-13", "12-14", "12-15", "12-16",
+            "12-17", "12-18", "12-19", "12-20", "12-21", "12-22", "12-23", "12-24", "12-25", "12-26", "12-27",
+            "12-28", "12-29", "12-30"
+        ])
             .seriesSet([
-                    AASeriesElement()
-                    .nameSet("2020")
-                    .lineWidthSet(3)
-                    .colorSet("#FFD700")#/*纯金色*/
-                    .fillOpacitySet(0.5)
-                    .dataSet([
-                        1.51, 6.7, 0.94, 1.44, 1.6, 1.63, 1.56, 1.91, 2.45, 3.87, 3.24, 4.90, 4.61, 4.10,
-                        4.17, 3.85, 4.17, 3.46, 3.46, 3.55, 3.50, 4.13, 2.58, 2.28,1.51, 12.7, 0.94, 1.44,
-                        18.6, 1.63, 1.56, 1.91, 2.45, 3.87, 3.24, 4.90, 4.61, 4.10, 4.17, 3.85, 4.17, 3.46,
-                        3.46, 3.55, 3.50, 4.13, 2.58, 2.28,1.33, 4.68, 1.31, 1.10, 13.9, 1.10, 1.16, 1.67,
-                        2.64, 2.86, 3.00, 3.21, 4.14, 4.07, 3.68, 3.11, 3.41, 3.25, 3.32, 3.07, 3.92, 3.05,
-                        2.18, 3.24,3.23, 3.15, 2.90, 1.81, 2.11, 2.43, 5.59, 3.09, 4.09, 6.14, 5.33, 6.05,
-                        5.71, 6.22, 6.56, 4.75, 5.27, 6.02, 5.48])
-            ]))
+            AASeriesElement()
+                .nameSet("2020")
+                .lineWidthSet(3)
+                .colorSet("#FFD700")#/*纯金色*/
+                .fillOpacitySet(0.5)
+                .dataSet([
+                1.51, 6.70, 0.94, 1.44, 1.60, 1.63, 1.56, 1.91, 2.45, 3.87, 3.24, 4.90, 4.61, 4.10,
+                4.17, 3.85, 4.17, 3.46, 3.46, 3.55, 3.50, 4.13, 2.58, 2.28, 1.51, 12.7, 0.94, 1.44,
+                18.6, 1.63, 1.56, 1.91, 2.45, 3.87, 3.24, 4.90, 4.61, 4.10, 4.17, 3.85, 4.17, 3.46,
+                3.46, 3.55, 3.50, 4.13, 2.58, 2.28, 1.33, 4.68, 1.31, 1.10, 13.9, 1.10, 1.16, 1.67,
+                2.64, 2.86, 3.00, 3.21, 4.14, 4.07, 3.68, 3.11, 3.41, 3.25, 3.32, 3.07, 3.92, 3.05,
+                2.18, 3.24, 3.23, 3.15, 2.90, 1.81, 2.11, 2.43, 5.59, 3.09, 4.09, 6.14, 5.33, 6.05,
+                5.71, 6.22, 6.56, 4.75, 5.27, 6.02, 5.48
+            ])
+        ]))
         
         aaOptions = aaChartModel.aa_toAAOptions()
 
@@ -1693,7 +1722,7 @@ class ChartOptionsComposer:
     #四边形雷达图
     @staticmethod
     def configureQuadrangleRadarChart():
-        aaOptions = configureTriangleRadarChart()
+        aaOptions = ChartOptionsComposer.configureTriangleRadarChart()
         aaOptions.yAxis.plotBands = [
                 AAPlotBandsElement()
                 .fromSet(0)
@@ -1732,7 +1761,7 @@ class ChartOptionsComposer:
     #五边形雷达图
     @staticmethod
     def configurePentagonRadarChart():
-        aaOptions = configureTriangleRadarChart()
+        aaOptions = ChartOptionsComposer.configureTriangleRadarChart()
         aaOptions.yAxis.plotBands = [
                 AAPlotBandsElement()
                 .fromSet(0)
@@ -1771,7 +1800,7 @@ class ChartOptionsComposer:
     #六边形雷达图
     @staticmethod
     def configureHexagonRadarChart():
-        aaOptions = configureTriangleRadarChart()
+        aaOptions = ChartOptionsComposer.configureTriangleRadarChart()
         aaOptions.yAxis.plotBands = [
                 AAPlotBandsElement()
                 .fromSet(0)
@@ -1810,7 +1839,7 @@ class ChartOptionsComposer:
     #🕸蜘蛛网状雷达图
     @staticmethod
     def configureSpiderWebRadarChart():
-        aaOptions = configureTriangleRadarChart()
+        aaOptions = ChartOptionsComposer.configureTriangleRadarChart()
         aaOptions.yAxis.plotBands = [
                 AAPlotBandsElement()
                 .fromSet(0)
@@ -1846,416 +1875,414 @@ class ChartOptionsComposer:
         return aaOptions
     
     
-    # @staticmethod
-    # def configureComplicatedCustomAreasplineChart():
-    #     aaChart = (AAChart()
-    #         .typeSet(AAChartType.areaspline)
-    #         .backgroundColorSet(AAColor.black))
-    #
-    #     aaTitle = (AATitle()
-    #         .textSet(""))
-    #
-    #     aaXAxis = (AAXAxis()
-    #         .categoriesSet([
-    #             "一月", "二月", "三月", "四月", "五月", "六月",
-    #             "七月", "八月", "九月", "十月", "十一月", "十二月"
-    #         ])
-    #         .tickWidthSet(0)#X轴刻度线宽度
-    #         .lineWidthSet(1.5)#X轴轴线宽度
-    #         .lineColorSet(AAColor.white)#X轴轴线颜色
-    #         .gridLineColorSet(AAColor.white)
-    #         .gridLineWidthSet(0.5)#X轴网格线宽度
-    #         .gridLineDashStyleSet(AAChartLineDashStyleType.dash)
-    #         .labelsSet(AALabels()
-    #                 .styleSet(AAStyle()
-    #                         .colorSet(AAColor.white))#X轴文字颜色
-    #         ))
-    #
-    #     aaYAXis = (AAYAxis()
-    #         .titleSet(AATitle()
-    #                 .textSet(""))
-    #         .tickPositionsSet([0, 20, 40, 60, 80, 100])
-    #         .lineWidthSet(1.5)#Y轴轴线颜色
-    #         .lineColorSet(AAColor.white)#Y轴轴线颜色
-    #         .gridLineWidthSet(0)#Y轴网格线宽度
-    #         .gridLineDashStyleSet(AAChartLineDashStyleType.dash)
-    #         .labelsSet(AALabels()
-    #                 .formatSet("value %")#给y轴添加单位
-    #                 .styleSet(AAStyle()
-    #                         .colorSet(AAColor.white))#Y轴文字颜色
-    #         ))
-    #
-    #
-    #     aaPlotOptions = (AAPlotOptions()
-    #         .seriesSet(AASeries()
-    #                 .markerSet(AAMarker()
-    #                         .symbolSet(AAChartSymbolType.circle)
-    #                         .radiusSet(0))))
-    #
-    #     aaLegend = (AALegend()
-    #         .enabledSet(True)
-    #         .itemStyleSet(AAItemStyle()
-    #                     .colorSet(AAColor.white))
-    #         .alignSet(AAChartAlignType.left)#设置图例位于水平方向上的右侧
-    #         .layoutSet(AAChartLayoutType.horizontal)#设置图例排列方式为垂直排布
-    #         .verticalAlignSet(AAChartVerticalAlignType.top))#设置图例位于竖直方向上的顶部
-    #
-    #     blueStopsArr = [
-    #         [0.0, AAColor.rgbaColor(30, 144, 255, 1.0)],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #         [0.6, AAColor.rgbaColor(30, 144, 255, 0.2)],
-    #         [1.0, AAColor.rgbaColor(30, 144, 255, 0.0)]
-    #     ]
-    #     gradientBlueColorDic = (AAGradientColor.linearGradient2(
-    #         AALinearGradientDirection.toBottom,
-    #         blueStopsArr
-    #     ))
-    #
-    #     redStopsArr = [
-    #         [0.0, AAColor.rgbaColor(255, 0, 0, 1.0)],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #         [0.6, AAColor.rgbaColor(255, 0, 0, 0.2)],
-    #         [1.0, AAColor.rgbaColor(255, 0, 0, 0.0)]
-    #     ]
-    #     gradientRedColorDic = (AAGradientColor.linearGradient2(
-    #         AALinearGradientDirection.toBottom,
-    #         redStopsArr
-    #     ))
-    #
-    #     singleSpecialData1 = (AADataElement()
-    #         .markerSet(
-    #                 AAMarker()
-    #                 .radiusSet(8)#曲线连接点半径
-    #                 .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-    #                 .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-    #                 .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-    #                 #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-    #                 .lineColorSet("#1e90ff")
-    #         )
-    #         .dataLabelsSet(
-    #                 AADataLabels()
-    #                 .enabledSet(True)
-    #                 .useHTMLSet(True)
-    #                 .backgroundColorSet("#1e90ff")
-    #                 .borderRadiusSet(5)
-    #                 .shapeSet("callout")
-    #                 .formatSet("point.category<br>series.name(): point.y %")
-    #                 .styleSet(AAStyle()
-    #                         .fontWeightSet(AAChartFontWeightType.bold)
-    #                         .colorSet(AAColor.white)
-    #                         .fontSizeSet(16)
-    #                         .fontWeightSet(AAChartFontWeightType.thin))
-    #                 .ySet(-75)
-    #                 .alignSet(AAChartAlignType.center)
-    #                 .verticalAlignSet(AAChartVerticalAlignType.top)
-    #                 .overflowSet("none")
-    #                 .cropSet(False)
-    #         )
-    #         .ySet(51.5)
+    @staticmethod
+    def configureComplicatedCustomAreasplineChart():
+        aaChart = (AAChart()
+            .typeSet(AAChartType.areaspline)
+            .backgroundColorSet(AAColor.black))
+
+        aaTitle = (AATitle()
+            .textSet(""))
+
+        aaXAxis = (AAXAxis()
+            .categoriesSet([
+                "一月", "二月", "三月", "四月", "五月", "六月",
+                "七月", "八月", "九月", "十月", "十一月", "十二月"
+            ])
+            .tickWidthSet(0)#X轴刻度线宽度
+            .lineWidthSet(1.5)#X轴轴线宽度
+            .lineColorSet(AAColor.white)#X轴轴线颜色
+            .gridLineColorSet(AAColor.white)
+            .gridLineWidthSet(0.5)#X轴网格线宽度
+            .gridLineDashStyleSet(AAChartLineDashStyleType.dash)
+            .labelsSet(AALabels()
+                    .styleSet(AAStyle()
+                            .colorSet(AAColor.white))#X轴文字颜色
+            ))
+
+        aaYAXis = (AAYAxis()
+            .titleSet(AATitle()
+                    .textSet(""))
+            .tickPositionsSet([0, 20, 40, 60, 80, 100])
+            .lineWidthSet(1.5)#Y轴轴线颜色
+            .lineColorSet(AAColor.white)#Y轴轴线颜色
+            .gridLineWidthSet(0)#Y轴网格线宽度
+            .gridLineDashStyleSet(AAChartLineDashStyleType.dash)
+            .labelsSet(AALabels()
+                    .formatSet("value %")#给y轴添加单位
+                    .styleSet(AAStyle()
+                            .colorSet(AAColor.white))#Y轴文字颜色
+            ))
 
 
-        # singleSpecialData2 = (AADataElement()
-        #     .markerSet(
-        #             AAMarker()
-        #             .radiusSet(8)#曲线连接点半径
-        #             .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-        #             .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-        #             .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-        #             #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-        #             .lineColorSet("#ef476f")
-        #     )
-        #     .dataLabelsSet(
-        #             AADataLabels()
-        #             .enabledSet(True)
-        #             .useHTMLSet(True)
-        #             .backgroundColorSet(AAColor.red)
-        #             .borderRadiusSet(5)
-        #             .shapeSet("callout")
-        #             .formatSet("point.category<br>series.name(): point.y %")
-        #             .styleSet(AAStyle()
-        #                     .fontWeightSet(AAChartFontWeightType.bold)
-        #                     .colorSet(AAColor.white)
-        #                     .fontSizeSet(16)
-        #                     .fontWeightSet(AAChartFontWeightType.thin))
-        #             .ySet(-75)
-        #             .alignSet(AAChartAlignType.center)
-        #             .verticalAlignSet(AAChartVerticalAlignType.top)
-        #             .overflowSet("none")
-        #             .cropSet(False)
-        #     )
-        #     .ySet(26.5))
-            
+        aaPlotOptions = (AAPlotOptions()
+            .seriesSet(AASeries()
+                    .markerSet(AAMarker()
+                            .symbolSet(AAChartSymbolType.circle)
+                            .radiusSet(0))))
 
+        aaLegend = (AALegend()
+            .enabledSet(True)
+            .itemStyleSet(AAItemStyle()
+                        .colorSet(AAColor.white))
+            .alignSet(AAChartAlignType.left)#设置图例位于水平方向上的右侧
+            .layoutSet(AAChartLayoutType.horizontal)#设置图例排列方式为垂直排布
+            .verticalAlignSet(AAChartVerticalAlignType.top))#设置图例位于竖直方向上的顶部
+
+        blueStopsArr = [
+            [0.0, AAColor.rgbaColor(30, 144, 255, 1.0)],#颜色字符串设置支持十六进制类型和 rgba 类型
+            [0.6, AAColor.rgbaColor(30, 144, 255, 0.2)],
+            [1.0, AAColor.rgbaColor(30, 144, 255, 0.0)]
+        ]
+        gradientBlueColorDic = (AAGradientColor.linearGradient2(
+            AALinearGradientDirection.toBottom,
+            blueStopsArr
+        ))
+
+        redStopsArr = [
+            [0.0, AAColor.rgbaColor(255, 0, 0, 1.0)],#颜色字符串设置支持十六进制类型和 rgba 类型
+            [0.6, AAColor.rgbaColor(255, 0, 0, 0.2)],
+            [1.0, AAColor.rgbaColor(255, 0, 0, 0.0)]
+        ]
+        gradientRedColorDic = (AAGradientColor.linearGradient2(
+            AALinearGradientDirection.toBottom,
+            redStopsArr
+        ))
+
+        singleSpecialData1 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet("#1e90ff")
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet("#1e90ff")
+                    .borderRadiusSet(5)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(AAStyle()
+                            .fontWeightSet(AAChartFontWeightType.bold)
+                            .colorSet(AAColor.white)
+                            .fontSizeSet(16)
+                            .fontWeightSet(AAChartFontWeightType.thin))
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(51.5))
+
+
+        singleSpecialData2 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet("#ef476f")
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet(AAColor.red)
+                    .borderRadiusSet(5)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(AAStyle()
+                            .fontWeightSet(AAChartFontWeightType.bold)
+                            .colorSet(AAColor.white)
+                            .fontSizeSet(16)
+                            .fontWeightSet(AAChartFontWeightType.thin))
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(26.5))
+
+        aaSeriesArr = [
+            AASeriesElement()
+                .nameSet("空气湿度")
+                .fillColorSet(gradientBlueColorDic)
+                .lineWidthSet(6)
+                .dataSet([17.0, 16.9, 8.5, 34.5, 28.2, singleSpecialData1, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6]),
+            AASeriesElement()
+                .nameSet("土壤湿度")
+                .fillColorSet(gradientRedColorDic)
+                .lineWidthSet(6)
+                .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, singleSpecialData2, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
+        ]
         
-        # aaSeriesArr = [
-        #         AASeriesElement()
-        #         .nameSet("空气湿度")
-        #         .fillColorSet(gradientBlueColorDic)
-        #         .lineWidthSet(6)
-        #         .dataSet([17.0, 16.9, 8.5, 34.5, 28.2, singleSpecialData1, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6])
-                # AASeriesElement()
-                # .nameSet("土壤湿度")
-                # .fillColorSet(gradientRedColorDic)
-                # .lineWidthSet(6)
-                # .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, singleSpecialData2, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
-        # ]
-        
-        # aaOptions = (AAOptions()
-        #     .chartSet(aaChart)
-        #     .titleSet(aaTitle)
-        #     .colorsSet(["#1e90ff",AAColor.red,])
-        #     .xAxisSet(aaXAxis)
-        #     .yAxisSet(aaYAXis)
-        #     .plotOptionsSet(aaPlotOptions)
-        #     .legendSet(aaLegend)
-        #     .seriesSet(aaSeriesArr))
+        aaOptions = (AAOptions()
+            .chartSet(aaChart)
+            .titleSet(aaTitle)
+            .colorsSet(["#1e90ff",AAColor.red,])
+            .xAxisSet(aaXAxis)
+            .yAxisSet(aaYAXis)
+            .plotOptionsSet(aaPlotOptions)
+            .legendSet(aaLegend)
+            .seriesSet(aaSeriesArr))
         
         
-        # return aaOptions
+        return aaOptions
     
-    #
-    # @staticmethod
-    # def configureComplicatedCustomAreasplineChart2():
-    #     aaOptions = configureComplicatedCustomAreasplineChart()
-    #
-    #     aaOptions.chart.backgroundColor = (AAGradientColor.linearGradient1(
-    #         AALinearGradientDirection.toTop,
-    #         AAColor.rgbaColor(113, 180, 185, 1.0),
-    #         AAColor.rgbaColor(115, 183, 166, 1.0)
-    #     ))
-    #
-    #     aaOptions.colors = [
-    #         AAColor.rgbaColor(204, 150, 103, 1.0),
-    #         AAColor.rgbaColor(154, 243, 247, 1.0),
-    #     ]
-    #
-    #     aaOptions.tooltip = (AATooltip()
-    #         .sharedSet(True)
-    #         .backgroundColorSet(AAColor.white)
-    #         .valueSuffixSet(" %"))
-    #
-    #     aaDataLabelsStyle = (AAStyle()
-    #         .fontWeightSet(AAChartFontWeightType.bold)
-    #         .colorSet(AAColor.white)
-    #         .fontSizeSet(16)
-    #         .fontWeightSet(AAChartFontWeightType.thin))
-    #
-    #     singleSpecialData1 = (AADataElement()
-    #         .markerSet(
-    #                 AAMarker()
-    #                 .radiusSet(8)#曲线连接点半径
-    #                 .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-    #                 .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-    #                 .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-    #                 #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-    #                 .lineColorSet(AAColor.rgbaColor(204, 150, 103, 1.0))
-    #         )
-    #         .dataLabelsSet(
-    #                 AADataLabels()
-    #                 .enabledSet(True)
-    #                 .allowOverlapSet(True)
-    #                 .useHTMLSet(True)
-    #                 .backgroundColorSet(AAColor.rgbaColor(219, 148, 111, 1.0))
-    #                 .borderRadiusSet(10)
-    #                 .shapeSet("callout")
-    #                 .formatSet("point.category<br>series.name(): point.y %")
-    #                 .styleSet(aaDataLabelsStyle)
-    #                 .ySet(-75)
-    #                 .alignSet(AAChartAlignType.center)
-    #                 .verticalAlignSet(AAChartVerticalAlignType.top)
-    #                 .overflowSet("none")
-    #                 .cropSet(False)
-    #         )
-    #         .ySet(51.5)
-    #
-    #
-    #
-    #     singleSpecialData22 = (AADataElement()
-    #         .markerSet(
-    #                 AAMarker()
-    #                 .radiusSet(8)#曲线连接点半径
-    #                 .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-    #                 .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-    #                 .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-    #                 #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-    #                 .lineColorSet(AAColor.rgbaColor(154, 243, 247, 1.0))
-    #         )
-    #         .dataLabelsSet(
-    #                 AADataLabels()
-    #                 .enabledSet(True)
-    #                 .allowOverlapSet(True)
-    #                 .useHTMLSet(True)
-    #                 .backgroundColorSet(AAColor.rgbaColor(65, 111, 166, 1.0))
-    #                 .borderRadiusSet(10)
-    #                 .shapeSet("callout")
-    #                 .formatSet("point.category<br>series.name(): point.y %")
-    #                 .styleSet(aaDataLabelsStyle)
-    #                 .ySet(-75)
-    #                 .alignSet(AAChartAlignType.center)
-    #                 .verticalAlignSet(AAChartVerticalAlignType.top)
-    #                 .overflowSet("none")
-    #                 .cropSet(False)
-    #         )
-    #         .ySet(26.5)
-    #
-    #
-    #     aaSeriesArr = [
-    #             AASeriesElement()
-    #             .nameSet("空气湿度")
-    #             .lineWidthSet(3)
-    #             .zoneAxisSet("x")
-    #             .zonesSet([
-    #                     AAZonesElement()
-    #                     .valueSet(5)
-    #                     .fillColorSet(
-    #                         AAGradientColor.linearGradient2(
-    #                             AALinearGradientDirection.toTop,
-    #                             [
-    #                                 [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #                                 [0.6, AAColor.rgbaColor(219, 148, 111, 0.6)],
-    #                                 [1.0, AAColor.rgbaColor(219, 148, 111, 1.0)]
-    #                             ])
-    #                     ),
-    #                     AAZonesElement()
-    #                     .fillColorSet(AAColor.clear),
-    #             ])
-    #             .dataSet([17.0, 16.9, 8.5, 34.5, 28.2, singleSpecialData1, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6]),
-    #
-    #             AASeriesElement()
-    #             .nameSet("土壤湿度")
-    #             .lineWidthSet(3)
-    #             .zoneAxisSet("x")
-    #             .zonesSet([
-    #                     AAZonesElement()
-    #                     .valueSet(5)
-    #                     .fillColorSet(AAGradientColor.linearGradient2(
-    #                                 AALinearGradientDirection.toTop,
-    #                                 [
-    #                                     [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #                                     [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
-    #                                     [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
-    #                                 ])),
-    #                     AAZonesElement()
-    #                     .fillColorSet(AAColor.clear),
-    #             ])
-    #             .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, singleSpecialData22, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
-    #     ]
-    #
-    #     aaOptions.series = aaSeriesArr
-    #
-    #     return aaOptions
-    #
-    #
-    # @staticmethod
-    # def configureComplicatedCustomAreasplineChart3():
-    #     aaDataLabelsStyle = (AAStyle()
-    #         .fontWeightSet(AAChartFontWeightType.bold)
-    #         .colorSet(AAColor.white)
-    #         .fontSizeSet(16)
-    #         .fontWeightSet(AAChartFontWeightType.thin))
-    #
-    #     singleSpecialData1 = (AADataElement()
-    #         .markerSet(
-    #                 AAMarker()
-    #                 .radiusSet(8)#曲线连接点半径
-    #                 .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-    #                 .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-    #                 .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-    #                 #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-    #                 .lineColorSet(AAColor.rgbaColor(204, 150, 103, 1.0))
-    #         )
-    #         .dataLabelsSet(
-    #                 AADataLabels()
-    #                 .enabledSet(True)
-    #                 .allowOverlapSet(True)
-    #                 .useHTMLSet(True)
-    #                 .backgroundColorSet(AAColor.rgbaColor(219, 148, 111, 1.0))
-    #                 .borderRadiusSet(10)
-    #                 .shapeSet("callout")
-    #                 .formatSet("point.category<br>series.name(): point.y %")
-    #                 .styleSet(aaDataLabelsStyle)
-    #                 .ySet(-75)
-    #                 .alignSet(AAChartAlignType.center)
-    #                 .verticalAlignSet(AAChartVerticalAlignType.top)
-    #                 .overflowSet("none")
-    #                 .cropSet(False)
-    #         )
-    #         .ySet(34.5)
-    #
-    #
-    #
-    #     singleSpecialData2 = (AADataElement()
-    #         .markerSet(
-    #                 AAMarker()
-    #                 .radiusSet(8)#曲线连接点半径
-    #                 .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
-    #                 .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
-    #                 .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
-    #                 #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
-    #                 .lineColorSet(AAColor.rgbaColor(154, 243, 247, 1.0))
-    #         )
-    #         .dataLabelsSet(
-    #                 AADataLabels()
-    #                 .enabledSet(True)
-    #                 .allowOverlapSet(True)
-    #                 .useHTMLSet(True)
-    #                 .backgroundColorSet(AAColor.rgbaColor(65, 111, 166, 1.0))
-    #                 .borderRadiusSet(10)
-    #                 .shapeSet("callout")
-    #                 .formatSet("point.category<br>series.name(): point.y %")
-    #                 .styleSet(aaDataLabelsStyle)
-    #                 .ySet(-75)
-    #                 .alignSet(AAChartAlignType.center)
-    #                 .verticalAlignSet(AAChartVerticalAlignType.top)
-    #                 .overflowSet("none")
-    #                 .cropSet(False)
-    #         )
-    #         .ySet(14.5)
-    #
-    #
-    #     aaSeriesArr = [
-    #             AASeriesElement()
-    #             .nameSet("空气湿度")
-    #             .lineWidthSet(3)
-    #             .zoneAxisSet("x")
-    #             .zonesSet([
-    #                     AAZonesElement()
-    #                     .valueSet(3)
-    #                     .fillColorSet(AAColor.clear),
-    #                     AAZonesElement()
-    #                     .fillColorSet(AAGradientColor.linearGradient2(
-    #                                 AALinearGradientDirection.toTop,
-    #                                 [
-    #                                     [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #                                     [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
-    #                                     [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
-    #                                 ])),
-    #             ])
-    #             .dataSet([17.0, 16.9, 8.5, singleSpecialData1, 28.2, 51.5, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6]),
-    #
-    #             AASeriesElement()
-    #             .nameSet("土壤湿度")
-    #             .lineWidthSet(3)
-    #             .zoneAxisSet("x")
-    #             .zonesSet([
-    #                     AAZonesElement()
-    #                     .valueSet(3)
-    #                     .fillColorSet(AAColor.clear),
-    #                     AAZonesElement()
-    #                     .fillColorSet(AAGradientColor.linearGradient2(
-    #                                 AALinearGradientDirection.toTop,
-    #                                 [
-    #                                     [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
-    #                                     [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
-    #                                     [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
-    #                                 ])),
-    #             ])
-    #             .dataSet([7.0, 6.9, 2.5, singleSpecialData2, 18.2, 26.5, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
-    #     ]
-    #
-    #     aaOptions = configureComplicatedCustomAreasplineChart2())
-    #
-    #     aaOptions.series = aaSeriesArr
-    #
-    #     return aaOptions
+
+    @staticmethod
+    def configureComplicatedCustomAreasplineChart2():
+        aaOptions = ChartOptionsComposer.configureComplicatedCustomAreasplineChart()
+
+        aaOptions.chart.backgroundColor = (AAGradientColor.linearGradient1(
+            AALinearGradientDirection.toTop,
+            AAColor.rgbaColor(113, 180, 185, 1.0),
+            AAColor.rgbaColor(115, 183, 166, 1.0)
+        ))
+
+        aaOptions.colors = [
+            AAColor.rgbaColor(204, 150, 103, 1.0),
+            AAColor.rgbaColor(154, 243, 247, 1.0),
+        ]
+
+        aaOptions.tooltip = (AATooltip()
+            .sharedSet(True)
+            .backgroundColorSet(AAColor.white)
+            .valueSuffixSet(" %"))
+
+        aaDataLabelsStyle = (AAStyle()
+            .fontWeightSet(AAChartFontWeightType.bold)
+            .colorSet(AAColor.white)
+            .fontSizeSet(16)
+            .fontWeightSet(AAChartFontWeightType.thin))
+
+        singleSpecialData1 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet(AAColor.rgbaColor(204, 150, 103, 1.0))
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .allowOverlapSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet(AAColor.rgbaColor(219, 148, 111, 1.0))
+                    .borderRadiusSet(10)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(aaDataLabelsStyle)
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(51.5))
+
+
+
+        singleSpecialData22 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet(AAColor.rgbaColor(154, 243, 247, 1.0))
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .allowOverlapSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet(AAColor.rgbaColor(65, 111, 166, 1.0))
+                    .borderRadiusSet(10)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(aaDataLabelsStyle)
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(26.5))
+
+
+        aaSeriesArr = [
+            AASeriesElement()
+                .nameSet("空气湿度")
+                .lineWidthSet(3)
+                .zoneAxisSet("x")
+                .zonesSet([
+                AAZonesElement()
+                    .valueSet(5)
+                    .fillColorSet(
+                    AAGradientColor.linearGradient2(
+                        AALinearGradientDirection.toTop,
+                        [
+                            [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
+                            [0.6, AAColor.rgbaColor(219, 148, 111, 0.6)],
+                            [1.0, AAColor.rgbaColor(219, 148, 111, 1.0)]
+                        ])
+                ),
+                AAZonesElement()
+                    .fillColorSet(AAColor.clear),
+            ])
+                .dataSet([17.0, 16.9, 8.5, 34.5, 28.2, singleSpecialData1, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6]),
+
+            AASeriesElement()
+                .nameSet("土壤湿度")
+                .lineWidthSet(3)
+                .zoneAxisSet("x")
+                .zonesSet([
+                AAZonesElement()
+                    .valueSet(5)
+                    .fillColorSet(AAGradientColor.linearGradient2(
+                    AALinearGradientDirection.toTop,
+                    [
+                        [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
+                        [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
+                        [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
+                    ])),
+                AAZonesElement()
+                    .fillColorSet(AAColor.clear),
+            ])
+                .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, singleSpecialData22, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
+        ]
+
+        aaOptions.series = aaSeriesArr
+
+        return aaOptions
+
+
+    @staticmethod
+    def configureComplicatedCustomAreasplineChart3():
+        aaDataLabelsStyle = (AAStyle()
+            .fontWeightSet(AAChartFontWeightType.bold)
+            .colorSet(AAColor.white)
+            .fontSizeSet(16)
+            .fontWeightSet(AAChartFontWeightType.thin))
+
+        singleSpecialData1 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet(AAColor.rgbaColor(204, 150, 103, 1.0))
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .allowOverlapSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet(AAColor.rgbaColor(219, 148, 111, 1.0))
+                    .borderRadiusSet(10)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(aaDataLabelsStyle)
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(34.5))
+
+
+
+        singleSpecialData2 = (AADataElement()
+            .markerSet(
+                    AAMarker()
+                    .radiusSet(8)#曲线连接点半径
+                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
+                    .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
+                    #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
+                    .lineColorSet(AAColor.rgbaColor(154, 243, 247, 1.0))
+            )
+            .dataLabelsSet(
+                    AADataLabels()
+                    .enabledSet(True)
+                    .allowOverlapSet(True)
+                    .useHTMLSet(True)
+                    .backgroundColorSet(AAColor.rgbaColor(65, 111, 166, 1.0))
+                    .borderRadiusSet(10)
+                    .shapeSet("callout")
+                    .formatSet("point.category<br>series.name(): point.y %")
+                    .styleSet(aaDataLabelsStyle)
+                    .ySet(-75)
+                    .alignSet(AAChartAlignType.center)
+                    .verticalAlignSet(AAChartVerticalAlignType.top)
+                    .overflowSet("none")
+                    .cropSet(False)
+            )
+            .ySet(14.5))
+
+
+        aaSeriesArr = [
+            AASeriesElement()
+                .nameSet("空气湿度")
+                .lineWidthSet(3)
+                .zoneAxisSet("x")
+                .zonesSet([
+                AAZonesElement()
+                    .valueSet(3)
+                    .fillColorSet(AAColor.clear),
+                AAZonesElement()
+                    .fillColorSet(AAGradientColor.linearGradient2(
+                    AALinearGradientDirection.toTop,
+                    [
+                        [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
+                        [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
+                        [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
+                    ])),
+            ])
+                .dataSet([17.0, 16.9, 8.5, singleSpecialData1, 28.2, 51.5, 15.2, 56.5, 33.3, 85.3, 23.9, 29.6]),
+
+            AASeriesElement()
+                .nameSet("土壤湿度")
+                .lineWidthSet(3)
+                .zoneAxisSet("x")
+                .zonesSet([
+                AAZonesElement()
+                    .valueSet(3)
+                    .fillColorSet(AAColor.clear),
+                AAZonesElement()
+                    .fillColorSet(AAGradientColor.linearGradient2(
+                    AALinearGradientDirection.toTop,
+                    [
+                        [0.0, AAColor.clear],#颜色字符串设置支持十六进制类型和 rgba 类型
+                        [0.6, AAColor.rgbaColor(65, 111, 166, 0.6)],
+                        [1.0, AAColor.rgbaColor(65, 111, 166, 1.0)]
+                    ])),
+            ])
+                .dataSet([7.0, 6.9, 2.5, singleSpecialData2, 18.2, 26.5, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
+        ]
+
+        aaOptions = ChartOptionsComposer.configureComplicatedCustomAreasplineChart2()
+
+        aaOptions.series = aaSeriesArr
+
+        return aaOptions
     
     
     @staticmethod
@@ -2483,10 +2510,10 @@ class ChartOptionsComposer:
     
     @staticmethod
     def AADateUTC(year: int, month: int, day: int):
-        dateStr = '$year-$month-$day'
-        date = Date.fromString(dateStr)
-        dateSeconds = date.getUTCSeconds()
-        return Std.string(dateSeconds)
+        # dateStr = '$year-$month-$day'
+        # date = Date.fromString(dateStr)
+        # dateSeconds = date.getUTCSeconds()
+        return ""
     
     
     #X 轴时间不连续的折线图
@@ -2504,118 +2531,118 @@ class ChartOptionsComposer:
                     AASeriesElement()
                     .nameSet("Winter 2014-2015")
                     .dataSet([
-                         [AADateUTC(1970, 10, 25),    0],
-                         [AADateUTC(1970, 11,  6), 0.25],
-                         [AADateUTC(1970, 11, 20), 1.41],
-                         [AADateUTC(1970, 11, 25), 1.64],
-                         [AADateUTC(1971, 0,  4),   1.6],
-                         [AADateUTC(1971, 0, 17),  2.55],
-                         [AADateUTC(1971, 0, 24),  2.62],
-                         [AADateUTC(1971, 1,  4),   2.5],
-                         [AADateUTC(1971, 1, 14),  2.42],
-                         [AADateUTC(1971, 2,  6),  2.74],
-                         [AADateUTC(1971, 2, 14),  2.62],
-                         [AADateUTC(1971, 2, 24),   2.6],
-                         [AADateUTC(1971, 3,  1),  2.81],
-                         [AADateUTC(1971, 3, 11),  2.63],
-                         [AADateUTC(1971, 3, 27),  2.77],
-                         [AADateUTC(1971, 4,  4),  2.68],
-                         [AADateUTC(1971, 4,  9),  2.56],
-                         [AADateUTC(1971, 4, 14),  2.39],
-                         [AADateUTC(1971, 4, 19),   2.3],
-                         [AADateUTC(1971, 5,  4),     2],
-                         [AADateUTC(1971, 5,  9),  1.85],
-                         [AADateUTC(1971, 5, 14),  1.49],
-                         [AADateUTC(1971, 5, 19),  1.27],
-                         [AADateUTC(1971, 5, 24),  0.99],
-                         [AADateUTC(1971, 5, 29),  0.67],
-                         [AADateUTC(1971, 6,  3),  0.18],
-                         [AADateUTC(1971, 6,  4),     0]
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 25),    0],
+                         [ChartOptionsComposer.AADateUTC(1970, 11,  6), 0.25],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 20), 1.41],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 25), 1.64],
+                         [ChartOptionsComposer.AADateUTC(1971, 0,  4),   1.6],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 17),  2.55],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 24),  2.62],
+                         [ChartOptionsComposer.AADateUTC(1971, 1,  4),   2.5],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 14),  2.42],
+                         [ChartOptionsComposer.AADateUTC(1971, 2,  6),  2.74],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 14),  2.62],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 24),   2.6],
+                         [ChartOptionsComposer.AADateUTC(1971, 3,  1),  2.81],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 11),  2.63],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 27),  2.77],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  4),  2.68],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  9),  2.56],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 14),  2.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 19),   2.3],
+                         [ChartOptionsComposer.AADateUTC(1971, 5,  4),     2],
+                         [ChartOptionsComposer.AADateUTC(1971, 5,  9),  1.85],
+                         [ChartOptionsComposer.AADateUTC(1971, 5, 14),  1.49],
+                         [ChartOptionsComposer.AADateUTC(1971, 5, 19),  1.27],
+                         [ChartOptionsComposer.AADateUTC(1971, 5, 24),  0.99],
+                         [ChartOptionsComposer.AADateUTC(1971, 5, 29),  0.67],
+                         [ChartOptionsComposer.AADateUTC(1971, 6,  3),  0.18],
+                         [ChartOptionsComposer.AADateUTC(1971, 6,  4),     0]
                     ]),
                     AASeriesElement()
                     .nameSet("Winter 2015-2016")
                     .dataSet([
-                         [AADateUTC(1970, 10,  9),    0],
-                         [AADateUTC(1970, 10, 15), 0.23],
-                         [AADateUTC(1970, 10, 20), 0.25],
-                         [AADateUTC(1970, 10, 25), 0.23],
-                         [AADateUTC(1970, 10, 30), 0.39],
-                         [AADateUTC(1970, 11,  5), 0.41],
-                         [AADateUTC(1970, 11, 10), 0.59],
-                         [AADateUTC(1970, 11, 15), 0.73],
-                         [AADateUTC(1970, 11, 20), 0.41],
-                         [AADateUTC(1970, 11, 25), 1.07],
-                         [AADateUTC(1970, 11, 30), 0.88],
-                         [AADateUTC(1971, 0,  5),  0.85],
-                         [AADateUTC(1971, 0, 11),  0.89],
-                         [AADateUTC(1971, 0, 17),  1.04],
-                         [AADateUTC(1971, 0, 20),  1.02],
-                         [AADateUTC(1971, 0, 25),  1.03],
-                         [AADateUTC(1971, 0, 30),  1.39],
-                         [AADateUTC(1971, 1,  5),  1.77],
-                         [AADateUTC(1971, 1, 26),  2.12],
-                         [AADateUTC(1971, 3, 19),   2.1],
-                         [AADateUTC(1971, 4,  9),   1.7],
-                         [AADateUTC(1971, 4, 29),  0.85],
-                         [AADateUTC(1971, 5,  7),     0]
+                         [ChartOptionsComposer.AADateUTC(1970, 10,  9),    0],
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 15), 0.23],
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 20), 0.25],
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 25), 0.23],
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 30), 0.39],
+                         [ChartOptionsComposer.AADateUTC(1970, 11,  5), 0.41],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 10), 0.59],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 15), 0.73],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 20), 0.41],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 25), 1.07],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 30), 0.88],
+                         [ChartOptionsComposer.AADateUTC(1971, 0,  5),  0.85],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 11),  0.89],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 17),  1.04],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 20),  1.02],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 25),  1.03],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 30),  1.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 1,  5),  1.77],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 26),  2.12],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 19),   2.1],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  9),   1.7],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 29),  0.85],
+                         [ChartOptionsComposer.AADateUTC(1971, 5,  7),     0]
                     ]),
                     AASeriesElement()
                     .nameSet("Winter 2016-2017")
                     .dataSet([
-                         [AADateUTC(1970, 9, 15),     0],
-                         [AADateUTC(1970, 9, 31),  0.09],
-                         [AADateUTC(1970, 10,  7), 0.17],
-                         [AADateUTC(1970, 10, 10),  0.1],
-                         [AADateUTC(1970, 11, 10),  0.1],
-                         [AADateUTC(1970, 11, 13),  0.1],
-                         [AADateUTC(1970, 11, 16), 0.11],
-                         [AADateUTC(1970, 11, 19), 0.11],
-                         [AADateUTC(1970, 11, 22), 0.08],
-                         [AADateUTC(1970, 11, 25), 0.23],
-                         [AADateUTC(1970, 11, 28), 0.37],
-                         [AADateUTC(1971, 0, 16),  0.68],
-                         [AADateUTC(1971, 0, 19),  0.55],
-                         [AADateUTC(1971, 0, 22),   0.4],
-                         [AADateUTC(1971, 0, 25),   0.4],
-                         [AADateUTC(1971, 0, 28),  0.37],
-                         [AADateUTC(1971, 0, 31),  0.43],
-                         [AADateUTC(1971, 1,  4),  0.42],
-                         [AADateUTC(1971, 1,  7),  0.39],
-                         [AADateUTC(1971, 1, 10),  0.39],
-                         [AADateUTC(1971, 1, 13),  0.39],
-                         [AADateUTC(1971, 1, 16),  0.39],
-                         [AADateUTC(1971, 1, 19),  0.35],
-                         [AADateUTC(1971, 1, 22),  0.45],
-                         [AADateUTC(1971, 1, 25),  0.62],
-                         [AADateUTC(1971, 1, 28),  0.68],
-                         [AADateUTC(1971, 2,  4),  0.68],
-                         [AADateUTC(1971, 2,  7),  0.65],
-                         [AADateUTC(1971, 2, 10),  0.65],
-                         [AADateUTC(1971, 2, 13),  0.75],
-                         [AADateUTC(1971, 2, 16),  0.86],
-                         [AADateUTC(1971, 2, 19),  1.14],
-                         [AADateUTC(1971, 2, 22),   1.2],
-                         [AADateUTC(1971, 2, 25),  1.27],
-                         [AADateUTC(1971, 2, 27),  1.12],
-                         [AADateUTC(1971, 2, 30),  0.98],
-                         [AADateUTC(1971, 3,  3),  0.85],
-                         [AADateUTC(1971, 3,  6),  1.04],
-                         [AADateUTC(1971, 3,  9),  0.92],
-                         [AADateUTC(1971, 3, 12),  0.96],
-                         [AADateUTC(1971, 3, 15),  0.94],
-                         [AADateUTC(1971, 3, 18),  0.99],
-                         [AADateUTC(1971, 3, 21),  0.96],
-                         [AADateUTC(1971, 3, 24),  1.15],
-                         [AADateUTC(1971, 3, 27),  1.18],
-                         [AADateUTC(1971, 3, 30),  1.12],
-                         [AADateUTC(1971, 4,  3),  1.06],
-                         [AADateUTC(1971, 4,  6),  0.96],
-                         [AADateUTC(1971, 4,  9),  0.87],
-                         [AADateUTC(1971, 4, 12),  0.88],
-                         [AADateUTC(1971, 4, 15),  0.79],
-                         [AADateUTC(1971, 4, 18),  0.54],
-                         [AADateUTC(1971, 4, 21),  0.34],
-                         [AADateUTC(1971, 4, 25),     0]
+                         [ChartOptionsComposer.AADateUTC(1970, 9, 15),     0],
+                         [ChartOptionsComposer.AADateUTC(1970, 9, 31),  0.09],
+                         [ChartOptionsComposer.AADateUTC(1970, 10,  7), 0.17],
+                         [ChartOptionsComposer.AADateUTC(1970, 10, 10),  0.1],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 10),  0.1],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 13),  0.1],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 16), 0.11],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 19), 0.11],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 22), 0.08],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 25), 0.23],
+                         [ChartOptionsComposer.AADateUTC(1970, 11, 28), 0.37],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 16),  0.68],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 19),  0.55],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 22),   0.4],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 25),   0.4],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 28),  0.37],
+                         [ChartOptionsComposer.AADateUTC(1971, 0, 31),  0.43],
+                         [ChartOptionsComposer.AADateUTC(1971, 1,  4),  0.42],
+                         [ChartOptionsComposer.AADateUTC(1971, 1,  7),  0.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 10),  0.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 13),  0.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 16),  0.39],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 19),  0.35],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 22),  0.45],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 25),  0.62],
+                         [ChartOptionsComposer.AADateUTC(1971, 1, 28),  0.68],
+                         [ChartOptionsComposer.AADateUTC(1971, 2,  4),  0.68],
+                         [ChartOptionsComposer.AADateUTC(1971, 2,  7),  0.65],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 10),  0.65],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 13),  0.75],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 16),  0.86],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 19),  1.14],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 22),   1.2],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 25),  1.27],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 27),  1.12],
+                         [ChartOptionsComposer.AADateUTC(1971, 2, 30),  0.98],
+                         [ChartOptionsComposer.AADateUTC(1971, 3,  3),  0.85],
+                         [ChartOptionsComposer.AADateUTC(1971, 3,  6),  1.04],
+                         [ChartOptionsComposer.AADateUTC(1971, 3,  9),  0.92],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 12),  0.96],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 15),  0.94],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 18),  0.99],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 21),  0.96],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 24),  1.15],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 27),  1.18],
+                         [ChartOptionsComposer.AADateUTC(1971, 3, 30),  1.12],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  3),  1.06],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  6),  0.96],
+                         [ChartOptionsComposer.AADateUTC(1971, 4,  9),  0.87],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 12),  0.88],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 15),  0.79],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 18),  0.54],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 21),  0.34],
+                         [ChartOptionsComposer.AADateUTC(1971, 4, 25),     0]
                     ]),
             ]))
         
