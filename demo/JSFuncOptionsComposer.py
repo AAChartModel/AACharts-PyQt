@@ -12,7 +12,7 @@ from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
 from aacharts.aaoptionsmodel.AACrosshair import AACrosshair
 from aacharts.aaoptionsmodel.AAStates import AAStates, AAHover, AAHalo, AAInactive, AASelect
 from aacharts.aaoptionsmodel.AALegend import AAItemStyle
-from aacharts.aaoptionsmodel.AASeries import AAEvents
+from aacharts.aaoptionsmodel.AASeries import AAEvents, AAPoint, AAPointEvents
 from aacharts.aaoptionsmodel.AALang import AALang
 from aacharts.aatool.AAGradientColor import AALinearGradientDirection
 from aacharts.aatool.AAJSArrayConverter import AAJSArrayConverter
@@ -741,9 +741,9 @@ function () {
         停止次数JS数组字符串 = AAJSArrayConverter.JSArrayWithHaxeArray(停止次数数组)
         干预次数JS数组字符串 = AAJSArrayConverter.JSArrayWithHaxeArray(干预次数数组)
 
-        jsFormatterStr = """
+        jsFormatterStr = Template("""
         function () {
-        let 总时长数组 = $总时长JS数组};
+        let 总时长数组 = ${总时长JS数组};
         let 有效时长数组 = ${有效时长JS数组};
         let 看近时长数组 = ${看近时长JS数组};
         let 看中时长数组 = ${看中时长JS数组};
@@ -768,18 +768,20 @@ function () {
         
         return wholeContentString;
         }
-        """
+        """)
 
-        jsFormatterStr.safe_subsititute(
-        总时长JS数组=总时长数组字符串,
-        有效时长JS数组=有效时长数组字符串,
-        看近时长JS数组=看近时长数组字符串,
-        看中时长JS数组=看中时长数组字符串,
-        看远时长JS数组=看远时长数组字符串,
-        切换次数JS数组=切换次数数组字符串,
-        停止次数JS数组=停止次数数组字符串,
-        干预次数JS数组=干预次数数组字符串
+        jsFormatterStr.safe_substitute(
+        总时长JS数组=总时长JS数组字符串,
+        有效时长JS数组=有效时长JS数组字符串,
+        看近时长JS数组=看近时长JS数组字符串,
+        看中时长JS数组=看中时长JS数组字符串,
+        看远时长JS数组=看远时长JS数组字符串,
+        切换次数JS数组=切换次数JS数组字符串,
+        停止次数JS数组=停止次数JS数组字符串,
+        干预次数JS数组=干预次数JS数组字符串
         )
+
+        print(jsFormatterStr)
 
         aaOptions = aaChartModel.aa_toAAOptions()
 
@@ -1176,7 +1178,7 @@ function () {
 
     @staticmethod
     def fixedTooltipPositionByCustomPositionerFunction():
-        aaOptions = customTooltipPositionerFunction()
+        aaOptions = JSFuncOptionsComposer.customTooltipPositionerFunction()
 
         (aaOptions.tooltip
          .positionerSet("""

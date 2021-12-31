@@ -28,7 +28,7 @@ class AAChart:
     # resetZoomButton: AAResetZoomButton?
 
     def typeSet(self, prop: AAChartType):
-        self.type = prop
+        self.type = prop.value
         return self
     
     
@@ -46,7 +46,7 @@ class AAChart:
     
 
     def pinchTypeSet(self, prop: AAChartZoomType):
-        self.pinchType = prop
+        # self.pinchType = prop._name_
         return self
     
     

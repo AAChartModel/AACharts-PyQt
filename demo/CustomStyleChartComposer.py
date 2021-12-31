@@ -1,4 +1,5 @@
-
+from aacharts.aaoptionsmodel.AAShadow import AAShadow
+from aacharts.aaoptionsmodel.AAZonesElement import AAZonesElement
 from aacharts.aatool.AAColor import AAColor
 from aacharts.aatool.AAGradientColor import AAGradientColor
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
@@ -6,7 +7,7 @@ from aacharts.aachartcreator.AAChartModel import AAChartModel, AAChartSymbolStyl
 from aacharts.aatool.AAGradientColor import AAGradientColor
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
 from aacharts.aachartcreator.AAChartModel import *
-from aacharts.aaoptionsmodel.AAMarker import AAMarker
+from aacharts.aaoptionsmodel.AAMarker import AAMarker, AAMarkerStates, AAMarkerHover
 from aacharts.aaoptionsmodel.AADataElement import AADataElement
 from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
 from aacharts.aaoptionsmodel.AAStates import AAStates, AAHover, AAHalo, AAInactive, AASelect
@@ -627,7 +628,7 @@ class CustomStyleChartComposer:
     # refer to online sample https():#jshare.com.cn/github/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-symbol/
     @staticmethod
     def customLineChartMarkerSymbolContent():
-        aaChartModel = customScatterChartMarkerSymbolContent()
+        aaChartModel = CustomStyleChartComposer.customScatterChartMarkerSymbolContent()
         aaChartModel.chartType = AAChartType.line
         return aaChartModel
 

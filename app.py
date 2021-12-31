@@ -15,6 +15,8 @@ import jsonpickle
 from aacharts.aachartcreator.AAChartModel import AAChartModel
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
 from aacharts.aaenum.AAEnum import AAChartType, AAChartAnimationType
+from demo.CustomStyleChartComposer import CustomStyleChartComposer
+from demo.JSFuncOptionsComposer import JSFuncOptionsComposer
 from demo.SpecialChartComposer import SpecialChartComposer
 
 
@@ -67,7 +69,7 @@ if __name__ == '__main__':
 
     testChartModel = SpecialChartComposer.configureColumnChart()
 
-    testChartModel2 = SpecialChartComposer.configureArearangeChart()
+    testChartOptions = JSFuncOptionsComposer.customColumnChartXAxisLabelsTextByInterceptTheFirstFourCharacters()
 
     # testChartModel = (AAChartModel()
     #       .chartTypeSet(AAChartType.column)
@@ -81,10 +83,17 @@ if __name__ == '__main__':
     #         .colorByPointSet(True)
     #   ]))
 
-    aaChartModel2 = testChartModel.aa_toAAOptions()
+
+    # aaOptions = testChartModel2.aa_toAAOptions()
     #
-    testJson = jsonpickle.encode(aaChartModel2)
+    jsonpickle.set_preferred_backend('json')
+    jsonpickle.set_encoder_options('json', ensure_ascii=False)
+    testJson = jsonpickle.encode(testChartOptions, False)
     print(testJson)
+    dict = json.loads(s=testJson)
+    print(dict)
+    json_dic2 = json.dumps(dict, sort_keys=True, indent=2, separators=(',', ':'), ensure_ascii=False)
+    print(json_dic2)
     # json_str = json.dumps(aaChartModel2, ensure_ascii=False)
     # json_str2 = json.dumps(aaChartModel2, ensure_ascii=False)
     # print(json_str)

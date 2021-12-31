@@ -58,7 +58,7 @@ class AAChartType(Enum):
     polygon = "polygon"
 
 class AAChartZoomType(Enum):
-    none = "none"
+    no = ""
     x = "x"
     y = "y"
     xy = "xy"
