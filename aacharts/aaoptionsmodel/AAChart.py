@@ -1,7 +1,25 @@
 from aacharts.aachartcreator.AAChartModel import AAChartType, AAChartZoomType
 from typing import List
 from aacharts.aaoptionsmodel.AAAnimation import AAAnimation
+from aacharts.aaoptionsmodel.AACredits import AAPosition
 from aacharts.aaoptionsmodel.AAScrollablePlotArea import AAScrollablePlotArea
+
+class AAResetZoomButton:
+    position: AAPosition
+    relativeTo: str
+    theme: map
+    
+    def position(self, prop: AAPosition):
+        self.position = prop
+        return self
+    
+    def relativeTo(self, prop: str):
+        self.relativeTo = prop
+        return self
+    
+    def theme(self, prop: map):
+        self.theme = prop
+        return self
 
 
 class AAChart:
