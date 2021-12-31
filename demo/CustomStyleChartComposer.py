@@ -322,20 +322,22 @@ class CustomStyleChartComposer:
 
     @staticmethod
     def configureCustomSingleDataLabelChart():
-        aaDataElement = (AADataElement()
-                         .ySet(1.25)
-                         .dataLabelsSet(AADataLabels()
-                                        .enabledSet(True)
-                                        .verticalAlignSet(AAChartVerticalAlignType.middle)
-                                        .formatSet("y 美元🇺🇸💲")
-                                        .xSet(3)
-                                        .styleSet(AAStyle()
-                                                  .fontSizeSet(20)
-                                                  .fontWeightSet(AAChartFontWeightType.bold)
-                                                  .colorSet(AAColor.red)
-                                                  .textOutlineSet("1px 1px contrast")
-                                                  )
-                                        ))
+        aaDataElement = (
+            AADataElement()
+                .ySet(1.25)
+                .dataLabelsSet(AADataLabels()
+                               .enabledSet(True)
+                               .verticalAlignSet(AAChartVerticalAlignType.middle)
+                               .formatSet("y 美元🇺🇸💲")
+                               .xSet(3)
+                               .styleSet(AAStyle()
+                                         .fontSizeSet(20)
+                                         .fontWeightSet(AAChartFontWeightType.bold)
+                                         .colorSet(AAColor.red)
+                                         .textOutlineSet("1px 1px contrast")
+                                         )
+                               )
+        )
 
         return (AAChartModel()
             .titleSet("单独自定义某个指定数据元素的DataLabel")
@@ -487,10 +489,9 @@ class CustomStyleChartComposer:
 
         singleSpecialData = (
             AADataElement()
-                .markerSet(
-                AAMarker()
+                .markerSet(AAMarker()
                     .radiusSet(8)  # 曲线连接点半径
-                    # .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet("#FFFFFF")  # 点的填充色(用来设置折线连接点的填充色)
                     .lineWidthSet(5)  # 外沿线的宽度(用来设置折线连接点的轮廓描边的宽度)
                     .lineColorSet("#FF0000")  # 外沿线的颜色(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -746,21 +747,23 @@ class CustomStyleChartComposer:
                 + "style=color():#FFFFFFfont-weight():thinfont-size():17px> m</span>"
         )
 
-        singleSpecialData = (AADataElement()
-                             .dataLabelsSet(AADataLabels()
-                                            .enabledSet(True)
-                                            .useHTMLSet(True)
-                                            .formatSet(formatStr)
-                                            .styleSet(AAStyle()
-                                                      .fontWeightSet(AAChartFontWeightType.bold)
-                                                      .colorSet(AAColor.white)
-                                                      .fontSizeSet(16))
-                                            .ySet(-35)
-                                            .alignSet(AAChartAlignType.center)
-                                            .verticalAlignSet(AAChartVerticalAlignType.top)
-                                            .overflowSet("none")
-                                            .cropSet(False))
-                             .ySet(26.5))
+        singleSpecialData = (
+            AADataElement()
+                .dataLabelsSet(AADataLabels()
+                               .enabledSet(True)
+                               .useHTMLSet(True)
+                               .formatSet(formatStr)
+                               .styleSet(AAStyle()
+                                         .fontWeightSet(AAChartFontWeightType.bold)
+                                         .colorSet(AAColor.white)
+                                         .fontSizeSet(16))
+                               .ySet(-35)
+                               .alignSet(AAChartAlignType.center)
+                               .verticalAlignSet(AAChartVerticalAlignType.top)
+                               .overflowSet("none")
+                               .cropSet(False))
+                .ySet(26.5)
+        )
 
         return (AAChartModel()
             .chartTypeSet(AAChartType.areaspline)
@@ -817,23 +820,24 @@ class CustomStyleChartComposer:
                 .nameSet("ElementOne")
                 .dataSet([211, 183, 157, 133, 111, 91, 73, 57, 43, 31, 21, 13, 7, 3])
                 .allowPointSelectSet(True)
-                .statesSet(AAStates()
-                           .hoverSet(AAHover()
-                                     .haloSet(AAHalo()
-                                              .sizeSet(130)
-                                              .opacitySet(0.8)
-                                              .attributesSet({"stroke-width":50,
-                                                              "fill": "#00BFFF",
-                                                              "stroke": "#00BFFF"})
-                                              ))
-                           .selectSet(AASelect()
-                                      .haloSet(AAHalo()
-                                               .sizeSet(130)
-                                               .opacitySet(1.0)
-                                               .attributesSet({"stroke-width":150,
-                                                               "fill": "rgba(138,43,226,1)",
-                                                               "stroke": "rgba(30,144,255,1)"})
-                                               )))
+                .statesSet(
+                AAStates()
+                    .hoverSet(AAHover()
+                              .haloSet(AAHalo()
+                                       .sizeSet(130)
+                                       .opacitySet(0.8)
+                                       .attributesSet({"stroke-width":50,
+                                                       "fill": "#00BFFF",
+                                                       "stroke": "#00BFFF"})
+                                       ))
+                    .selectSet(AASelect()
+                               .haloSet(AAHalo()
+                                        .sizeSet(130)
+                                        .opacitySet(1.0)
+                                        .attributesSet({"stroke-width":150,
+                                                        "fill": "rgba(138,43,226,1)",
+                                                        "stroke": "rgba(30,144,255,1)"})
+                                        )))
         ]))
 
 
@@ -890,19 +894,21 @@ class CustomStyleChartComposer:
             "#7dffc0"
         ]
 
-        element1 = (AASeriesElement()
-                    .nameSet("2017")
-                    .dataLabelsSet(AADataLabels()
-                                   .enabledSet(True)
-                                   .ySet(-10)
-                                   .formatSet("total mm")
-                                   .colorSet(AAColor.red)
-                                   .shapeSet("callout")
-                                   .backgroundColorSet(AAColor.white)
-                                   .borderColorSet(AAColor.red)
-                                   .borderRadiusSet(1)
-                                   .borderWidthSet(1))
-                    .dataSet([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]))
+        element1 = (
+            AASeriesElement()
+                .nameSet("2017")
+                .dataLabelsSet(AADataLabels()
+                               .enabledSet(True)
+                               .ySet(-10)
+                               .formatSet("total mm")
+                               .colorSet(AAColor.red)
+                               .shapeSet("callout")
+                               .backgroundColorSet(AAColor.white)
+                               .borderColorSet(AAColor.red)
+                               .borderRadiusSet(1)
+                               .borderWidthSet(1))
+                .dataSet([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6])
+        )
 
         element2 = (AASeriesElement()
                     .nameSet("2018")
