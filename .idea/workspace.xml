@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="944be588-b347-46fb-b0d3-ef87bd66ad90" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/aacharts/aachartcreator/AAChartModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aachartcreator/AAOptionsComposer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aachartcreator/AASeriesElement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaenum/AAEnum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAAnimation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAChart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AACredits.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AACrosshair.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AADataElement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AADataLabels.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AALabel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AALabels.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AALang.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AALegend.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAMarker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAOptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAPane.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAPlotBandsElement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAPlotLinesElement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAPlotOptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAScrollablePlotArea.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AASeries.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAShadow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAStates.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAStyle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AASubtitle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AATitle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AATooltip.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAXAxis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAYAxis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aaoptionsmodel/AAZonesElement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aatool/AAColor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aatool/AAGradientColor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aatool/AAJSArrayConverter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aacharts/aatool/AAStringPurer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/ChartOptionsComposer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/CustomStyleChartComposer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/JSFuncOptionsComposer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/MixedChartComposer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/SpecialChartComposer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AACharts-PyQt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AACharts-PyQt.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AAChartModel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="1wwZNPJ2b2bpYGkhdX9CEpJAR9e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="AACharts-PyQt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="944be588-b347-46fb-b0d3-ef87bd66ad90" name="Default Changelist" comment="" />
+      <created>1629371570968</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629371570968</updated>
+      <workItem from="1629371572362" duration="530000" />
+      <workItem from="1640571999488" duration="157000" />
+      <workItem from="1640919457566" duration="5861000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AACharts_PyQt$app.coverage" NAME="app Coverage Results" MODIFIED="1640930283103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
