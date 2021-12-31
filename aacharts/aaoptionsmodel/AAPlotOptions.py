@@ -1,6 +1,6 @@
 
 from typing import List
-from aacharts.aaenum.AAEnum import AAChartType
+from aacharts.aaenum.AAEnum import AAChartType, AAChartStackingType
 from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
 from aacharts.aaoptionsmodel.AASeries import AASeries
 
@@ -60,8 +60,8 @@ class AAColumn:
         self.dataLabels = prop
         return self
      
-     def stackingSet(self, prop: str):
-        self.stacking = prop
+     def stackingSet(self, prop: AAChartStackingType):
+        self.stacking = prop.value
         return self
      
      def borderRadiusSet(self, prop: float):
@@ -129,8 +129,8 @@ class AABar:
         self.dataLabels = prop
         return self
      
-     def stackingSet(self, prop: str):
-        self.stacking = prop
+     def stackingSet(self, prop: AAChartStackingType):
+        self.stacking = prop.value
         return self
      
      def borderRadiusSet(self, prop: float):

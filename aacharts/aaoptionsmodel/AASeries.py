@@ -75,7 +75,7 @@ class AAEvents:
 class AASeries:
     borderRadius: float
     marker: AAMarker
-    stacking: AAChartStackingType
+    stacking: str
     animation: AAAnimation
     keys: List
     colorByPoint: bool
@@ -103,7 +103,7 @@ class AASeries:
         return self
 
     def stackingSet(self, prop: AAChartStackingType):
-        self.stacking = prop
+        self.stacking = prop.value
         return self
 
     def animationSet(self, prop: AAAnimation):
