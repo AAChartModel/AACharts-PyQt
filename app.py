@@ -15,6 +15,7 @@ import jsonpickle
 from aacharts.aachartcreator.AAChartModel import AAChartModel
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
 from aacharts.aaenum.AAEnum import AAChartType, AAChartAnimationType
+from aacharts.aatool.AAJsonConverter import AAJsonConverter
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
 from demo.JSFuncOptionsComposer import JSFuncOptionsComposer
 from demo.SpecialChartComposer import SpecialChartComposer
@@ -71,29 +72,11 @@ if __name__ == '__main__':
 
     testChartOptions = JSFuncOptionsComposer.customColumnChartXAxisLabelsTextByInterceptTheFirstFourCharacters()
 
-    # testChartModel = (AAChartModel()
-    #       .chartTypeSet(AAChartType.column)
-    #       .polarSet(True)
-    #       .dataLabelsEnabledSet(False)
-    #       .categoriesSet(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
-    #       .seriesSet([
-    #     AASeriesElement()
-    #         .nameSet("2018")
-    #         .dataSet([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6])
-    #         .colorByPointSet(True)
-    #   ]))
-
-
-    # aaOptions = testChartModel2.aa_toAAOptions()
-    #
-    jsonpickle.set_preferred_backend('json')
-    jsonpickle.set_encoder_options('json', ensure_ascii=False)
-    testJson = jsonpickle.encode(testChartOptions, False)
+    testJson = AAJsonConverter.convertObjectToJson(testChartOptions)
     print(testJson)
-    dict = json.loads(s=testJson)
-    print(dict)
-    json_dic2 = json.dumps(dict, sort_keys=True, indent=2, separators=(',', ':'), ensure_ascii=False)
-    print(json_dic2)
+
+    testPrettyJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
+    print(testPrettyJson)
     # json_str = json.dumps(aaChartModel2, ensure_ascii=False)
     # json_str2 = json.dumps(aaChartModel2, ensure_ascii=False)
     # print(json_str)
