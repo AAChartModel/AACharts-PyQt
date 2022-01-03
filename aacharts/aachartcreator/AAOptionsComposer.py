@@ -10,7 +10,7 @@ from aacharts.aaoptionsmodel.AAOptions import AAOptions
 from aacharts.aaoptionsmodel.AATitle import AATitle
 from aacharts.aaoptionsmodel.AAChart import AAChart
 from aacharts.aaoptionsmodel.AATooltip import AATooltip
-from aacharts.aaoptionsmodel.AAPlotOptions import AAPlotOptions
+from aacharts.aaoptionsmodel.AAPlotOptions import AAPlotOptions, AAColumnrange, AAPie
 from aacharts.aaoptionsmodel.AAAnimation import AAAnimation
 from aacharts.aaoptionsmodel.AALegend import AALegend
 from aacharts.aaoptionsmodel.AACredits import AACredits
