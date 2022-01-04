@@ -101,11 +101,15 @@ class Example(wx.Frame):
         delBtn = wx.Button(btnPanel, wx.ID_ANY, 'Delete', size=(90, 30))
         clrBtn = wx.Button(btnPanel, wx.ID_ANY, 'Clear', size=(90, 30))
 
-        web_view = WebView.New(btnPanel, wx.ID_ANY, 'Clear', size=(800, 450))
-        web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
+        self.web_view = WebView.New(btnPanel, -1, size=(900,600))
+        # web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
+        self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
+        self.web_view.Bind(wx.html2.EVT_WEBVIEW_ERROR, self.on_webview_error)
+        self.web_view.Bind(wx.html2.EVT_WEBVIEW_LOADED, self.on_webview_load)
         # web_view.RunScript("alert('测试运行 JS')")
         # web_view.RunScript("document.write('Hello from wx.Widgets!')")
         # web_view.RunScript("document.write('--------------这个世上本没有路, 走的人多了,也便成了路Hello from wx.Widgets!')")
+
 
 
         self.Bind(wx.EVT_BUTTON, self.NewItem, id=newBtn.GetId())
@@ -119,7 +123,7 @@ class Example(wx.Frame):
         vbox.Add(renBtn, 0, wx.TOP, 5)
         vbox.Add(delBtn, 0, wx.TOP, 5)
         vbox.Add(clrBtn, 0, wx.TOP, 5)
-        vbox.Add(web_view, 0, wx.TOP, 5)
+        vbox.Add(self.web_view, 0, wx.TOP, 5)
 
 
         btnPanel.SetSizer(vbox)
@@ -138,6 +142,29 @@ class Example(wx.Frame):
         self.listbox.Append("Spline Chart---曲线图")
 
         self.Centre()
+
+    def on_webview_error(self, evt):
+        self.URL = evt.GetURL()
+        print(self.URL)
+        self.retries += 1
+        if self.retries > self.max_retries:  # Give up
+            self.Destroy()
+        print("💀💀💀💀💀Error {} of {} attempts to load {}, trying again in 3 seconds.".format(self.retries, self.max_retries,
+                                                                                      self.URL))
+        if self.retries > 5:  # Try alternate
+            self.URL = "http://wxPython.org"
+            print("Swapping to alternate Url " + self.URL)
+        self.browser.Destroy()
+
+
+    def on_webview_load(self, evt):
+        print("哈哈哈🔥, 图表加载完成事件捕获成功")
+        testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
+        prettyJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
+        print(prettyJson)
+        pureJson = AAJsonConverter.convertObjectToJson(testChartOptions)
+        jsStr = f"loadTheHighChartView('{pureJson}','0','0')"
+        self.web_view.RunScript(jsStr)
 
     def NewItem(self, event):
 
