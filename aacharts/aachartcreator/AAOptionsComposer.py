@@ -107,7 +107,7 @@ class AAOptionsComposer:
             ):
             aaMarker = (AAMarker()
                 .radiusSet(aaChartModel.markerRadius) #Curve connection point radius, default is 4
-                .symbolSet(aaChartModel.markerSymbol)) #Curve connection point type(): "circle", "square", "diamond", "triangle", "triangle-down", the default is "circle"
+                .symbolSet(aaChartModel.markerSymbol.value)) #Curve connection point type(): "circle", "square", "diamond", "triangle", "triangle-down", the default is "circle"
             if aaChartModel.markerSymbolStyle == AAChartSymbolStyleType.innerBlank:
                 (aaMarker
                     .fillColorSet(AAColor.white) #The fill color of the point (used to set the fill color of the polyline connection point)

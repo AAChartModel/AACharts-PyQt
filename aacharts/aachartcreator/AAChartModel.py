@@ -31,7 +31,7 @@ class AAChartModel:
     subtitleStyle: AAStyle = None # The chart subtitle style
     chartType: AAChartType = AAChartType.column # The default series type for the chart. Can be any of the chart types listed under `AAChartType`. Defaults to line
     stacking: AAChartStackingType = AAChartStackingType.none # Whether to stack the values of each series on top of each other. Possible values are null to disable, "normal" to stack by value or "percent". When stacking is enabled, data must be sorted in ascending X order
-    markerSymbol: AAChartSymbolType = None # A predefined shape or symbol for the marker. When null, the symbol is pulled from options.symbols. Other possible values are "circle", "square", "diamond", "triangle" and "triangle-down"
+    markerSymbol: AAChartSymbolType = AAChartSymbolType.circle # A predefined shape or symbol for the marker. When null, the symbol is pulled from options.symbols. Other possible values are "circle", "square", "diamond", "triangle" and "triangle-down"
     markerSymbolStyle: AAChartSymbolStyleType = None
     zoomType: AAChartZoomType = None # Decides in what dimensions the user can zoom by dragging the mouse. Can be one of x, y or xy
     inverted: bool = None # Whether to invert the axes so that the x axis is vertical and y axis is horizontal. When true, the x axis is reversed by default. If a bar series is present in the chart, it will be inverted automatically.Inverting the chart doesn't have an effect if there are no cartesian series in the chart, or if the chart is polar.Defaults to false
