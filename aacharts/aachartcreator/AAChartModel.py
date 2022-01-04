@@ -30,7 +30,7 @@ class AAChartModel:
     subtitleAlign: AAChartAlignType = None # The chart subtitle text align style
     subtitleStyle: AAStyle = None # The chart subtitle style
     chartType: AAChartType = AAChartType.column # The default series type for the chart. Can be any of the chart types listed under `AAChartType`. Defaults to line
-    stacking: AAChartStackingType = None # Whether to stack the values of each series on top of each other. Possible values are null to disable, "normal" to stack by value or "percent". When stacking is enabled, data must be sorted in ascending X order
+    stacking: AAChartStackingType = AAChartStackingType.no # Whether to stack the values of each series on top of each other. Possible values are null to disable, "normal" to stack by value or "percent". When stacking is enabled, data must be sorted in ascending X order
     markerSymbol: AAChartSymbolType = None # A predefined shape or symbol for the marker. When null, the symbol is pulled from options.symbols. Other possible values are "circle", "square", "diamond", "triangle" and "triangle-down"
     markerSymbolStyle: AAChartSymbolStyleType = None
     zoomType: AAChartZoomType = None # Decides in what dimensions the user can zoom by dragging the mouse. Can be one of x, y or xy

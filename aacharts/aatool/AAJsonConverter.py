@@ -30,6 +30,8 @@ class AAJsonConverter:
         jsonDic = json.loads(s=jsonStr)
         pureJsonDic = AAJsonConverter.del_none(jsonDic)
         prettyJsonStr = json.dumps(pureJsonDic, sort_keys=True, indent=2, separators=(',', ':'), ensure_ascii=False)
+        print("==========================================================================================")
+        print("=========================================🚀🚀🚀============================================")
         print(prettyJsonStr)
         jsonStr = prettyJsonStr.replace("\n", "")
         jsonStr = jsonStr.replace(" ", "")

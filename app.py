@@ -189,38 +189,46 @@ class Example(wx.Frame):
 
 
     def NewItem(self, event):
+        testChartModel = CustomStyleChartComposer.setUpColorfulBarChart()
+        self.aa_drawChartWithChartModel(testChartModel)
 
-        text = wx.GetTextFromUser('Enter a new item', 'Insert dialog')
-        if text != '':
-            self.listbox.Append(text)
+        # text = wx.GetTextFromUser('Enter a new item', 'Insert dialog')
+        # if text != '':
+        #     self.listbox.Append(text)
 
     def OnRename(self, event):
+        testChartModel = CustomStyleChartComposer.setUpColorfulGradientColorChart()
+        self.aa_drawChartWithChartModel(testChartModel)
 
-        sel = self.listbox.GetSelection()
-        text = self.listbox.GetString(sel)
-        renamed = wx.GetTextFromUser('Rename item', 'Rename dialog', text)
-
-        if renamed != '':
-            self.listbox.Delete(sel)
-            item_id = self.listbox.Insert(renamed, sel)
-            self.listbox.SetSelection(item_id)
+        # sel = self.listbox.GetSelection()
+        # text = self.listbox.GetString(sel)
+        # renamed = wx.GetTextFromUser('Rename item', 'Rename dialog', text)
+        #
+        # if renamed != '':
+        #     self.listbox.Delete(sel)
+        #     item_id = self.listbox.Insert(renamed, sel)
+        #     self.listbox.SetSelection(item_id)
 
     def OnDelete(self, event):
+        testChartModel = CustomStyleChartComposer.setUpDiscontinuousDataChart()
+        self.aa_drawChartWithChartModel(testChartModel)
 
-        sel = self.listbox.GetSelection()
-        if sel != -1:
-            self.listbox.Delete(sel)
+        # sel = self.listbox.GetSelection()
+        # if sel != -1:
+        #     self.listbox.Delete(sel)
 
     def OnClear(self, event):
-        self.listbox.Clear()
+        testChartModel = CustomStyleChartComposer.configureMixedLineChart()
+        self.aa_drawChartWithChartModel(testChartModel)
+
+        # self.listbox.Clear()/
 
 
 def main():
 
     app = wx.App()
     ex = Example(None)
-    testChartModel = CustomStyleChartComposer.setUpColorfulBarChart()
-    ex.aa_drawChartWithChartModel(testChartModel)
+
     ex.Show()
     app.MainLoop()
 

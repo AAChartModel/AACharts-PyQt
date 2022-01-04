@@ -7,7 +7,7 @@ class AAZonesElement:
     value: float
     color: str
     fillColor: str
-    dashStyle: AAChartLineDashStyleType
+    dashStyle: str
 
     def valueSet(self, prop: float):
         self.value = prop
@@ -25,6 +25,6 @@ class AAZonesElement:
    
     
     def dashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.dashStyle = prop
+        self.dashStyle = prop.value
         return self
 

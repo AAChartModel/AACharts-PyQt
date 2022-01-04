@@ -64,7 +64,7 @@ class AAChartZoomType(Enum):
     xy = "xy"
 
 class AAChartStackingType(Enum):
-    none = ""
+    no = ""
     normal = "normal"
     percent = "percent"
 
