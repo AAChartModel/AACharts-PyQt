@@ -19,7 +19,7 @@ from demo.AAChartSymbolConstant import *
 class CustomStyleChartComposer:
 
     @staticmethod
-    def setUpColorfulBarChart():
+    def configureColorfulBarChart():
         colorsNameArr = [
             "red",
             "orange",
@@ -69,7 +69,7 @@ class CustomStyleChartComposer:
         ]))
 
     @staticmethod
-    def setUpColorfulGradientColorChart():
+    def configureColorfulGradientColorBarChart():
         gradientColorNamesArr = [
             "oceanBlue",
             "sanguine",
@@ -139,7 +139,7 @@ class CustomStyleChartComposer:
         ]))
 
     @staticmethod
-    def setUpDiscontinuousDataChart():
+    def configureDiscontinuousDataChart():
         return (AAChartModel()
             .chartTypeSet(AAChartType.column)
             .yAxisTitleSet("")  # 设置Y轴标题

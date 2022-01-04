@@ -60,7 +60,8 @@ class AAStyle:
         return self
 
     def fontWeightSet(self, prop: AAChartFontWeightType):
-        self.fontWeight = prop.value
+        if (prop != None):
+            self.fontWeight = prop.value
         return self
 
     def heightSet(self, prop: float):
