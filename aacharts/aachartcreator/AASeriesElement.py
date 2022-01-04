@@ -120,7 +120,7 @@ class AASeriesElement:
    
     
     def dashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.dashStyle = prop
+        self.dashStyle = prop.value
         return self
    
     

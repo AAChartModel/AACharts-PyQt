@@ -6,7 +6,7 @@ from aacharts.aatool.AAStringPurer import AAStringPurer
 
 class AADataLabels:
     enabled: bool
-    align: AAChartAlignType
+    align: str
     style: AAStyle
     format: str
     formatter: str
@@ -14,7 +14,7 @@ class AADataLabels:
     allowOverlap: bool
     useHTML: bool
     distance: str
-    verticalAlign: AAChartVerticalAlignType
+    verticalAlign: str
     x: float
     y: float
     color: str
@@ -42,7 +42,7 @@ class AADataLabels:
    
     
     def alignSet(self, prop: AAChartAlignType):
-        self.align = prop
+        self.align = prop.value
         return self
    
     
@@ -83,7 +83,7 @@ class AADataLabels:
    
     
     def verticalAlignSet(self, prop: AAChartVerticalAlignType):
-        self.verticalAlign = prop
+        self.verticalAlign = prop.value
         return self
    
     

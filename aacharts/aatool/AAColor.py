@@ -30,7 +30,7 @@ class AAColor:
     clear: str = "clear"
   
     def rgbaColor(red: int, green: int, blue: int, alpha: float):
-        return f"rgba({red},{green},{blue},{alpha}"
+        return f"rgba({red},{green},{blue},{alpha})"
   
   
     

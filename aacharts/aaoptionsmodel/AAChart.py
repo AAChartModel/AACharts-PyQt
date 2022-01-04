@@ -9,15 +9,15 @@ class AAResetZoomButton:
     relativeTo: str
     theme: map
     
-    def position(self, prop: AAPosition):
+    def positionSet(self, prop: AAPosition):
         self.position = prop
         return self
     
-    def relativeTo(self, prop: str):
+    def relativeToSet(self, prop: str):
         self.relativeTo = prop
         return self
     
-    def theme(self, prop: map):
+    def themeSet(self, prop: map):
         self.theme = prop
         return self
 
@@ -43,7 +43,7 @@ class AAChart:
     spacingBottom: float # 👇
     spacingLeft: float # 👈
     scrollablePlotArea: AAScrollablePlotArea
-    # resetZoomButton: AAResetZoomButton?
+    resetZoomButton: AAResetZoomButton
 
     def typeSet(self, prop: AAChartType):
         self.type = prop.value
@@ -165,6 +165,6 @@ class AAChart:
     
     
 
-    # def resetZoomButtonSet(self, prop: AAResetZoomButton):
-    #     resetZoomButton = prop
-    #     return self   
+    def resetZoomButtonSet(self, prop: AAResetZoomButton):
+        self.resetZoomButton = prop
+        return self

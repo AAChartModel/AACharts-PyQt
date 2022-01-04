@@ -857,7 +857,7 @@ class CustomStyleChartComposer:
             AASeriesElement()
                 .nameSet("Tokyo Hot")
                 .lineWidthSet(5.0)
-                .colorSet("rgbaSet(220,20,60,1)")  # 猩红色, alpha 透明度 1
+                .colorSet("rgba(220,20,60,1)")  # 猩红色, alpha 透明度 1
                 .markerSet(AAMarker()
                            .statesSet(AAMarkerStates()
                                       .hoverSet(AAMarkerHover()
@@ -1325,7 +1325,7 @@ class CustomStyleChartComposer:
             AASeriesElement()
                 .nameSet("Tokyo Hot")
                 .lineWidthSet(5.0)
-                .colorSet("rgbaSet(220,20,60,1)")  # 猩红色, alpha 透明度 1
+                .colorSet("rgba(220,20,60,1)")  # 猩红色, alpha 透明度 1
                 .markerSet(AAMarker()
                            .statesSet(AAMarkerStates()
                                       .hoverSet(AAMarkerHover()

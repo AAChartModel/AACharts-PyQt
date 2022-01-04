@@ -12,7 +12,7 @@ from aacharts.aaoptionsmodel.AAXAxis import AADateTimeLabelFormats
 class AAYAxis:
     alternateGridColor: str
     title: AATitle
-    type: AAChartAxisType
+    type: str
     dateTimeLabelFormats = None
     dateTimeLabelFormats: AADateTimeLabelFormats
     plotBands: List

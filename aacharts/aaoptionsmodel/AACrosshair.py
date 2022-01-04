@@ -1,13 +1,13 @@
 from aacharts.aaenum.AAEnum import AAChartLineDashStyleType
 
 class AACrosshair:
-     dashStyle: AAChartLineDashStyleType
+     dashStyle: str
      color: str
      width: float
      zIndex: int
      
      def dashStyleSet(self, prop: AAChartLineDashStyleType):
-         self.dashStyle = prop
+         self.dashStyle = prop.value
          return self
      
      def colorSet(self, prop: str):

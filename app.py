@@ -35,7 +35,7 @@ class Demo(QWidget):  # 1
         # self.web_view.setMinimumWidth(400)
         # self.web_view.setMinimumHeight(300)
         #
-        # self.web_view.load(QUrl("file:///Users/anan/PycharmProjects/HelloMyPython/AAChartView.html"))
+        # self.web_view.load(QUrl("file:#/Users/anan/PycharmProjects/HelloMyPython/AAChartView.html"))
 
         self.button = QPushButton('Start', self)  # 2
         # self.button.clicked.connect(self.change_text)           # 3
@@ -135,20 +135,20 @@ class Example(wx.Frame):
 
         self.SetTitle('wx.ListBox')
 
-        self.listbox.Append("Polar Chart---极地图")
-        self.listbox.Append("Pie Chart---扇形图")
-        self.listbox.Append("Bubble Chart---气泡图")
-        self.listbox.Append("Scatter Chart---散点图")
-        self.listbox.Append("Arearange Chart---折线区域范围图")
-        self.listbox.Append("Area Spline range Chart--曲线区域范围图")
-        self.listbox.Append("Columnrange Chart--- 柱形范围图")
-        self.listbox.Append("Step Line Chart--- 直方折线图")
-        self.listbox.Append("Step Area Chart--- 直方折线填充图")
-        self.listbox.Append("Boxplot Chart--- 箱线图")
-        self.listbox.Append("Waterfall Chart--- 瀑布图")
-        self.listbox.Append("Pyramid Chart---金字塔图")
-        self.listbox.Append("Funnel Chart---漏斗图")
-        self.listbox.Append("Error Bar Chart---误差图")
+        # self.listbox.Append("Polar Chart---极地图")
+        # self.listbox.Append("Pie Chart---扇形图")
+        # self.listbox.Append("Bubble Chart---气泡图")
+        # self.listbox.Append("Scatter Chart---散点图")
+        # self.listbox.Append("Arearange Chart---折线区域范围图")
+        # self.listbox.Append("Area Spline range Chart--曲线区域范围图")
+        # self.listbox.Append("Columnrange Chart--- 柱形范围图")
+        # self.listbox.Append("Step Line Chart--- 直方折线图")
+        # self.listbox.Append("Step Area Chart--- 直方折线填充图")
+        # self.listbox.Append("Boxplot Chart--- 箱线图")
+        # self.listbox.Append("Waterfall Chart--- 瀑布图")
+        # self.listbox.Append("Pyramid Chart---金字塔图")
+        # self.listbox.Append("Funnel Chart---漏斗图")
+        # self.listbox.Append("Error Bar Chart---误差图")
 
 
 
@@ -197,6 +197,56 @@ class Example(wx.Frame):
         # self.listbox.Append("noMoreGroupingAndOverlapEachOtherColumnChart---不分组的相互重叠柱状图📊")
         # self.listbox.Append("noMoreGroupingAndNestedColumnChart---不分组的嵌套柱状图📊")
 
+        self.listbox.Append("configureLegendStyle")
+        self.listbox.Append("Custom Chart  Sample Two")
+        self.listbox.Append("Custom Chart  Sample three")
+        self.listbox.Append("Custom Chart  Sample 4")
+        self.listbox.Append("customAreaChartYAxisLabelsAndGridLineStyle---自定义曲线填充图图的 Y 轴 的 Labels 和 网格线样式")
+        self.listbox.Append("Adjust Y Axis Min value")
+        self.listbox.Append("Mirror Chart")
+        self.listbox.Append("Adjust The XAxis Labels")
+        self.listbox.Append("Adjust GroupPadding Between Columns")
+        self.listbox.Append("configureAAPlotBandsForChart || 值域颜色分割带🎀")
+        self.listbox.Append("configureAAPlotLinesForChart || 值域颜色分割线🧶")
+        self.listbox.Append("customAATooltipWithJSFuntion")
+        self.listbox.Append("customXAxisCrosshairStyle")
+        self.listbox.Append("configureXAxisLabelsFontColorWithHTMLString")
+        self.listbox.Append("configureXAxisLabelsFontColorAndFontSizeWithHTMLString")
+        self.listbox.Append("configure_DataLabels_XAXis_YAxis_Legend_Style")
+        self.listbox.Append("configureXAxisPlotBand")
+        self.listbox.Append("configureDoubleYAxisChartOptions")
+        self.listbox.Append("configureTripleYAxesMixedChart || 三重 Y 轴混合图")
+        self.listbox.Append("Double Y Axes And Column Line Mixed Chart || 双 Y 轴柱形曲线混合图")
+        self.listbox.Append("Double Y Axes Market Depth Chart || 双 Y 轴市场深度图")
+        self.listbox.Append("custom Area Chart Tooltip Style Like HTML Table || 自定义区域填充图浮动提示框为 HTML 表格样式")
+        self.listbox.Append("custom Axes Grid Line Style || 自定义 X 轴和 Y 轴网格线の样式")
+        self.listbox.Append("custom Radar Chart Style || 自定义雷达图样式")
+        self.listbox.Append("customColumnrangeChartStyle---自定义柱形范围图样式")
+        self.listbox.Append("self customXAxisLabelsBeImages---自定义曲线面积图 X 轴 labels 为一组图片🖼")
+        self.listbox.Append("Triangle Radar Chart With PlotBands---带有颜色标志带の三角形雷达图")
+        self.listbox.Append("Quadrangle Radar Chart With PlotBands---带有颜色标志带の四角形雷达图")
+        self.listbox.Append("Pentagon Radar Chart With PlotBands---带有颜色标志带の五角形雷达图")
+        self.listbox.Append("Hexagon Radar Char With PlotBands----带有颜色标志带の六角形雷达图")
+        self.listbox.Append("Spider Web Radar Chart With PlotBands----带有颜色标志带の🕸蜘蛛网状雷达图")
+
+        self.listbox.Append("configureComplicatedCustomAreasplineChart---复杂自定义曲线填充图 1")
+        self.listbox.Append("configureComplicatedCustomAreasplineChart2---复杂自定义曲线填充图 2")
+        self.listbox.Append("configureComplicatedCustomAreasplineChart3---复杂自定义曲线填充图 3")
+        self.listbox.Append("yAxisOnTheRightSideChart---y轴在右侧的图表")
+        self.listbox.Append("doubleLayerHalfPieChart---双层嵌套的玉阕图")
+        self.listbox.Append("customAreasplineChartTooltipContentWithHeaderFormat---通过 tooltip 的 headerFormat 属性来自定义 曲线填充图的 tooltip")
+        self.listbox.Append("customAreaChartTooltipStyleWithTotalValueHeader---浮动提示框 header 显示总值信息")
+        self.listbox.Append("configureYAxisLabelsNumericSymbolsMagnitudeOfAerasplineChart---自定义 Y 轴的 Labels 国际单位符基数及国际单位符")
+        self.listbox.Append("timeDataWithIrregularIntervalsChart---X 轴时间不连续的折线图")
+        self.listbox.Append("logarithmicAxisLineChart---对数轴折线图📈")
+        self.listbox.Append("logarithmicAxisScatterChart---对数轴散点图")
+
+        self.listbox.Append("Disable Mixed Chart Inactive Animation Effect----禁用混合图表的 inactive 动画效果")
+        self.listbox.Append("Adjust Bubble Chart Min And Max----调整气泡图的 min 和 max 相关属性")
+        self.listbox.Append("customLineChartDataLabelsFormat---自定义曲线图的 DataLabels 的 format 属性")
+        self.listbox.Append("customLineChartDataLabelsFormat2---自定义曲线图的 DataLabels 的 format 属性2(更简易方法)")
+        self.listbox.Append("complicatedScatterChart---复杂的自定义散点图")
+
         # 添加事件处理
         self.Bind(wx.EVT_LISTBOX, self.on_choice, self.listbox)
 
@@ -206,10 +256,10 @@ class Example(wx.Frame):
         listbox = event.GetEventObject()
         print("选择{0}".format(listbox.GetSelections()))
         selectedIndex = listbox.GetSelections()[0]
-        testChartModel = self.specialChartConfigurationWithSelectedIndex(selectedIndex)
+        testChartModel = self.chartOptionsConfigurationWithSelectedIndex(selectedIndex)
         # testChartModel2 = self.chartConfigurationWithSelectedIndex(listbox.GetSelections())
 
-        self.aa_drawChartWithChartModel(testChartModel)
+        self.aa_drawChartWithChartOptions(testChartModel)
 
     def on_webview_error(self, evt):
         self.URL = evt.GetURL()
@@ -220,7 +270,7 @@ class Example(wx.Frame):
         print("💀💀💀💀💀Error {} of {} attempts to load {}, trying again in 3 seconds.".format(self.retries, self.max_retries,
                                                                                       self.URL))
         if self.retries > 5:  # Try alternate
-            self.URL = "http://wxPython.org"
+            self.URL = "http:#wxPython.org"
             print("Swapping to alternate Url " + self.URL)
         self.browser.Destroy()
 
@@ -312,6 +362,55 @@ class Example(wx.Frame):
         elif selectedIndex == 40: return CustomStyleChartComposer.customVerticalXAxisCategoriesLabelsByHTMLBreakLineTag()
         elif selectedIndex == 41: return CustomStyleChartComposer.noMoreGroupingAndOverlapEachOtherColumnChart()
         elif selectedIndex == 42: return CustomStyleChartComposer.noMoreGroupingAndNestedColumnChart()
+
+    def chartOptionsConfigurationWithSelectedIndex(self, selectedIndex):
+        if selectedIndex ==  0:   return ChartOptionsComposer.configureLegendStyle()
+        elif selectedIndex ==  1: return ChartOptionsComposer.simpleGaugeChart()
+        elif selectedIndex ==  2: return ChartOptionsComposer.gaugeChartWithPlotBand()
+        elif selectedIndex ==  3: return ChartOptionsComposer.configureChartWithBackgroundImage()
+        elif selectedIndex ==  4: return ChartOptionsComposer.customAreaChartYAxisLabelsAndGridLineStyle()#自定义曲线填充图图的 Y 轴 的 Labels 和 elif selectedIndex ==式
+        elif selectedIndex ==  5: return ChartOptionsComposer.adjustYAxisMinValueForChart()
+        elif selectedIndex ==  6: return ChartOptionsComposer.configureTheMirrorColumnChart()
+        elif selectedIndex ==  7: return ChartOptionsComposer.adjustTheXAxisLabels()
+        elif selectedIndex ==  8: return ChartOptionsComposer.adjustGroupPaddingBetweenColumns()
+        elif selectedIndex ==  9: return ChartOptionsComposer.configureAAPlotBandsForChart()
+        elif selectedIndex == 10: return ChartOptionsComposer.configureAAPlotLinesForChart()
+        elif selectedIndex == 11: return ChartOptionsComposer.customAATooltipWithJSFuntion()
+        elif selectedIndex == 12: return ChartOptionsComposer.customXAxisCrosshairStyle()
+        elif selectedIndex == 13: return ChartOptionsComposer.configureXAxisLabelsFontColorWithHTMLString()
+        elif selectedIndex == 14: return ChartOptionsComposer.configureXAxisLabelsFontColorAndFontSizeWithHTMLString()
+        elif selectedIndex == 15: return ChartOptionsComposer.configure_DataLabels_XAXis_YAxis_Legend_Style()
+        elif selectedIndex == 16: return ChartOptionsComposer.configureXAxisPlotBand()
+        elif selectedIndex == 17: return ChartOptionsComposer.configureDoubleYAxisChartOptions()
+        elif selectedIndex == 18: return ChartOptionsComposer.configureTripleYAxesMixedChart()
+        elif selectedIndex == 19: return ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
+        elif selectedIndex == 20: return ChartOptionsComposer.configureDoubleYAxesMarketDepthChart()
+        elif selectedIndex == 21: return ChartOptionsComposer.customAreaChartTooltipStyleLikeHTMLTable()
+        elif selectedIndex == 22: return ChartOptionsComposer.customAxesGridLineStyle()
+        elif selectedIndex == 23: return ChartOptionsComposer.customRadarChartStyle()
+        elif selectedIndex == 24: return ChartOptionsComposer.customColumnrangeChartStyle()
+        elif selectedIndex == 25: return ChartOptionsComposer.customXAxisLabelsBeImages()#自定义曲线面积图 X 轴 labels 为一组图片🖼
+        elif selectedIndex == 26: return ChartOptionsComposer.configureTriangleRadarChart()#带有颜色标志带の三角形雷达图
+        elif selectedIndex == 27: return ChartOptionsComposer.configureQuadrangleRadarChart()#带有颜色标志带の四角形雷达图
+        elif selectedIndex == 28: return ChartOptionsComposer.configurePentagonRadarChart()#带有颜色标志带の五角形雷达图
+        elif selectedIndex == 29: return ChartOptionsComposer.configureHexagonRadarChart()#带有颜色标志带の六角形雷达图
+        elif selectedIndex == 30: return ChartOptionsComposer.configureSpiderWebRadarChart()#带有颜色标志带の🕸蜘蛛网状雷达elif selectedIndex ==
+        elif selectedIndex == 31: return ChartOptionsComposer.configureComplicatedCustomAreasplineChart()#复杂自定义曲线填充图 1
+        elif selectedIndex == 32: return ChartOptionsComposer.configureComplicatedCustomAreasplineChart2()#复杂自定义曲线填充图 2
+        elif selectedIndex == 33: return ChartOptionsComposer.configureComplicatedCustomAreasplineChart3()#复杂自定义曲线填充图 3
+        elif selectedIndex == 34: return ChartOptionsComposer.yAxisOnTheRightSideChart()#y轴在右侧的图表
+        elif selectedIndex == 35: return ChartOptionsComposer.doubleLayerHalfPieChart()#双层嵌套的玉阕图
+        elif selectedIndex == 36: return ChartOptionsComposer.customAreasplineChartTooltipContentWithHeaderFormat()#通过 tooltip 的 elif selectedIndex ==erFormat 属性来自定义 曲线填充图的 to
+        elif selectedIndex == 37: return ChartOptionsComposer.customAreaChartTooltipStyleWithTotalValueHeader()#浮动提示框 header 显示总值信息
+        elif selectedIndex == 38: return ChartOptionsComposer.configureYAxisLabelsNumericSymbolsMagnitudeOfAerasplineChart()#自定义 Y 轴的 elif selectedIndex ==ls 国际单位符基数及国际单位符
+        elif selectedIndex == 39: return ChartOptionsComposer.timeDataWithIrregularIntervalsChart()#X 轴时间不连续的折线图
+        elif selectedIndex == 40: return ChartOptionsComposer.logarithmicAxisLineChart()#对数轴折线图📈
+        elif selectedIndex == 41: return ChartOptionsComposer.logarithmicAxisScatterChart()#对数轴散点elif selectedIndex ==
+        elif selectedIndex == 42: return ChartOptionsComposer.disableMixedChartInactiveAnimationEffect()#禁用混合图表的 inactive 动画效果
+        elif selectedIndex == 43: return ChartOptionsComposer.adjustBubbleChartMinAndMax()#调整气泡图的 min 和 max 相关属性
+        elif selectedIndex == 44: return ChartOptionsComposer.customLineChartDataLabelsFormat()#自定义曲线图的 DataLabels 的 format 属性
+        elif selectedIndex == 45: return ChartOptionsComposer.customLineChartDataLabelsFormat2()#自定义曲线图的 DataLabels 的 format elif selectedIndex ==简易方法)
+        elif selectedIndex == 46: return ChartOptionsComposer.complicatedScatterChart()#复杂的自定义散点图
 
 
     def NewItem(self, event):

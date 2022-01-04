@@ -6,7 +6,7 @@ from aacharts.aaoptionsmodel.AALabel import AALabel
 
 class AAPlotLinesElement:
     color: str
-    dashStyle: AAChartLineDashStyleType
+    dashStyle: str
     width: float
     value: float
     zIndex: int
@@ -17,7 +17,7 @@ class AAPlotLinesElement:
         return self
      
     def dashStyleSet(self, prop: AAChartLineDashStyleType):
-        self.dashStyle = prop
+        self.dashStyle = prop.value
         return self
      
     def widthSet(self, prop: float):

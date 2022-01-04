@@ -64,7 +64,7 @@ class ChartOptionsComposer:
                 AAGradientColor.lusciousLime,
                 AAGradientColor.mysticMauve
             ])
-            .markerSymbolSet(AAChartSymbolType.circle)
+            .markerSymbolSet(AAChartSymbolType.circle.value)
             .markerSymbolStyleSet(AAChartSymbolStyleType.innerBlank)
             .stackingSet(AAChartStackingType.normal)
             .xAxisLabelsStyleSet(AAStyle.colorSizeWeight(AAColor.purple, 18, AAChartFontWeightType.bold))
@@ -231,12 +231,21 @@ class ChartOptionsComposer:
 
         (aaOptions.xAxis.labels
             .formatterSet("""
-        """))
+        function () {
+            return categoryJSArr[this.value];
+        }
+        """.replace("categoryJSArr", categoryJSArrStr)))
 
         (aaOptions.tooltip
             .useHTMLSet(True)
             .formatterSet("""
-            """))
+        function () {
+            return  'The value for <b>'
+        + categoryJSArr[this.x]
+        + '</b> is <b>' + this.y + '</b> '
+        + "℃";
+        }
+            """.replace("categoryJSArr", categoryJSArrStr)))
         
         return aaOptions
     
@@ -653,6 +662,15 @@ class ChartOptionsComposer:
         (aaOptions.tooltip
             .useHTMLSet(True)
             .formatterSet("""
+    function () {
+        return ' 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔 <br/> '
+        + ' Support JavaScript Function Just Right Now !!! <br/> '
+        + ' The Gold Price For <b>2020 '
+        +  this.x
+        + ' </b> Is <b> '
+        +  this.y
+        + ' </b> Dollars ';
+        }
             """)
             .valueDecimalsSet(2)#设置取值精确到小数点后几位#设置取值精确到小数点后几位
             .backgroundColorSet(AAColor.black)
@@ -800,8 +818,8 @@ class ChartOptionsComposer:
         
         fillColorGradientColor = (AAGradientColor.linearGradient1(
             AALinearGradientDirection.toTop,
-            "rgbaSet(256,256,256,0.3)",
-            "rgbaSet(256,256,256,1.0)"#颜色字符串设置支持十六进制类型和 rgba 类型
+            "rgba(256,256,256,0.3)",
+            "rgba(256,256,256,1.0)"#颜色字符串设置支持十六进制类型和 rgba 类型
         ))
         
         aaChartModel = (AAChartModel()
@@ -822,14 +840,14 @@ class ChartOptionsComposer:
             ]))
         
         aaOptions = aaChartModel.aa_toAAOptions()
-        (aaOptions.plotOptions.areaspline.dataLabels
-            .enabledSet(True)
-            .styleSet(AAStyle()
-                .colorSet(AAColor.white)
-                .fontSizeSet(14)
-                .fontWeightSet(AAChartFontWeightType.thin)
-                .textOutlineSet("0px 0px contrast")#文字轮廓描边
-        ))
+        # (aaOptions.plotOptions.areaspline.dataLabels
+        #     .enabledSet(True)
+        #     .styleSet(AAStyle()
+        #         .colorSet(AAColor.white)
+        #         .fontSizeSet(14)
+        #         .fontWeightSet(AAChartFontWeightType.thin)
+        #         .textOutlineSet("0px 0px contrast")#文字轮廓描边
+        # ))
         
         aaCrosshair = (AACrosshair()
             .dashStyleSet(AAChartLineDashStyleType.longDashDot)
@@ -879,7 +897,7 @@ class ChartOptionsComposer:
                     AASeriesElement()
                     .nameSet("New York Hot")
                     .lineWidthSet(5.0)
-                    .colorSet("rgbaSet(220,20,60,1)")#猩红色, alpha 透明度 1
+                    .colorSet("rgba(220,20,60,1)")#猩红色, alpha 透明度 1
                     .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, 21.5, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6]),
                     AASeriesElement()
                     .typeSet(AAChartType.column)
@@ -977,7 +995,7 @@ class ChartOptionsComposer:
         
         aaMarker = (AAMarker()
             .radiusSet(7)#曲线连接点半径，默认是4
-            .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+            .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
             .fillColorSet(AAColor.white)#点の填充色Set(用来设置折线连接点の填充色)
             .lineWidthSet(3)#外沿线の宽度Set(用来设置折线连接点の轮廓描边の宽度)
             .lineColorSet(""))#外沿线の颜色Set(用来设置折线连接点の轮廓描边颜色，当值为空字符串时，默认取数据点或数据列の颜色))
@@ -1458,9 +1476,9 @@ class ChartOptionsComposer:
         (aaOptions.tooltip
             .sharedSet(True)
             .useHTMLSet(True)
-            .headerFormatSet("<small>point.key</small><table>")
-            .pointFormatSet("<tr><td style=\\\"series.color\\\">series.name(): </td>"
-                + "<td style=\\\"text-align(): right\\\"><b>point.yEUR</b></td></tr>")
+            .headerFormatSet("<small>{point.key}</small><table>")
+            .pointFormatSet("<tr><td style=\\\"color: {series.color}\\\">{series.name}: </td>"
+                + "<td style=\\\"text-align: right\\\"><b>{point.y}EUR</b></td></tr>")
             .footerFormatSet("</table>"))
         
         return aaOptions
@@ -1511,7 +1529,7 @@ class ChartOptionsComposer:
             .yAxisLabelsEnabledSet(False)
             .polarSet(True)
             .markerRadiusSet(8)
-            .markerSymbolSet(AAChartSymbolType.circle)
+            .markerSymbolSet(AAChartSymbolType.circle.value)
             .markerSymbolStyleSet(AAChartSymbolStyleType.borderBlank)
             .legendEnabledSet(False)
             .touchEventEnabledSet(False)
@@ -1526,7 +1544,10 @@ class ChartOptionsComposer:
         categoryJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(categories))
         
         xAxisLabelsFormatter = """
-        """
+        function () {
+            return categoryJSArr[this.value];
+        }
+        """.replace("categoryJSArr", categoryJSArrStr)
 
         (aaOptions.yAxis
             .tickPositionsSet([0, 25, 50, 75, 100])
@@ -1916,7 +1937,7 @@ class ChartOptionsComposer:
         aaPlotOptions = (AAPlotOptions()
             .seriesSet(AASeries()
                     .markerSet(AAMarker()
-                            .symbolSet(AAChartSymbolType.circle)
+                            .symbolSet(AAChartSymbolType.circle.value)
                             .radiusSet(0))))
 
         aaLegend = (AALegend()
@@ -1951,7 +1972,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -1983,7 +2004,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -2067,7 +2088,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -2097,7 +2118,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -2181,7 +2202,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -2211,7 +2232,7 @@ class ChartOptionsComposer:
             .markerSet(
                     AAMarker()
                     .radiusSet(8)#曲线连接点半径
-                    .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                    .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                     .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                     .lineWidthSet(5)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                     #外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -2486,7 +2507,7 @@ class ChartOptionsComposer:
             ])
             .markerRadiusSet(8.0)#marker点半径为8个像素
             .markerSymbolStyleSet(AAChartSymbolStyleType.innerBlank)#marker点为空心效果
-            .markerSymbolSet(AAChartSymbolType.circle)#marker点为圆形点○
+            .markerSymbolSet(AAChartSymbolType.circle.value)#marker点为圆形点○
             .yAxisLineWidthSet(0)
             .legendEnabledSet(False)
             .seriesSet([
@@ -2684,7 +2705,7 @@ class ChartOptionsComposer:
     def logarithmicAxisScatterChart():
         aaMarker = (AAMarker()
             .radiusSet(8)
-            .symbolSet(AAChartSymbolType.circle)
+            .symbolSet(AAChartSymbolType.circle.value)
             .fillColorSet(AAColor.white)
             .lineWidthSet(3)
             .lineColorSet(AAColor.red))
@@ -2862,7 +2883,7 @@ class ChartOptionsComposer:
             .subtitleStyleSet(AAStyle.colorStr(AAColor.black))
             .chartTypeSet(AAChartType.scatter)
             .yAxisGridLineWidthSet(0)
-            .markerSymbolSet(AAChartSymbolType.circle)
+            .markerSymbolSet(AAChartSymbolType.circle.value)
             .markerRadiusSet(8)
             .markerSymbolStyleSet(AAChartSymbolStyleType.borderBlank)
             .dataLabelsEnabledSet(True)
