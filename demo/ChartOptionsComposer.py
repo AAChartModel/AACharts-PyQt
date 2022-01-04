@@ -368,8 +368,8 @@ class ChartOptionsComposer:
                     .nameSet("2021")
                     .colorSet(AAGradientColor.deepSea)
                     .dataSet([
-                        None,None,None,None,None,None,
-                        None,None,None,None,None,None,
+                        None, None, None, None, None, None,
+                        None, None, None, None, None, None,
                         0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5])
                 ,
             ]))
@@ -774,18 +774,18 @@ class ChartOptionsComposer:
     @staticmethod
     def configureXAxisLabelsFontColorAndFontSizeWithHTMLString():
         categories = [
-            "<span style=\\\"color():#CC0066font-weight():boldfont-size():10px\\\">使命召唤</span>",
-            "<span style=\\\"color():#CC0033font-weight():boldfont-size():11px\\\">荣誉勋章</span>",
-            "<span style=\\\"color():#FF0066font-weight():boldfont-size():12px\\\">狙击精英</span>",
-            "<span style=\\\"color():#66FF99font-weight():boldfont-size():13px\\\">神秘海域</span>",
-            "<span style=\\\"color():#00FF00font-weight():boldfont-size():14px\\\">美国末日</span>",
-            "<span style=\\\"color():#00CC00font-weight():boldfont-size():15px\\\">巫师狂猎</span>",
-            "<span style=\\\"color():#000CCCfont-weight():boldfont-size():15px\\\">孤岛危机</span>",
-            "<span style=\\\"color():#666FFFfont-weight():boldfont-size():14px\\\">地狱边境</span>",
-            "<span style=\\\"color():#9933CCfont-weight():boldfont-size():13px\\\">忍者之印</span>",
-            "<span style=\\\"color():#FFCC99font-weight():boldfont-size():12px\\\">合金装备</span>",
-            "<span style=\\\"color():#FFCC00font-weight():boldfont-size():11px\\\">全战三国</span>",
-            "<span style=\\\"color():#CC9909font-weight():boldfont-size():10px\\\">死亡搁浅</span>",
+            "<span style=\\\"color:#CC0066;font-weight:bold;font-size:10px\\\">使命召唤</span>",
+            "<span style=\\\"color:#CC0033;font-weight:bold;font-size:11px\\\">荣誉勋章</span>",
+            "<span style=\\\"color:#FF0066;font-weight:bold;font-size:12px\\\">狙击精英</span>",
+            "<span style=\\\"color:#66FF99;font-weight:bold;font-size:13px\\\">神秘海域</span>",
+            "<span style=\\\"color:#00FF00;font-weight:bold;font-size:14px\\\">美国末日</span>",
+            "<span style=\\\"color:#00CC00;font-weight:bold;font-size:15px\\\">巫师狂猎</span>",
+            "<span style=\\\"color:#000CCC;font-weight:bold;font-size:15px\\\">孤岛危机</span>",
+            "<span style=\\\"color:#666FFF;font-weight:bold;font-size:14px\\\">地狱边境</span>",
+            "<span style=\\\"color:#9933CC;font-weight:bold;font-size:13px\\\">忍者之印</span>",
+            "<span style=\\\"color:#FFCC99;font-weight:bold;font-size:12px\\\">合金装备</span>",
+            "<span style=\\\"color:#FFCC00;font-weight:bold;font-size:11px\\\">全战三国</span>",
+            "<span style=\\\"color:#CC9909;font-weight:bold;font-size:10px\\\">死亡搁浅</span>",
         ]
         
         aaChartModel = (AAChartModel()
@@ -1362,7 +1362,7 @@ class ChartOptionsComposer:
         
         aaTooltip = (AATooltip()
             .enabledSet(True)
-            .headerFormatSet("<span style=\\\"font-size=10px\\\">Price(): point.key</span><br/>")
+            .headerFormatSet("<span style=\\\"font-size=10px\\\">Price: point.key</span><br/>")
             .valueDecimalsSet(2))
         
         aaLegend = (AALegend()
@@ -1635,15 +1635,14 @@ class ChartOptionsComposer:
     @staticmethod
     def customXAxisLabelsBeImages():
         imageLinkStrArr = [
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197582.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197604.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197507.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197571.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197408.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197375.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197374.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>",
-            "<span><img src=\\\"https():/image.flaticon.com/icons/svg/197/197484.svg\\\" style=\\\"width(): 30px height(): 30px\\\"/><br></span>"
-        ]
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197582.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197604.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197507.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197571.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197408.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197375.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197374.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>",
+            "<span><img src=\\\"https:/image.flaticon.com/icons/svg/197/197484.svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>" ]
         
         aaChartModel = (AAChartModel()
             .chartTypeSet(AAChartType.areaspline)
@@ -2409,10 +2408,10 @@ class ChartOptionsComposer:
                     ])
             ]))
         
-        title = "<span style=\"color():redfont-size():17pxfont-weight():bold\">客流</span><br>"
+        title = "<span style=color:red;font-size:17px;font-weight:bold;>客流</span><br>"
         week = "周一"
-        time = "时间(): 8.point.x Set($week)<br>"
-        headerFormat = "$title)$time)"
+        time = "时间: 8.{point.x}" + f"({week})<br>"
+        headerFormat = f"{title}{time}"
         
         aaOptions = aaChartModel.aa_toAAOptions()
 
@@ -2426,6 +2425,9 @@ class ChartOptionsComposer:
         #禁用图例点击事件
         aaOptions.plotOptions.series.events = (AAEvents()
             .legendItemClickSet("""
+        function() {
+            return false;
+        }
             """))
         
         return aaOptions
