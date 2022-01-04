@@ -68,52 +68,6 @@ class Demo(QWidget):  # 1
         self.web_view.page().runJavaScript(js_string, self.js_callback)
 
 
-class MyWidget(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self.chartWindow = webview.create_window('Woah dude!', 'https://pywebview.flowrl.com')
-        self.button = QtWidgets.QPushButton("点这里")
-        # self.webView = QtWebEngineWidgets.QWebEngineView(self)
-        # self.webView.setUrl("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
-        # self.webView.load(QUrl("file:///Users/anan/PycharmProjects/HelloMyPython/AAChartView.html"))
-        self.button2 = QtWidgets.QPushButton("尝试执行 JS")
-
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.button)
-        self.layout.addWidget(self.button2)
-
-        # self.layout.addWidget(self.webView)
-
-
-
-
-        self.button.clicked.connect(self.showMessage)
-        self.button2.clicked.connect(self.showJSMessage)
-
-
-    @QtCore.Slot()
-    def showMessage(self):
-        window = webview.create_window('Woah dude!', 'https://pywebview.flowrl.com')
-        webview.start()
-
-        self.chartWindow = window
-
-        msgBox = QtWidgets.QMessageBox()
-        msgBox.setText("Hello world")
-        msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        ret = msgBox.exec()
-
-    @QtCore.Slot()
-    def showJSMessage(self):
-        testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
-        # testChartOptions = testChartModel.aa_toAAOptions()
-
-        # testChartOptions = JSFuncOptionsComposer.customAreasplineChartTooltipStyleByDivWithCSS()
-
-        testJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
-        print(testJson)
-        # widget.chartWindow.load_html("<h1>This is dynamically loaded HTML</h1>'")
 
 class MyHtmlFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -125,6 +79,99 @@ class MyHtmlFrame(wx.Frame):
         web_view.RunScript("document.write('--------------这个世上本没有路, 走的人多了,也便成了路Hello from wx.Widgets!')")
 
 
+class Example(wx.Frame):
+
+    def __init__(self, *args, **kw):
+        super(Example, self).__init__(*args, **kw)
+
+        self.InitUI()
+
+    def InitUI(self):
+
+        panel = wx.Panel(self)
+        hbox = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.listbox = wx.ListBox(panel)
+        hbox.Add(self.listbox, wx.ID_ANY, wx.EXPAND | wx.ALL, 20)
+
+        btnPanel = wx.Panel(panel)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        newBtn = wx.Button(btnPanel, wx.ID_ANY, 'New', size=(90, 30))
+        renBtn = wx.Button(btnPanel, wx.ID_ANY, 'Rename', size=(90, 30))
+        delBtn = wx.Button(btnPanel, wx.ID_ANY, 'Delete', size=(90, 30))
+        clrBtn = wx.Button(btnPanel, wx.ID_ANY, 'Clear', size=(90, 30))
+
+        web_view = WebView.New(btnPanel, wx.ID_ANY, 'Clear', size=(800, 450))
+        web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
+        # web_view.RunScript("alert('测试运行 JS')")
+        # web_view.RunScript("document.write('Hello from wx.Widgets!')")
+        # web_view.RunScript("document.write('--------------这个世上本没有路, 走的人多了,也便成了路Hello from wx.Widgets!')")
+
+
+        self.Bind(wx.EVT_BUTTON, self.NewItem, id=newBtn.GetId())
+        self.Bind(wx.EVT_BUTTON, self.OnRename, id=renBtn.GetId())
+        self.Bind(wx.EVT_BUTTON, self.OnDelete, id=delBtn.GetId())
+        self.Bind(wx.EVT_BUTTON, self.OnClear, id=clrBtn.GetId())
+        self.Bind(wx.EVT_LISTBOX_DCLICK, self.OnRename)
+
+        vbox.Add((-1, 20))
+        vbox.Add(newBtn)
+        vbox.Add(renBtn, 0, wx.TOP, 5)
+        vbox.Add(delBtn, 0, wx.TOP, 5)
+        vbox.Add(clrBtn, 0, wx.TOP, 5)
+        vbox.Add(web_view, 0, wx.TOP, 5)
+
+
+        btnPanel.SetSizer(vbox)
+        hbox.Add(btnPanel, 1, wx.EXPAND | wx.RIGHT, 20)
+        panel.SetSizer(hbox)
+
+        self.SetTitle('wx.ListBox')
+
+        self.listbox.Append("Column Chart---柱形图")
+        self.listbox.Append("Bar Chart---条形图")
+        self.listbox.Append("Area Chart---折线填充图")
+        self.listbox.Append("Areaspline Chart---曲线填充图")
+        self.listbox.Append("Step Area Chart--- 直方折线填充图")
+        self.listbox.Append("Step Line Chart--- 直方折线图")
+        self.listbox.Append("Line Chart---折线图")
+        self.listbox.Append("Spline Chart---曲线图")
+
+        self.Centre()
+
+    def NewItem(self, event):
+
+        text = wx.GetTextFromUser('Enter a new item', 'Insert dialog')
+        if text != '':
+            self.listbox.Append(text)
+
+    def OnRename(self, event):
+
+        sel = self.listbox.GetSelection()
+        text = self.listbox.GetString(sel)
+        renamed = wx.GetTextFromUser('Rename item', 'Rename dialog', text)
+
+        if renamed != '':
+            self.listbox.Delete(sel)
+            item_id = self.listbox.Insert(renamed, sel)
+            self.listbox.SetSelection(item_id)
+
+    def OnDelete(self, event):
+
+        sel = self.listbox.GetSelection()
+        if sel != -1:
+            self.listbox.Delete(sel)
+
+    def OnClear(self, event):
+        self.listbox.Clear()
+
+
+def main():
+
+    app = wx.App()
+    ex = Example(None)
+    ex.Show()
+    app.MainLoop()
 
 if __name__ == '__main__':
     # app = QApplication(sys.argv)
@@ -143,13 +190,9 @@ if __name__ == '__main__':
     # json_str2 = json.dumps(aaChartModel2, ensure_ascii=False)
     # print(json_str)
 
-    # demo = Demo()
-    # demo.setFixedWidth(400)
-    # demo.setFixedHeight(300)
-    # demo.show()  # 7
+    main()
 
-    # sys.exit(app.exec_())
-    app = wx.App()
-    frm = MyHtmlFrame(None, "Simple HTML Browser")
-    frm.Show()
-    app.MainLoop()
+    # app = wx.App()
+    # frm = MyHtmlFrame(None, "Simple HTML Browser")
+    # frm.Show()
+    # app.MainLoop()
