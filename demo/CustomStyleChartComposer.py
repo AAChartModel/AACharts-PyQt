@@ -737,14 +737,14 @@ class CustomStyleChartComposer:
     def customSpecialStyleDataLabelOfSingleDataElementChart():
         gradientColorDic1 = AAGradientColor.linearGradient1(
             AALinearGradientDirection.toBottom,
-            "rgbaColor(255,215,0,0.1)",  # gold color, alpha(): 0.1
-            "rgbaColor(255,215,0, 0.6)"  # gold color, alpha(): 0.6
+            "rgba(255,215,0,0.1)",  # gold color, alpha(): 0.1
+            "rgba(255,215,0, 0.6)"  # gold color, alpha(): 0.6
         )
 
         formatStr = (
-                "<img src=https():#www.highcharts.com/samples/graphics/sun.png><span"
-                + "style=color():#FFFFFFfont-weight():thinfont-size():25px>y</span><span"
-                + "style=color():#FFFFFFfont-weight():thinfont-size():17px> m</span>"
+                "<img src=https://www.highcharts.com/samples/graphics/sun.png>"
+                + "<span style=color:#FFFFFF;font-weight:thin;font-size:25px>{y}</span>"
+                + "<span style=color:#FFFFFF;font-weight:thin;font-size:17px> m</span>"
         )
 
         singleSpecialData = (
@@ -778,7 +778,7 @@ class CustomStyleChartComposer:
             AASeriesElement()
                 .nameSet("Virtual Data")
                 .lineWidthSet(6)
-                .colorSet("rgbaColor(255,215,0,1)")
+                .colorSet("rgba(255,215,0,1)")
                 .fillColorSet(gradientColorDic1)  # gold color, alpha(): 1.0
                 .dataSet([7.0, 6.9, 2.5, 14.5, 18.2, singleSpecialData, 5.2, 26.5, 23.3, 45.3, 13.9, 9.6])
         ]))
@@ -799,7 +799,7 @@ class CustomStyleChartComposer:
                 .allowPointSelectSet(True)
                 .statesSet(AAStates()
                            .hoverSet(AAHover()
-                                     .colorSet("rgbaColor(220,20,60,1)"))  # 猩红色, alpha 透明度 1
+                                     .colorSet("rgba(220,20,60,1)"))  # 猩红色, alpha 透明度 1
                            .selectSet(AASelect()
                                       .colorSet(AAColor.red)))
         ]))
