@@ -1,17 +1,35 @@
 import json
 import jsonpickle
 
+from aacharts.aachartcreator.AAChartModel import AAChartModel
+
+
 class AAJsonConverter:
     @staticmethod
-    def convertObjectToJson(obj: object):
+    def convertChartModelToJson(chartModel: AAChartModel):
+        aaOptions = chartModel.aa_toAAOptions()
+        jsonStr = AAJsonConverter.convertChartOptionsToJson(aaOptions)
+        return jsonStr
+
+    @staticmethod
+    def convertChartModelToPureJson(chartModel: AAChartModel):
+        aaOptions = chartModel.aa_toAAOptions()
+        prettyJson = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
+        print(prettyJson)
+        jsonStr = prettyJson.replace("\n","")
+        jsonStr = jsonStr.replace(" ","")
+        return jsonStr
+
+    @staticmethod
+    def convertChartOptionsToJson(obj: object):
         jsonpickle.set_preferred_backend('json')
         jsonpickle.set_encoder_options('json', ensure_ascii=False)
         jsonStr = jsonpickle.encode(obj, False)
         return jsonStr
 
     @staticmethod
-    def convertObjectToPureJson(obj: object):
-        jsonStr = AAJsonConverter.convertObjectToJson(obj)
+    def convertChartOptionsToPureJson(obj: object):
+        jsonStr = AAJsonConverter.convertChartOptionsToJson(obj)
         jsonDic = json.loads(s=jsonStr)
         pureJsonDic = AAJsonConverter.del_none(jsonDic)
         prettyJsonStr = json.dumps(pureJsonDic, sort_keys=True, indent=2, separators=(',', ':'), ensure_ascii=False)
