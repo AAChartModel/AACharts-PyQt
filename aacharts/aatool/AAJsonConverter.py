@@ -14,10 +14,7 @@ class AAJsonConverter:
     @staticmethod
     def convertChartModelToPureJson(chartModel: AAChartModel):
         aaOptions = chartModel.aa_toAAOptions()
-        prettyJson = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
-        print(prettyJson)
-        jsonStr = prettyJson.replace("\n","")
-        jsonStr = jsonStr.replace(" ","")
+        jsonStr = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
         return jsonStr
 
     @staticmethod
@@ -33,7 +30,10 @@ class AAJsonConverter:
         jsonDic = json.loads(s=jsonStr)
         pureJsonDic = AAJsonConverter.del_none(jsonDic)
         prettyJsonStr = json.dumps(pureJsonDic, sort_keys=True, indent=2, separators=(',', ':'), ensure_ascii=False)
-        return prettyJsonStr
+        print(prettyJsonStr)
+        jsonStr = prettyJsonStr.replace("\n", "")
+        jsonStr = jsonStr.replace(" ", "")
+        return jsonStr
 
     # https://stackoverflow.com/questions/4255400/exclude-empty-null-values-from-json-serialization
     @staticmethod
