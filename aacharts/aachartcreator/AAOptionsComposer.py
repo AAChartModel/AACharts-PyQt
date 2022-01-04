@@ -113,6 +113,8 @@ class AAOptionsComposer:
                     .fillColorSet(AAColor.white) #The fill color of the point (used to set the fill color of the polyline connection point)
                     # .lineWidthSet(0.4 * aaChartModel.markerRadius) #The width of the outer line (used to set the width of the outline stroke of the polyline connection point)
                     .lineColorSet("")) #The color of the outer edge (used to set the outline stroke color of the polyline connection point. When the value is an empty string, the color of the data point or data column is taken by default)
+                if aaChartModel.markerRadius != None:
+                    aaMarker.lineWidthSet(0.4 * aaChartModel.markerRadius)
             elif aaChartModel.markerSymbolStyle == AAChartSymbolStyleType.borderBlank:
                 (aaMarker
                     .lineWidthSet(2.0)
