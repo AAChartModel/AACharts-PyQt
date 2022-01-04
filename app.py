@@ -159,10 +159,8 @@ class Example(wx.Frame):
 
     def on_webview_load(self, evt):
         print("哈哈哈🔥, 图表加载完成事件捕获成功")
-        testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
-        prettyJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
-        print(prettyJson)
-        pureJson = AAJsonConverter.convertObjectToJson(testChartOptions)
+        testChartModel = CustomStyleChartComposer.setUpColorfulBarChart()
+        pureJson = AAJsonConverter.convertChartModelToPureJson(testChartModel)
         jsStr = f"loadTheHighChartView('{pureJson}','0','0')"
         self.web_view.RunScript(jsStr)
 
