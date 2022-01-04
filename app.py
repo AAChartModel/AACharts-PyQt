@@ -2,6 +2,11 @@ import sys
 
 from PyQt6.QtCore import QUrl
 from PyQt6.QtWidgets import QApplication, QLabel, QPushButton, QWidget, QMessageBox
+from PySide6 import QtWebEngineWidgets, QtWidgets, QtCore
+from PySide6.QtWebEngineWidgets import QWebEngineView
+import webview
+import wx
+from wx.html2 import WebView
 
 # from PyQt6.QtWebEngineWidgets import QWebEnginePage
 # from PyQt6.QtWebEngineWidgets import QWebEngineView
@@ -16,6 +21,7 @@ from aacharts.aachartcreator.AAChartModel import AAChartModel
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
 from aacharts.aaenum.AAEnum import AAChartType, AAChartAnimationType
 from aacharts.aatool.AAJsonConverter import AAJsonConverter
+from demo.ChartOptionsComposer import ChartOptionsComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
 from demo.JSFuncOptionsComposer import JSFuncOptionsComposer
 from demo.SpecialChartComposer import SpecialChartComposer
@@ -62,21 +68,77 @@ class Demo(QWidget):  # 1
         self.web_view.page().runJavaScript(js_string, self.js_callback)
 
 
+class MyWidget(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.chartWindow = webview.create_window('Woah dude!', 'https://pywebview.flowrl.com')
+        self.button = QtWidgets.QPushButton("点这里")
+        # self.webView = QtWebEngineWidgets.QWebEngineView(self)
+        # self.webView.setUrl("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
+        # self.webView.load(QUrl("file:///Users/anan/PycharmProjects/HelloMyPython/AAChartView.html"))
+        self.button2 = QtWidgets.QPushButton("尝试执行 JS")
+
+        self.layout = QtWidgets.QVBoxLayout(self)
+        self.layout.addWidget(self.button)
+        self.layout.addWidget(self.button2)
+
+        # self.layout.addWidget(self.webView)
+
+
+
+
+        self.button.clicked.connect(self.showMessage)
+        self.button2.clicked.connect(self.showJSMessage)
+
+
+    @QtCore.Slot()
+    def showMessage(self):
+        window = webview.create_window('Woah dude!', 'https://pywebview.flowrl.com')
+        webview.start()
+
+        self.chartWindow = window
+
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.setText("Hello world")
+        msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        ret = msgBox.exec()
+
+    @QtCore.Slot()
+    def showJSMessage(self):
+        testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
+        # testChartOptions = testChartModel.aa_toAAOptions()
+
+        # testChartOptions = JSFuncOptionsComposer.customAreasplineChartTooltipStyleByDivWithCSS()
+
+        testJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
+        print(testJson)
+        # widget.chartWindow.load_html("<h1>This is dynamically loaded HTML</h1>'")
+
+class MyHtmlFrame(wx.Frame):
+    def __init__(self, parent, title):
+        wx.Frame.__init__(self, parent, -1, title, size=(1024, 768))
+        web_view = WebView.New(self)
+        web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
+        web_view.RunScript("alert('测试运行 JS')")
+        web_view.RunScript("document.write('Hello from wx.Widgets!')")
+        web_view.RunScript("document.write('--------------这个世上本没有路, 走的人多了,也便成了路Hello from wx.Widgets!')")
 
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    # app = QApplication(sys.argv)
 
-    testChartModel = SpecialChartComposer.configureColumnChart()
+    # testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
+    # testChartOptions = testChartModel.aa_toAAOptions()
 
-    testChartOptions = JSFuncOptionsComposer.customColumnChartXAxisLabelsTextByInterceptTheFirstFourCharacters()
+    # testChartOptions = JSFuncOptionsComposer.customAreasplineChartTooltipStyleByDivWithCSS()
 
-    testJson = AAJsonConverter.convertObjectToJson(testChartOptions)
-    print(testJson)
-
-    testPrettyJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
-    print(testPrettyJson)
+    # testJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
+    # print(testJson)
+    #
+    # testPrettyJson = AAJsonConverter.convertObjectToPureJson(testChartOptions)
+    # print(testPrettyJson)
     # json_str = json.dumps(aaChartModel2, ensure_ascii=False)
     # json_str2 = json.dumps(aaChartModel2, ensure_ascii=False)
     # print(json_str)
@@ -87,3 +149,7 @@ if __name__ == '__main__':
     # demo.show()  # 7
 
     # sys.exit(app.exec_())
+    app = wx.App()
+    frm = MyHtmlFrame(None, "Simple HTML Browser")
+    frm.Show()
+    app.MainLoop()
