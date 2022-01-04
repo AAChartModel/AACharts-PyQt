@@ -58,13 +58,13 @@ class AAChartType(Enum):
     polygon = "polygon"
 
 class AAChartZoomType(Enum):
-    no = ""
+    none = ""
     x = "x"
     y = "y"
     xy = "xy"
 
 class AAChartStackingType(Enum):
-    no = ""
+    none = ""
     normal = "normal"
     percent = "percent"
 
