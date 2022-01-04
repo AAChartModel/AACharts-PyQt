@@ -20,6 +20,7 @@ import jsonpickle
 from aacharts.aachartcreator.AAChartModel import AAChartModel
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
 from aacharts.aaenum.AAEnum import AAChartType, AAChartAnimationType
+from aacharts.aaoptionsmodel.AAOptions import AAOptions
 from aacharts.aatool.AAJsonConverter import AAJsonConverter
 from demo.ChartOptionsComposer import ChartOptionsComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
@@ -88,6 +89,8 @@ class Example(wx.Frame):
 
     def InitUI(self):
 
+        self.optionsJson = ""
+
         panel = wx.Panel(self)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
@@ -103,7 +106,7 @@ class Example(wx.Frame):
 
         self.web_view = WebView.New(btnPanel, -1, size=(900,600))
         # web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
-        self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
+        # self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
         self.web_view.Bind(wx.html2.EVT_WEBVIEW_ERROR, self.on_webview_error)
         self.web_view.Bind(wx.html2.EVT_WEBVIEW_LOADED, self.on_webview_load)
         # web_view.RunScript("alert('测试运行 JS')")
@@ -159,10 +162,31 @@ class Example(wx.Frame):
 
     def on_webview_load(self, evt):
         print("哈哈哈🔥, 图表加载完成事件捕获成功")
-        testChartModel = CustomStyleChartComposer.setUpColorfulBarChart()
-        pureJson = AAJsonConverter.convertChartModelToPureJson(testChartModel)
-        jsStr = f"loadTheHighChartView('{pureJson}','0','0')"
+        self.drawChart()
+
+    def drawChart(self):
+        jsStr = f"loadTheHighChartView('{self.optionsJson}','0','0')"
         self.web_view.RunScript(jsStr)
+
+    def aa_drawChartWithChartModel(self, aaChartModel: AAChartModel):
+        aaOptions = aaChartModel.aa_toAAOptions()
+        self.aa_drawChartWithChartOptions(aaOptions)
+
+    def aa_drawChartWithChartOptions(self, aaOptions: AAOptions):
+        if len(self.optionsJson) < 1:
+            self.configureOptionsJsonStringWithAAOptions(aaOptions)
+            self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
+        else:
+            self.aa_refreshChartWholeContentWithChartOptions(aaOptions)
+
+    def configureOptionsJsonStringWithAAOptions(self, aaOptions: AAOptions):
+        pureJson = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
+        self.optionsJson = pureJson
+
+    def aa_refreshChartWholeContentWithChartOptions(self, aaOptions: AAOptions):
+        self.configureOptionsJsonStringWithAAOptions(aaOptions)
+        self.drawChart()
+
 
     def NewItem(self, event):
 
@@ -195,6 +219,8 @@ def main():
 
     app = wx.App()
     ex = Example(None)
+    testChartModel = CustomStyleChartComposer.setUpColorfulBarChart()
+    ex.aa_drawChartWithChartModel(testChartModel)
     ex.Show()
     app.MainLoop()
 
