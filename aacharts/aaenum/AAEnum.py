@@ -56,6 +56,8 @@ class AAChartType(Enum):
     boxplot = "boxplot"
     waterfall = "waterfall"
     polygon = "polygon"
+    gauge = "gauge"
+    errorbar = "errorbar"
 
 class AAChartZoomType(Enum):
     none = ""
