@@ -776,17 +776,6 @@ function () {
         }
         """)
 
-        # jsFormatterStr.safe_substitute(
-        # 总时长JS数组=总时长JS数组字符串,
-        # 有效时长JS数组=有效时长JS数组字符串,
-        # 看近时长JS数组=看近时长JS数组字符串,
-        # 看中时长JS数组=看中时长JS数组字符串,
-        # 看远时长JS数组=看远时长JS数组字符串,
-        # 切换次数JS数组=切换次数JS数组字符串,
-        # 停止次数JS数组=停止次数JS数组字符串,
-        # 干预次数JS数组=干预次数JS数组字符串
-        # )
-
         jsFormatterStr = jsFormatterStr.replace("${总时长JS数组}", 总时长JS数组字符串)
         jsFormatterStr = jsFormatterStr.replace("${有效时长JS数组}", 有效时长JS数组字符串)
         jsFormatterStr = jsFormatterStr.replace("${看近时长JS数组}", 看近时长JS数组字符串)
@@ -1003,13 +992,11 @@ function () {
 
         imageLinkFlagJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(imageLinkFlagArr))
 
-        xLabelsFormatter = """
-function () {
-    let imageFlag = imageLinkFlagJSArr[this.pos];
-    let imageLink = '<span><img src='http://image.flaticon.com/icons/svg/197/' + imageFlag + '.svg' style='width: 30px; height: 30px;'/><br></span>';
-    return imageLink;
-}
-        """
+        xLabelsFormatter = ("function () {\n" +
+                                "        let imageFlag = imageLinkFlagJSArr[this.pos];\n" +
+                                "        let imageLink = \"<span><img src=\\\"https://image.flaticon.com/icons/svg/197/\" + imageFlag + \".svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>\";\n" +
+                                "        return imageLink;\n" +
+                                "    }")
 
         xLabelsFormatter = xLabelsFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
@@ -1023,20 +1010,18 @@ function () {
         aaOptions.plotOptions.column.groupPaddingSet(0.005)
 
         #Custom tooltip style
-        tooltipFormatter = """
-function () {
-    let imageFlag = imageLinkFlagJSArr[this.point.index];
-    let imageLink = "<span><img src=\"https://image.flaticon.com/icons/svg/197/" + imageFlag + ".svg\" style=\"width: 30px; height: 30px;\"/><br></span>";
-    return imageLink
-    + " 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔 <br/> "
-    + " Support JavaScript Function Just Right Now !!! <br/> "
-    + " The Gold Price For <b>2020 "
-    +  this.x
-    + " </b> Is <b> "
-    +  this.y
-    + " </b> Dollars ";
-}
-        """
+        tooltipFormatter = ("function () {\n" +
+                        "        let imageFlag = imageLinkFlagJSArr[this.point.index];\n" +
+                        "        let imageLink = \"<span><img src=\\\"https://image.flaticon.com/icons/svg/197/\" + imageFlag + \".svg\\\" style=\\\"width: 30px; height: 30px;\\\"/><br></span>\";\n" +
+                        "        return imageLink\n" +
+                        "        + \" 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔 <br/> \"\n" +
+                        "        + \" Support JavaScript Function Just Right Now !!! <br/> \"\n" +
+                        "        + \" The Gold Price For <b>2020 \"\n" +
+                        "        +  this.x\n" +
+                        "        + \" </b> Is <b> \"\n" +
+                        "        +  this.y\n" +
+                        "        + \" </b> Dollars \";\n" +
+                        "    }")
 
         tooltipFormatter = tooltipFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
@@ -1307,26 +1292,24 @@ function () {
          .useHTMLSet(True)
          .paddingSet(0)
          .borderWidthSet(0)
-         .formatterSet("""
-            function () {
-                var box1Text = "&nbsp 2021-" + this.x + this.points[0].series.name + this.y;
-                var box2Text = "&nbsp 2021-" + this.x + this.points[1].series.name + this.y;
-                
-                return '<style>\
-                div{margin:0;padding:0}\
-                #container{width:300px;height:40px;border:80px;}\
-                #container .box1{width:150px;height:40px;float:left;background:red;line-height:40px;color:#fff}\
-                #container .box2{width:150px;height:40px;float:right;background:green;line-height:40px;color:#fff}\
-                </style>\
-                <div id='container'>'
-                +
-                '<div class='box1'>' + box1Text + '</div>'
-                +
-                '<div class='box2'>' + box2Text + '</div>'
-                +
-                '</div>';
-            }
-            """))
+         .formatterSet("function () {\n" +
+                "        var box1Text = \"&nbsp 2021-\" + this.x + this.points[0].series.name + this.y;\n" +
+                "        var box2Text = \"&nbsp 2021-\" + this.x + this.points[1].series.name + this.y;\n" +
+                "        \n" +
+                "        return '<style>\\\n" +
+                "        div{margin:0;padding:0}\\\n" +
+                "        #container{width:300px;height:40px;border:80px;}\\\n" +
+                "        #container .box1{width:150px;height:40px;float:left;background:red;line-height:40px;color:#fff}\\\n" +
+                "        #container .box2{width:150px;height:40px;float:right;background:green;line-height:40px;color:#fff}\\\n" +
+                "        </style>\\\n" +
+                "        <div id=\\\"container\\\">'\n" +
+                "        +\n" +
+                "        '<div class=\\\"box1\\\">' + box1Text + '</div>'\n" +
+                "        +\n" +
+                "        '<div class=\\\"box2\\\">' + box2Text + '</div>'\n" +
+                "        +\n" +
+                "        '</div>';\n" +
+                "    }"))
 
         #禁用图例点击事件
         aaOptions.plotOptions.series.events = (
