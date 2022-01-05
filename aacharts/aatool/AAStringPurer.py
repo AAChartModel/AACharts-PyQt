@@ -2,6 +2,11 @@ class AAStringPurer:
 
     @staticmethod
     def pureJSString(jsStr: str):
+        print("-------------------------------------")
+        print(jsStr)
+        print("-------------------------------------")
+
+
         pureJSStr = f"({jsStr})"
         pureJSStr = pureJSStr.replace("'" , "\"")
         pureJSStr = pureJSStr.replace("\0", "")

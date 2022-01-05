@@ -796,8 +796,6 @@ function () {
         jsFormatterStr = jsFormatterStr.replace("${停止次数JS数组}", 停止次数JS数组字符串)
         jsFormatterStr = jsFormatterStr.replace("${干预次数JS数组}", 干预次数JS数组字符串)
 
-        jsFormatterStr
-
         print(jsFormatterStr)
 
         aaOptions = aaChartModel.aa_toAAOptions()
@@ -919,23 +917,24 @@ function () {
         ]))
 
         aaOptions = aaChartModel.aa_toAAOptions()
-        #  aaOptions.yAxis.gridLineDashStyle = (AAChartLineDashStyleType.longDash#设置Y轴的网格线样式为 AAChartLineDashStyleTypeLongDash
+        aaOptions.yAxis.gridLineDashStyleSet(AAChartLineDashStyleType.longDash) #设置Y轴的网格线样式为 AAChartLineDashStyleTypeLongDash
 
         aaOptions.tooltip.shared = True
 
 
         unitArr = ["美元", "欧元", "人民币", "日元", "韩元", "越南盾", "港币", ]
         unitJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(unitArr))
-        #单组 series 图表, 获取选中的点的索引是 this.point.index ,多组并且共享提示框,则是this.points[0].index
+        # 单组 series 图表, 获取选中的点的索引是 this.point.index ,多组并且共享提示框,则是this.points[0].index
         dataLabelsFormatter = """
     function () {
         return this.y + unitJSArr[this.point.index];
         }
              """
 
-        dataLabelsFormatter.replace("unitJSArr", unitJSArrStr)
+        dataLabelsFormatter = dataLabelsFormatter.replace("unitJSArr", unitJSArrStr)
 
         aaDataLabels = (AADataLabels()
+                        .enabledSet(True)
                         .styleSet(AAStyle.colorSizeWeight(AAColor.red, 10, AAChartFontWeightType.bold))
                         .formatterSet(dataLabelsFormatter)
                         .backgroundColorSet(AAColor.white)# white color
@@ -966,14 +965,14 @@ function () {
         ]
 
         colorArr = [
-            "rgbSet(201, 36, 39)",
-            "rgbSet(201, 36, 39)",
-            "rgbSet(0, 82, 180)",
-            "rgbSet(0, 0, 0)",
-            "rgbSet(240, 240, 240)",
-            "rgbSet(255, 217, 68)",
-            "rgbSet(0, 82, 180)",
-            "rgbSet(215, 0, 38)"
+            "rgb(201, 36, 39)",
+            "rgb(201, 36, 39)",
+            "rgb(0, 82, 180)",
+            "rgb(0, 0, 0)",
+            "rgb(240, 240, 240)",
+            "rgb(255, 217, 68)",
+            "rgb(0, 82, 180)",
+            "rgb(215, 0, 38)"
         ]
 
 
@@ -1006,13 +1005,13 @@ function () {
 
         xLabelsFormatter = """
 function () {
-    let imageFlag = ${imageLinkFlagJSArr}[this.pos];
-    let imageLink = "<span><img src=\"https://image.flaticon.com/icons/svg/197/" + imageFlag + ".svg\" style=\"width: 30px; height: 30px;\"/><br></span>";
+    let imageFlag = imageLinkFlagJSArr[this.pos];
+    let imageLink = '<span><img src='http://image.flaticon.com/icons/svg/197/' + imageFlag + '.svg' style='width: 30px; height: 30px;'/><br></span>';
     return imageLink;
 }
         """
 
-        xLabelsFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
+        xLabelsFormatter = xLabelsFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
         #    https():#api.highcharts.com.cn/highcharts#xAxis.labels.formatter
         aaOptions = aaChartModel.aa_toAAOptions()
@@ -1039,7 +1038,7 @@ function () {
 }
         """
 
-        tooltipFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
+        tooltipFormatter = tooltipFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
         (aaOptions.tooltip
          .sharedSet(False)
@@ -1319,11 +1318,11 @@ function () {
                 #container .box1{width:150px;height:40px;float:left;background:red;line-height:40px;color:#fff}\
                 #container .box2{width:150px;height:40px;float:right;background:green;line-height:40px;color:#fff}\
                 </style>\
-                <div id=\"container\">'
+                <div id='container'>'
                 +
-                '<div class=\"box1\">' + box1Text + '</div>'
+                '<div class='box1'>' + box1Text + '</div>'
                 +
-                '<div class=\"box2\">' + box2Text + '</div>'
+                '<div class='box2'>' + box2Text + '</div>'
                 +
                 '</div>';
             }
@@ -1363,7 +1362,7 @@ function () {
                          .seriesSet(AASeries()
                                     .markerSet(AAMarker()
                                                .radiusSet(7)#曲线连接点半径，默认是4
-                                               .symbolSet(AAChartSymbolType.circle)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
+                                               .symbolSet(AAChartSymbolType.circle.value)#曲线点类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
                                                .fillColorSet(AAColor.white)#点的填充色Set(用来设置折线连接点的填充色)
                                                .lineWidthSet(3)#外沿线的宽度Set(用来设置折线连接点的轮廓描边的宽度)
                                                .lineColorSet("")#外沿线的颜色Set(用来设置折线连接点的轮廓描边颜色，当值为空字符串时，默认取数据点或数据列的颜色)
@@ -1489,11 +1488,11 @@ function () {
                             .sharedSet(False)
                             .pointFormatterSet("""
                                 function() {
-                                    return "<span style=\'color:" + this.color + "\'> ◉ </span>"
+                                    return '<span style=color: + this.color + > ◉ </span>'
                                     + this.series.name
-                                    + ": <b>"
+                                    + ': <b>'
                                     + (this.options.isZero ? 0 : this.y)
-                                    + "</b><br/>";
+                                    + '</b><br/>';
                                 }
                                 """))
         ]))

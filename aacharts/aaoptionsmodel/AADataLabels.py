@@ -5,7 +5,7 @@ from aacharts.aatool.AAStringPurer import AAStringPurer
 
 
 class AADataLabels:
-    enabled: bool
+    enabled: bool = True
     align: str
     style: AAStyle
     format: str
