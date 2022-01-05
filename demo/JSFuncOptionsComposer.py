@@ -631,17 +631,22 @@ function () {
 
         categoryJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(categories))
 
-        tooltipFormatter = Template("""
+        tooltipFormatter = ("""
     function () {
-        return  'The value for <b>' + ${categoryJSArr}[this.x] +
+        return  'The value for <b>' + categoryJSArr[this.x] +
         '</b> is <b>' + this.y + '</b> ' + "℃";
         }
              """)
 
-        tooltipFormatter.safe_substitute(categoryJSArr=categoryJSArrStr)
+        tooltipFormatter = tooltipFormatter.replace("categoryJSArr", categoryJSArrStr)
 
         xAxisLabelsFormatter = """
+    function () {
+        return categoryJSArr[this.value];
+        }
              """
+
+        xAxisLabelsFormatter = xAxisLabelsFormatter.replace("categoryJSArr", categoryJSArrStr)
 
         aaChartModel = (AAChartModel()
             .chartTypeSet(AAChartType.line)
@@ -742,7 +747,7 @@ function () {
         停止次数JS数组字符串 = AAJSArrayConverter.JSArrayWithHaxeArray(停止次数数组)
         干预次数JS数组字符串 = AAJSArrayConverter.JSArrayWithHaxeArray(干预次数数组)
 
-        jsFormatterStr = Template("""
+        jsFormatterStr = ("""
         function () {
         let 总时长数组 = ${总时长JS数组};
         let 有效时长数组 = ${有效时长JS数组};
@@ -771,16 +776,27 @@ function () {
         }
         """)
 
-        jsFormatterStr.safe_substitute(
-        总时长JS数组=总时长JS数组字符串,
-        有效时长JS数组=有效时长JS数组字符串,
-        看近时长JS数组=看近时长JS数组字符串,
-        看中时长JS数组=看中时长JS数组字符串,
-        看远时长JS数组=看远时长JS数组字符串,
-        切换次数JS数组=切换次数JS数组字符串,
-        停止次数JS数组=停止次数JS数组字符串,
-        干预次数JS数组=干预次数JS数组字符串
-        )
+        # jsFormatterStr.safe_substitute(
+        # 总时长JS数组=总时长JS数组字符串,
+        # 有效时长JS数组=有效时长JS数组字符串,
+        # 看近时长JS数组=看近时长JS数组字符串,
+        # 看中时长JS数组=看中时长JS数组字符串,
+        # 看远时长JS数组=看远时长JS数组字符串,
+        # 切换次数JS数组=切换次数JS数组字符串,
+        # 停止次数JS数组=停止次数JS数组字符串,
+        # 干预次数JS数组=干预次数JS数组字符串
+        # )
+
+        jsFormatterStr = jsFormatterStr.replace("${总时长JS数组}", 总时长JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${有效时长JS数组}", 有效时长JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${看近时长JS数组}", 看近时长JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${看中时长JS数组}", 看中时长JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${看远时长JS数组}", 看远时长JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${切换次数JS数组}", 切换次数JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${停止次数JS数组}", 停止次数JS数组字符串)
+        jsFormatterStr = jsFormatterStr.replace("${干预次数JS数组}", 干预次数JS数组字符串)
+
+        jsFormatterStr
 
         print(jsFormatterStr)
 
@@ -815,18 +831,18 @@ function () {
         ]
         categoryJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(categoryArr))
 
-        xAxisLabelsFormatter = Template("""
+        xAxisLabelsFormatter = """
     function () {
-        return ${categoryJSArr}[this.value];
+        return categoryJSArr[this.value];
         }
-             """)
+             """
 
-        xAxisLabelsFormatter.substitute(categoryJSArr=categoryJSArrStr)
+        xAxisLabelsFormatter = xAxisLabelsFormatter.replace("categoryJSArr", categoryJSArrStr)
 
         aaChartModel = (AAChartModel()
             .chartTypeSet(AAChartType.line)#图表类型
             .titleSet("健康体检表")#图表主标题
-            .colorsThemeSet(["#fe117c","#ffc069",])#设置主体颜色数组
+            .colorsThemeSet(["#fe117c", "#ffc069",])#设置主体颜色数组
             .yAxisLineWidthSet(0)
             .yAxisGridLineWidthSet(1)#y轴横向分割线宽度为0Set(即是隐藏分割线)
             # .yAxisTickPositionsSet([0, 5, 10, 15, 20, 25, 30, 35])
