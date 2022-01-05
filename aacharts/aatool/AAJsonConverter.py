@@ -35,7 +35,8 @@ class AAJsonConverter:
         prettyJsonStr = prettyJsonStr.replace("_from", "from")
         print(prettyJsonStr)
         jsonStr = prettyJsonStr.replace("\n", "")
-        jsonStr = jsonStr.replace(" ", "")
+        # jsonStr = jsonStr.replace(" ", "")//不能去除 formatter 函数的空格, 这样 eval 的时候有问题
+        print(jsonStr)
         return jsonStr
 
     # https://stackoverflow.com/questions/4255400/exclude-empty-null-values-from-json-serialization
