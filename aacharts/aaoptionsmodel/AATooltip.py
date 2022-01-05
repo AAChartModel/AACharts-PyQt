@@ -1,6 +1,7 @@
 
 
 from aacharts.aaoptionsmodel.AAStyle import AAStyle
+from aacharts.aaoptionsmodel.AAXAxis import AADateTimeLabelFormats
 from aacharts.aatool.AAStringPurer import AAStringPurer
 
 
@@ -10,7 +11,7 @@ class AATooltip:
     borderRadius: float
     borderWidth: float
     style: AAStyle
-    enabled: bool
+    enabled: bool = True
     useHTML: bool
     formatter: str
     headerFormat: str
@@ -24,7 +25,7 @@ class AATooltip:
     padding: float
     pointFormatter: str
     positioner: str
-    # dateTimeLabelFormats: AADateTimeLabelFormats
+    dateTimeLabelFormats: AADateTimeLabelFormats
     
     def backgroundColorSet(self, prop: str):
         self.backgroundColor = prop
@@ -121,8 +122,8 @@ class AATooltip:
         return self
    
     
-    # def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
-    #     dateTimeLabelFormats = prop
-    #     return self
-    #
+    def dateTimeLabelFormatsSet(self, prop: AADateTimeLabelFormats):
+        self.dateTimeLabelFormats = prop
+        return self
+
     
