@@ -115,8 +115,8 @@ class JSFuncOptionsComposer:
          .formatterSet("""
     function () {
         var s = '第' + '<b>' +  this.x + '</b>' + '年' + '<br/>';
-        let colorDot1 = '<span style=\"' + 'color:#1e90ff; font-size:13px\"' + '>◉</span> ';
-        let colorDot2 = '<span style=\"' + 'color:#ef476f; font-size:13px\"' + '>◉</span> ';
+        let colorDot1 = '<span style=' + 'color:#1e90ff; font-size:13px' + '>◉</span> ';
+        let colorDot2 = '<span style=' + 'color:#ef476f; font-size:13px' + '>◉</span> ';
         let s1 = colorDot1  + this.points[0].series.name + ': ' + this.points[0].y + '只' + '<br/>';
         let s2 =  colorDot2 + this.points[1].series.name + ': ' + this.points[1].y + '棵';
         s += s1 + s2;
@@ -178,13 +178,13 @@ class JSFuncOptionsComposer:
          .useHTMLSet(True)
          .formatterSet("""
     function () {
-        let wholeContentStr ='<span style=\"' + 'color:lightGray; font-size:13px\"' + '>◉ Time: ' + this.x + ' year</span><br/>';
+        let wholeContentStr ='<span style=' + 'color:lightGray; font-size:13px' + '>◉ Time: ' + this.x + ' year</span><br/>';
         let length = this.points.length;
         for (let i = 0; i < length; i++) {
             let thisPoint = this.points[i];
             let yValue = thisPoint.y;
             if (yValue != 0) {
-                let spanStyleStartStr = '<span style=\"' + 'color:'+ thisPoint.color + '; font-size:13px\"' + '>◉ ';
+                let spanStyleStartStr = '<span style=' + 'color:'+ thisPoint.color + '; font-size:13px' + '>◉ ';
                 let spanStyleEndStr = '</span> <br/>';
                 wholeContentStr += spanStyleStartStr + thisPoint.series.name + ': ' + thisPoint.y + '℃' + spanStyleEndStr;
             }
@@ -236,7 +236,7 @@ class JSFuncOptionsComposer:
             let thisPoint = this.points[i];
             let yValue = thisPoint.y;
             if (yValue != 0) {
-                let prefixStr = '<span style=\"' + 'color:'+ thisPoint.color + '; font-size:13px\"' + '>◉ ';
+                let prefixStr = '<span style=' + 'color:'+ thisPoint.color + '; font-size:13px' + '>◉ ';
                 wholeContentStr += prefixStr + thisPoint.series.name + ': ' + yValue + '<br/>';
             }
         }
@@ -317,15 +317,15 @@ class JSFuncOptionsComposer:
     function () {
         let yValue = this.value;
         if (yValue >= 200) {
-            return "Excellent";
+            return 'Excellent';
         } else if (yValue >= 150 && yValue < 200) {
-            return "Very Good";
+            return 'Very Good';
         } else if (yValue >= 100 && yValue < 150) {
-            return "Good";
+            return 'Good';
         } else if (yValue >= 50 && yValue < 100) {
-            return "Not Bad";
+            return 'Not Bad';
         } else {
-            return "Just So So";
+            return 'Just So So';
         }
     }
                  """))
@@ -361,15 +361,15 @@ class JSFuncOptionsComposer:
     function () {
         let yValue = this.value;
         if (yValue == 0) {
-            return "0";
+            return '0';
         } else if (yValue == 2500) {
-            return "25%";
+            return '25%';
         } else if (yValue == 5000) {
-            return "50%";
+            return '50%';
         } else if (yValue == 7500) {
-            return "75%";
+            return '75%';
         } else if (yValue == 10000) {
-            return "100%";
+            return '100%';
         }
     }
                  """))
@@ -829,7 +829,7 @@ function () {
             .colorsThemeSet(["#fe117c","#ffc069",])#设置主体颜色数组
             .yAxisLineWidthSet(0)
             .yAxisGridLineWidthSet(1)#y轴横向分割线宽度为0Set(即是隐藏分割线)
-            .yAxisTickPositionsSet([0, 5, 10, 15, 20, 25, 30, 35])
+            # .yAxisTickPositionsSet([0, 5, 10, 15, 20, 25, 30, 35])
             .markerRadiusSet(5)
             .markerSymbolSet(AAChartSymbolType.circle)
             .polarSet(True)
@@ -911,13 +911,13 @@ function () {
         unitArr = ["美元", "欧元", "人民币", "日元", "韩元", "越南盾", "港币", ]
         unitJSArrStr = (AAJSArrayConverter.JSArrayWithHaxeArray(unitArr))
         #单组 series 图表, 获取选中的点的索引是 this.point.index ,多组并且共享提示框,则是this.points[0].index
-        dataLabelsFormatter = Template("""
+        dataLabelsFormatter = """
     function () {
-        return this.y + ${unitJSArr}[this.point.index];
+        return this.y + unitJSArr[this.point.index];
         }
-             """)
+             """
 
-        dataLabelsFormatter.substitude(unitJSArr=unitJSArrStr)
+        dataLabelsFormatter.replace("unitJSArr", unitJSArrStr)
 
         aaDataLabels = (AADataLabels()
                         .styleSet(AAStyle.colorSizeWeight(AAColor.red, 10, AAChartFontWeightType.bold))
@@ -996,7 +996,7 @@ function () {
 }
         """
 
-        xLabelsFormatter.substitude(imageLinkFlagJSArr=imageLinkFlagJSArrStr)
+        xLabelsFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
         #    https():#api.highcharts.com.cn/highcharts#xAxis.labels.formatter
         aaOptions = aaChartModel.aa_toAAOptions()
@@ -1010,7 +1010,7 @@ function () {
         #Custom tooltip style
         tooltipFormatter = """
 function () {
-    let imageFlag = ${imageLinkFlagJSArr}[this.point.index];
+    let imageFlag = imageLinkFlagJSArr[this.point.index];
     let imageLink = "<span><img src=\"https://image.flaticon.com/icons/svg/197/" + imageFlag + ".svg\" style=\"width: 30px; height: 30px;\"/><br></span>";
     return imageLink
     + " 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔 <br/> "
@@ -1023,7 +1023,7 @@ function () {
 }
         """
 
-        tooltipFormatter.substitute(imageLinkFlagJSArr=imageLinkFlagJSArrStr)
+        tooltipFormatter.replace("imageLinkFlagJSArr", imageLinkFlagJSArrStr)
 
         (aaOptions.tooltip
          .sharedSet(False)
