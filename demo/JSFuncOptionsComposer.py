@@ -1482,17 +1482,19 @@ function () {
             AASeriesElement()
                 .nameSet("ZeroDataPie")
                 .dataSet([
-
-            ])
+                {"y": 1, "isZero": True, "name": "One"},
+                {"y": 1, "isZero": True, "name": "Two"},
+                {"y": 1, "isZero": True, "name": "Three"}
+        ])
                 .tooltipSet(AATooltip()
                             .sharedSet(False)
                             .pointFormatterSet("""
                                 function() {
-                                    return '<span style=color: + this.color + > ◉ </span>'
+                                    return "<span style=color:" + this.color + "> ◉ </span>"
                                     + this.series.name
-                                    + ': <b>'
+                                    + ": <b>"
                                     + (this.options.isZero ? 0 : this.y)
-                                    + '</b><br/>';
+                                    + "</b><br/>";
                                 }
                                 """))
         ]))
