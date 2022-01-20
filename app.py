@@ -30,6 +30,7 @@ from aacharts.aatool.AAJsonConverter import AAJsonConverter
 from demo.ChartOptionsComposer import ChartOptionsComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
 from demo.JSFuncOptionsComposer import JSFuncOptionsComposer
+from demo.MainTreeWidget import MainTreeWidget
 from demo.SpecialChartComposer import SpecialChartComposer
 
 
@@ -547,81 +548,11 @@ def main():
     # app.MainLoop()
 
 
-class MyWidget(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-
-        folderTree = QtWidgets.QTreeWidget()
-
-        header = QtWidgets.QTreeWidgetItem(["Virtual folder tree", "Comment"])
-        # ...
-        folderTree.setHeaderItem(header)  # Another alternative is setHeaderLabels(["Tree","First",...])
-
-        root = QtWidgets.QTreeWidgetItem(folderTree, ["Untagged files"])
-        root.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
-
-        folder1 = QtWidgets.QTreeWidgetItem(root, ["Interiors"])
-        folder1.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
-
-        folder2 = QtWidgets.QTreeWidgetItem(root, ["Exteriors"])
-        folder2.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
-
-        folder1_1 = QtWidgets.QTreeWidgetItem(folder1, ["Bathroom", "Seg was here"])
-        folder1_1.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
-
-        folder1_2 = QtWidgets.QTreeWidgetItem(folder1, ["Living room", "Approved by client"])
-        folder1_2.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
-
-        def printer(treeItem):
-            foldername = treeItem.text(0)
-            comment = treeItem.text(1)
-            data = treeItem.text(2)
-            print(foldername + ': ' + comment + ' (' + data + ')')
-
-        folderTree.itemClicked.connect(lambda: printer(folderTree.currentItem()))
-
-        self.hello = ["Hallo World", "Hei maailma", "Hola Mundo", "你好，世界"]
-        self.button = QtWidgets.QPushButton("点击我")
-        self.text = QtWidgets.QLabel("Hello World", alignment=QtCore.Qt.AlignCenter)
-
-        self.chartView = PYChartView()
-        testChartModel = CustomStyleChartComposer.configureColorfulBarChart()
-        self.chartView.aa_drawChartWithChartModel(testChartModel)
-        # self.qtWebView = QWebEngineView()
-        # self.qtWebView.load(QUrl("file:///Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html"))
-        #
-        # QUrl("file:///" + htmlPath)
-        # self.qtWebView.load("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
-
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
-        self.layout.addWidget(self.chartView)
-        self.layout.addWidget(folderTree)
-
-        # self.layout.addWidget(self.qtWebView)
-
-
-        self.button.clicked.connect(self.magic)
-        self.setWindowTitle("你好世界")
-
-    def printer(treeItem):
-        foldername = treeItem.text(0)
-        comment = treeItem.text(1)
-        data = treeItem.text(2)
-        print
-        foldername + ': ' + comment + ' (' + data + ')'
-
-
-    @QtCore.Slot()
-    def magic(self):
-        self.text.setText(random.choice(self.hello))
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
 
-    widget = MyWidget()
+    widget = MainTreeWidget()
     widget.resize(300, 1200)
     widget.show()
 
