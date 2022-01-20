@@ -3,13 +3,22 @@ from random import random
 from PySide6 import QtWidgets, QtCore
 
 from aacharts.aachartcreator.PYChartView import PYChartView
-from demo import SpecialChartComposer, ChartOptionsComposer, JSFuncOptionsComposer
+from demo.MixedChartComposer import MixedChartComposer
+from demo.SpecialChartComposer import SpecialChartComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
+from demo.ChartOptionsComposer import ChartOptionsComposer
+from demo.JSFuncOptionsComposer import JSFuncOptionsComposer
+
 
 
 class MainTreeWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+
+        self.chartView = PYChartView()
+        testChartModel = CustomStyleChartComposer.configureColorfulBarChart()
+        self.chartView.aa_drawChartWithChartModel(testChartModel)
+
 
         # https://gist.github.com/fredrikaverpil/1fa4f3360ffdb1e69507
         folderTree = QtWidgets.QTreeWidget()
@@ -219,17 +228,33 @@ class MainTreeWidget(QtWidgets.QWidget):
         def printer(treeItem):
             foldername = treeItem.text(0)
             sectionIndex = treeItem.text(1)
-            rowIndex = treeItem.text(2)
+            rowIndexStr = treeItem.text(2)
             # treeItem.indexOfChild()
             print(foldername + ': ' + f"(Section Index: {sectionIndex})" + f"(Row Index: {rowIndex})")
+
+            if len(rowIndexStr) > 0:
+                sectionIndexValue = int(sectionIndex)
+                rowIndexValue = int(rowIndexStr) - 1
+                if sectionIndexValue == 2:
+                   aaChartModel = self.specialChartConfigurationWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartModel(aaChartModel)
+                elif sectionIndexValue == 3:
+                   aaChartModel = self.customStyleChartModelWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartModel(aaChartModel)
+                elif sectionIndexValue == 4:
+                   aaChartModel = self.mixedTypeChartModelWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartModel(aaChartModel)
+                elif sectionIndexValue == 5:
+                   aaOptions = self.chartOptionsConfigurationWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartOptions(aaOptions)
+                elif sectionIndexValue == 6:
+                   aaOptions = self.chartJSFuncOptionsConfigurationWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartOptions(aaOptions)
+
 
         folderTree.itemClicked.connect(lambda: printer(folderTree.currentItem()))
 
         folderTree.currentColumn()
-
-        self.chartView = PYChartView()
-        testChartModel = CustomStyleChartComposer.configureColorfulBarChart()
-        self.chartView.aa_drawChartWithChartModel(testChartModel)
 
         self.layout = QtWidgets.QVBoxLayout(self)
         self.layout.addWidget(self.chartView)
@@ -366,6 +391,38 @@ class MainTreeWidget(QtWidgets.QWidget):
             return CustomStyleChartComposer.noMoreGroupingAndOverlapEachOtherColumnChart()
         elif selectedIndex == 42:
             return CustomStyleChartComposer.noMoreGroupingAndNestedColumnChart()
+
+
+    def mixedTypeChartModelWithSelectedIndex(self, selectedIndex):
+        if selectedIndex == 0:
+            return MixedChartComposer.configureArearangeMixedLineChart()
+        elif selectedIndex == 1:
+            return MixedChartComposer.configureColumnrangeMixedLineChart()
+        elif selectedIndex == 2:
+            return MixedChartComposer.configureStackingColumnMixedLineChart()
+        elif selectedIndex == 3:
+            return MixedChartComposer.configureDashStyleTypesMixedChart()
+        elif selectedIndex == 4:
+            return MixedChartComposer.configureNegativeColorMixedChart()
+        elif selectedIndex == 5:
+            return MixedChartComposer.configureScatterMixedLineChart()
+        elif selectedIndex == 6:
+            return MixedChartComposer.configureNegativeColorMixedBubbleChart()
+        elif selectedIndex == 7:
+            return MixedChartComposer.configurePolygonMixedScatterChart()
+        elif selectedIndex == 8:
+            return MixedChartComposer.configurePolarChartMixedChart()
+        elif selectedIndex == 9:
+            return MixedChartComposer.configureColumnMixedScatterChart()
+        elif selectedIndex == 10:
+            return MixedChartComposer.configurePieMixedLineMixedColumnChart()
+        elif selectedIndex == 11:
+            return MixedChartComposer.configureLineChartWithShadow()
+        elif selectedIndex == 12:
+            return MixedChartComposer.configureNegativeColorMixedAreasplineChart()
+        elif selectedIndex == 13:
+            return MixedChartComposer.configureAerasplinerangeMixedColumnrangeMixedLineChart()
+
 
     def chartOptionsConfigurationWithSelectedIndex(self, selectedIndex):
         if selectedIndex == 0:
