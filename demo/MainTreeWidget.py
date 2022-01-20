@@ -3,6 +3,7 @@ from random import random
 from PySide6 import QtWidgets, QtCore
 
 from aacharts.aachartcreator.PYChartView import PYChartView
+from demo import SpecialChartComposer, ChartOptionsComposer, JSFuncOptionsComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
 
 
@@ -198,42 +199,42 @@ class MainTreeWidget(QtWidgets.QWidget):
 
         ]
 
-        for index in range(len(sectionTitleArr)):
-            sectionTitleStr = sectionTitleArr[index]
-            root = QtWidgets.QTreeWidgetItem(folderTree, [sectionTitleStr])
+        for sectionIndex in range(len(sectionTitleArr)):
+            sectionTitleStr = sectionTitleArr[sectionIndex]
+            sectionIndexStr = f"{sectionIndex + 1}"
+            sectionRoot = QtWidgets.QTreeWidgetItem(folderTree, [sectionIndexStr + "  " + sectionTitleStr])
+            sectionRoot.setData(1, QtCore.Qt.EditRole,
+                            sectionIndexStr)
 
-            singleSectionChartTypeTitleArr = chartTypeTitleArr[index]
-            for chartTypeStr in singleSectionChartTypeTitleArr:
-                QtWidgets.QTreeWidgetItem(root, [chartTypeStr])
-
+            singleSectionChartTypeTitleArr = chartTypeTitleArr[sectionIndex]
+            for rowIndex in range(len(singleSectionChartTypeTitleArr)):
+                rowIndexStr = f"{rowIndex + 1}"
+                chartTypeStr = singleSectionChartTypeTitleArr[rowIndex]
+                rowRoot = QtWidgets.QTreeWidgetItem(sectionRoot, [rowIndexStr + "  " + chartTypeStr])
+                rowRoot.setData(1, QtCore.Qt.EditRole,
+                                sectionIndexStr)  # Data set to column 2, which is not visible
+                rowRoot.setData(2, QtCore.Qt.EditRole,
+                             rowIndexStr)  # Data set to column 2, which is not visible
 
         def printer(treeItem):
             foldername = treeItem.text(0)
-            comment = treeItem.text(1)
-            data = treeItem.text(2)
+            sectionIndex = treeItem.text(1)
+            rowIndex = treeItem.text(2)
             # treeItem.indexOfChild()
-            print(foldername + ': ' + comment + ' (' + data + ')')
+            print(foldername + ': ' + f"(Section Index: {sectionIndex})" + f"(Row Index: {rowIndex})")
 
         folderTree.itemClicked.connect(lambda: printer(folderTree.currentItem()))
 
-        self.hello = ["Hallo World", "Hei maailma", "Hola Mundo", "你好，世界"]
-        self.button = QtWidgets.QPushButton("点击我")
-        self.text = QtWidgets.QLabel("Hello World", alignment=QtCore.Qt.AlignCenter)
+        folderTree.currentColumn()
 
         self.chartView = PYChartView()
         testChartModel = CustomStyleChartComposer.configureColorfulBarChart()
         self.chartView.aa_drawChartWithChartModel(testChartModel)
 
         self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
         self.layout.addWidget(self.chartView)
         self.layout.addWidget(folderTree)
 
-        # self.layout.addWidget(self.qtWebView)
-
-
-        self.button.clicked.connect(self.magic)
         self.setWindowTitle("你好世界")
 
     def printer(treeItem):
@@ -247,4 +248,267 @@ class MainTreeWidget(QtWidgets.QWidget):
     @QtCore.Slot()
     def magic(self):
         self.text.setText(random.choice(self.hello))
+
+    def specialChartConfigurationWithSelectedIndex(self, selectedIndex):
+        if selectedIndex == 0:
+            return SpecialChartComposer.configureColumnChart()
+        elif selectedIndex == 1:
+            return SpecialChartComposer.configurePieChart()
+        elif selectedIndex == 2:
+            return SpecialChartComposer.configureBubbleChart()
+        elif selectedIndex == 3:
+            return SpecialChartComposer.configureScatterChart()
+        elif selectedIndex == 4:
+            return SpecialChartComposer.configureArearangeChart()
+        elif selectedIndex == 5:
+            return SpecialChartComposer.configureAreasplinerangeChart()
+        elif selectedIndex == 6:
+            return SpecialChartComposer.configureColumnrangeChart()
+        elif selectedIndex == 7:
+            return SpecialChartComposer.configureStepLineChart()
+        elif selectedIndex == 8:
+            return SpecialChartComposer.configureStepAreaChart()
+        elif selectedIndex == 9:
+            return SpecialChartComposer.configureBoxplotChart()
+        elif selectedIndex == 10:
+            return SpecialChartComposer.configureWaterfallChart()
+        elif selectedIndex == 11:
+            return SpecialChartComposer.configurePyramidChart()
+        elif selectedIndex == 12:
+            return SpecialChartComposer.configureFunnelChart()
+        elif selectedIndex == 13:
+            return SpecialChartComposer.configureErrorbarChart()
+
+    def customStyleChartModelWithSelectedIndex(self, selectedIndex):
+        if selectedIndex == 0:
+            return CustomStyleChartComposer.configureColorfulBarChart()
+        elif selectedIndex == 1:
+            return CustomStyleChartComposer.configureColorfulGradientColorBarChart()
+        elif selectedIndex == 2:
+            return CustomStyleChartComposer.configureDiscontinuousDataChart()
+        elif selectedIndex == 3:
+            return CustomStyleChartComposer.configureMixedLineChart()
+        elif selectedIndex == 4:
+            return CustomStyleChartComposer.configureColorfulColumnChart()
+        elif selectedIndex == 5:
+            return CustomStyleChartComposer.configureGradientColorBarChart()
+        elif selectedIndex == 6:
+            return CustomStyleChartComposer.configureColorfulBarChart()  # 待添加
+        elif selectedIndex == 7:
+            return CustomStyleChartComposer.configureWithMinusNumberChart()
+        elif selectedIndex == 8:
+            return CustomStyleChartComposer.configureStepLineChart()
+        elif selectedIndex == 9:
+            return CustomStyleChartComposer.configureStepAreaChart()
+        elif selectedIndex == 10:
+            return CustomStyleChartComposer.configureNightingaleRoseChart()
+        elif selectedIndex == 11:
+            return CustomStyleChartComposer.configureCustomSingleDataLabelChart()
+        elif selectedIndex == 12:
+            return CustomStyleChartComposer.configureChartWithShadowStyle()
+        elif selectedIndex == 13:
+            return CustomStyleChartComposer.configureColorfulGradientAreaChart()
+        elif selectedIndex == 14:
+            return CustomStyleChartComposer.configureColorfulGradientSplineChart()
+        elif selectedIndex == 15:
+            return CustomStyleChartComposer.configureGradientColorAreasplineChart()
+        elif selectedIndex == 16:
+            return CustomStyleChartComposer.configureSpecialStyleMarkerOfSingleDataElementChart()
+        elif selectedIndex == 17:
+            return CustomStyleChartComposer.configureSpecialStyleColumnOfSingleDataElementChart()
+        elif selectedIndex == 18:
+            return CustomStyleChartComposer.configureAreaChartThreshold()
+        elif selectedIndex == 19:
+            return CustomStyleChartComposer.customScatterChartMarkerSymbolContent()
+        elif selectedIndex == 20:
+            return CustomStyleChartComposer.customLineChartMarkerSymbolContent()
+        elif selectedIndex == 21:
+            return CustomStyleChartComposer.configureTriangleRadarChart()
+        elif selectedIndex == 22:
+            return CustomStyleChartComposer.configureQuadrangleRadarChart()
+        elif selectedIndex == 23:
+            return CustomStyleChartComposer.configurePentagonRadarChart()
+        elif selectedIndex == 24:
+            return CustomStyleChartComposer.configureHexagonRadarChart()
+        elif selectedIndex == 25:
+            return CustomStyleChartComposer.drawLineChartWithPointsCoordinates()
+        elif selectedIndex == 26:
+            return CustomStyleChartComposer.customSpecialStyleDataLabelOfSingleDataElementChart()
+        elif selectedIndex == 27:
+            return CustomStyleChartComposer.customBarChartHoverColorAndSelectColor()
+        elif selectedIndex == 28:
+            return CustomStyleChartComposer.customChartHoverAndSelectHaloStyle()
+        elif selectedIndex == 29:
+            return CustomStyleChartComposer.customSplineChartMarkerStatesHoverStyle()
+        elif selectedIndex == 30:
+            return CustomStyleChartComposer.customNormalStackingChartDataLabelsContentAndStyle()
+        elif selectedIndex == 31:
+            return CustomStyleChartComposer.upsideDownPyramidChart()
+        elif selectedIndex == 32:
+            return CustomStyleChartComposer.doubleLayerPieChart()
+        elif selectedIndex == 33:
+            return CustomStyleChartComposer.doubleLayerDoubleColorsPieChart()
+        elif selectedIndex == 34:
+            return CustomStyleChartComposer.disableSomeOfLinesMouseTrackingEffect()
+        elif selectedIndex == 35:
+            return CustomStyleChartComposer.configureColorfulShadowSplineChart()
+        elif selectedIndex == 36:
+            return CustomStyleChartComposer.configureColorfulDataLabelsStepLineChart()
+        elif selectedIndex == 37:
+            return CustomStyleChartComposer.configureColorfulGradientColorAndColorfulDataLabelsStepAreaChart()
+        elif selectedIndex == 38:
+            return CustomStyleChartComposer.disableSplineChartMarkerHoverEffect()
+        elif selectedIndex == 39:
+            return CustomStyleChartComposer.configureMaxAndMinDataLabelsForChart()
+        elif selectedIndex == 40:
+            return CustomStyleChartComposer.customVerticalXAxisCategoriesLabelsByHTMLBreakLineTag()
+        elif selectedIndex == 41:
+            return CustomStyleChartComposer.noMoreGroupingAndOverlapEachOtherColumnChart()
+        elif selectedIndex == 42:
+            return CustomStyleChartComposer.noMoreGroupingAndNestedColumnChart()
+
+    def chartOptionsConfigurationWithSelectedIndex(self, selectedIndex):
+        if selectedIndex == 0:
+            return ChartOptionsComposer.configureLegendStyle()
+        elif selectedIndex == 1:
+            return ChartOptionsComposer.simpleGaugeChart()
+        elif selectedIndex == 2:
+            return ChartOptionsComposer.gaugeChartWithPlotBand()
+        elif selectedIndex == 3:
+            return ChartOptionsComposer.configureChartWithBackgroundImage()
+        elif selectedIndex == 4:
+            return ChartOptionsComposer.customAreaChartYAxisLabelsAndGridLineStyle()  # 自定义曲线填充图图的 Y 轴 的 Labels 和 elif selectedIndex ==式
+        elif selectedIndex == 5:
+            return ChartOptionsComposer.adjustYAxisMinValueForChart()
+        elif selectedIndex == 6:
+            return ChartOptionsComposer.configureTheMirrorColumnChart()
+        elif selectedIndex == 7:
+            return ChartOptionsComposer.adjustTheXAxisLabels()
+        elif selectedIndex == 8:
+            return ChartOptionsComposer.adjustGroupPaddingBetweenColumns()
+        elif selectedIndex == 9:
+            return ChartOptionsComposer.configureAAPlotBandsForChart()
+        elif selectedIndex == 10:
+            return ChartOptionsComposer.configureAAPlotLinesForChart()
+        elif selectedIndex == 11:
+            return ChartOptionsComposer.customAATooltipWithJSFuntion()
+        elif selectedIndex == 12:
+            return ChartOptionsComposer.customXAxisCrosshairStyle()
+        elif selectedIndex == 13:
+            return ChartOptionsComposer.configureXAxisLabelsFontColorWithHTMLString()
+        elif selectedIndex == 14:
+            return ChartOptionsComposer.configureXAxisLabelsFontColorAndFontSizeWithHTMLString()
+        elif selectedIndex == 15:
+            return ChartOptionsComposer.configure_DataLabels_XAXis_YAxis_Legend_Style()
+        elif selectedIndex == 16:
+            return ChartOptionsComposer.configureXAxisPlotBand()
+        elif selectedIndex == 17:
+            return ChartOptionsComposer.configureDoubleYAxisChartOptions()
+        elif selectedIndex == 18:
+            return ChartOptionsComposer.configureTripleYAxesMixedChart()
+        elif selectedIndex == 19:
+            return ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
+        elif selectedIndex == 20:
+            return ChartOptionsComposer.configureDoubleYAxesMarketDepthChart()
+        elif selectedIndex == 21:
+            return ChartOptionsComposer.customAreaChartTooltipStyleLikeHTMLTable()
+        elif selectedIndex == 22:
+            return ChartOptionsComposer.customAxesGridLineStyle()
+        elif selectedIndex == 23:
+            return ChartOptionsComposer.customRadarChartStyle()
+        elif selectedIndex == 24:
+            return ChartOptionsComposer.customColumnrangeChartStyle()
+        elif selectedIndex == 25:
+            return ChartOptionsComposer.customXAxisLabelsBeImages()  # 自定义曲线面积图 X 轴 labels 为一组图片🖼
+        elif selectedIndex == 26:
+            return ChartOptionsComposer.configureTriangleRadarChart()  # 带有颜色标志带の三角形雷达图
+        elif selectedIndex == 27:
+            return ChartOptionsComposer.configureQuadrangleRadarChart()  # 带有颜色标志带の四角形雷达图
+        elif selectedIndex == 28:
+            return ChartOptionsComposer.configurePentagonRadarChart()  # 带有颜色标志带の五角形雷达图
+        elif selectedIndex == 29:
+            return ChartOptionsComposer.configureHexagonRadarChart()  # 带有颜色标志带の六角形雷达图
+        elif selectedIndex == 30:
+            return ChartOptionsComposer.configureSpiderWebRadarChart()  # 带有颜色标志带の🕸蜘蛛网状雷达elif selectedIndex ==
+        elif selectedIndex == 31:
+            return ChartOptionsComposer.configureComplicatedCustomAreasplineChart()  # 复杂自定义曲线填充图 1
+        elif selectedIndex == 32:
+            return ChartOptionsComposer.configureComplicatedCustomAreasplineChart2()  # 复杂自定义曲线填充图 2
+        elif selectedIndex == 33:
+            return ChartOptionsComposer.configureComplicatedCustomAreasplineChart3()  # 复杂自定义曲线填充图 3
+        elif selectedIndex == 34:
+            return ChartOptionsComposer.yAxisOnTheRightSideChart()  # y轴在右侧的图表
+        elif selectedIndex == 35:
+            return ChartOptionsComposer.doubleLayerHalfPieChart()  # 双层嵌套的玉阕图
+        elif selectedIndex == 36:
+            return ChartOptionsComposer.customAreasplineChartTooltipContentWithHeaderFormat()  # 通过 tooltip 的 elif selectedIndex ==erFormat 属性来自定义 曲线填充图的 to
+        elif selectedIndex == 37:
+            return ChartOptionsComposer.customAreaChartTooltipStyleWithTotalValueHeader()  # 浮动提示框 header 显示总值信息
+        elif selectedIndex == 38:
+            return ChartOptionsComposer.configureYAxisLabelsNumericSymbolsMagnitudeOfAerasplineChart()  # 自定义 Y 轴的 elif selectedIndex ==ls 国际单位符基数及国际单位符
+        elif selectedIndex == 39:
+            return ChartOptionsComposer.timeDataWithIrregularIntervalsChart()  # X 轴时间不连续的折线图
+        elif selectedIndex == 40:
+            return ChartOptionsComposer.logarithmicAxisLineChart()  # 对数轴折线图📈
+        elif selectedIndex == 41:
+            return ChartOptionsComposer.logarithmicAxisScatterChart()  # 对数轴散点elif selectedIndex ==
+        elif selectedIndex == 42:
+            return ChartOptionsComposer.disableMixedChartInactiveAnimationEffect()  # 禁用混合图表的 inactive 动画效果
+        elif selectedIndex == 43:
+            return ChartOptionsComposer.adjustBubbleChartMinAndMax()  # 调整气泡图的 min 和 max 相关属性
+        elif selectedIndex == 44:
+            return ChartOptionsComposer.customLineChartDataLabelsFormat()  # 自定义曲线图的 DataLabels 的 format 属性
+        elif selectedIndex == 45:
+            return ChartOptionsComposer.customLineChartDataLabelsFormat2()  # 自定义曲线图的 DataLabels 的 format elif selectedIndex ==简易方法)
+        elif selectedIndex == 46:
+            return ChartOptionsComposer.complicatedScatterChart()  # 复杂的自定义散点图
+
+    def chartJSFuncOptionsConfigurationWithSelectedIndex(self, selectedIndex):
+        if selectedIndex == 0:
+            return JSFuncOptionsComposer.customAreaChartTooltipStyleWithSimpleFormatString()
+        elif selectedIndex == 1:
+            return JSFuncOptionsComposer.customAreaChartTooltipStyleWithDifferentUnitSuffix()
+        elif selectedIndex == 2:
+            return JSFuncOptionsComposer.customAreaChartTooltipStyleWithColorfulHtmlLabels()
+        elif selectedIndex == 3:
+            return JSFuncOptionsComposer.customLineChartTooltipStyleWhenValueBeZeroDoNotShow()
+        elif selectedIndex == 4:
+            return JSFuncOptionsComposer.customBoxplotTooltipContent()
+        elif selectedIndex == 5:
+            return JSFuncOptionsComposer.customYAxisLabels()
+        elif selectedIndex == 6:
+            return JSFuncOptionsComposer.customYAxisLabels2()
+        elif selectedIndex == 7:
+            return JSFuncOptionsComposer.customStackedAndGroupedColumnChartTooltip()
+        elif selectedIndex == 8:
+            return JSFuncOptionsComposer.customDoubleXAxesChart()
+        elif selectedIndex == 9:
+            return JSFuncOptionsComposer.customArearangeChartTooltip()
+        elif selectedIndex == 10:
+            return JSFuncOptionsComposer.customLineChartOriginalPointPositionByConfiguringXAxisFormatterAndTooltipFormatter()
+        elif selectedIndex == 11:
+            return JSFuncOptionsComposer.customTooltipWhichDataSourceComeFromOutSideRatherThanSeries()
+        elif selectedIndex == 12:
+            return JSFuncOptionsComposer.customSpiderChartStyle()
+        elif selectedIndex == 13:
+            return JSFuncOptionsComposer.customizeEveryDataLabelSinglelyByDataLabelsFormatter()
+        elif selectedIndex == 14:
+            return JSFuncOptionsComposer.customXAxisLabelsBeImages()
+        elif selectedIndex == 15:
+            return JSFuncOptionsComposer.customLegendItemClickEvent()
+        elif selectedIndex == 16:
+            return JSFuncOptionsComposer.customTooltipPositionerFunction()
+        elif selectedIndex == 17:
+            return JSFuncOptionsComposer.fixedTooltipPositionByCustomPositionerFunction()
+        elif selectedIndex == 18:
+            return JSFuncOptionsComposer.disableColumnChartUnselectEventEffectBySeriesPointEventClickFunction()
+        elif selectedIndex == 19:
+            return JSFuncOptionsComposer.customAreasplineChartTooltipStyleByDivWithCSS()
+        elif selectedIndex == 20:
+            return JSFuncOptionsComposer.configureTheAxesLabelsFormattersOfDoubleYAxesChart()
+        elif selectedIndex == 21:
+            return JSFuncOptionsComposer.makePieChartShow0Data()
+        elif selectedIndex == 22:
+            return JSFuncOptionsComposer.customColumnChartXAxisLabelsTextByInterceptTheFirstFourCharacters()
+
 
