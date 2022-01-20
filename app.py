@@ -1,9 +1,12 @@
+import random
 import sys
 
 # from PyQt6.QtCore import QUrl
 # from PyQt6.QtWidgets import QApplication, QLabel, QPushButton, QWidget, QMessageBox
 # from PySide6 import QtWebEngineWidgets, QtWidgets, QtCore
-# from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6.QtCore import QUrl
+from PySide6.QtWebEngineWidgets import QWebEngineView
 # import webview
 import wx
 from wx.html2 import WebView
@@ -18,7 +21,9 @@ import json
 import jsonpickle
 
 from aacharts.aachartcreator.AAChartModel import AAChartModel
+from aacharts.aachartcreator.AAChartView import AAChartView
 from aacharts.aachartcreator.AASeriesElement import AASeriesElement
+from aacharts.aachartcreator.PYChartView import PYChartView
 from aacharts.aaenum.AAEnum import AAChartType, AAChartAnimationType
 from aacharts.aaoptionsmodel.AAOptions import AAOptions
 from aacharts.aatool.AAJsonConverter import AAJsonConverter
@@ -82,8 +87,9 @@ class MyHtmlFrame(wx.Frame):
 
 class Example(wx.Frame):
 
-    def __init__(self, *args, **kw):
-        super(Example, self).__init__(*args, **kw)
+    def __init__(self, parent, title):
+        super(Example, self).__init__(parent, title=title,
+                                      size=(1300, 450))
 
         self.InitUI()
 
@@ -104,11 +110,14 @@ class Example(wx.Frame):
         delBtn = wx.Button(btnPanel, wx.ID_ANY, 'Delete', size=(90, 30))
         clrBtn = wx.Button(btnPanel, wx.ID_ANY, 'Clear', size=(90, 30))
 
-        self.web_view = WebView.New(btnPanel, -1, size=(900,600))
+        self.web_view = AAChartView(btnPanel, size=(900,600))
+
+
+        # self.web_view = WebView.New(btnPanel, -1, size=(900,600))
         # web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html")
         # self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
-        self.web_view.Bind(wx.html2.EVT_WEBVIEW_ERROR, self.on_webview_error)
-        self.web_view.Bind(wx.html2.EVT_WEBVIEW_LOADED, self.on_webview_load)
+        # self.web_view.Bind(wx.html2.EVT_WEBVIEW_ERROR, self.on_webview_error)
+        # self.web_view.Bind(wx.html2.EVT_WEBVIEW_LOADED, self.on_webview_load)
         # web_view.RunScript("alert('测试运行 JS')")
         # web_view.RunScript("document.write('Hello from wx.Widgets!')")
         # web_view.RunScript("document.write('--------------这个世上本没有路, 走的人多了,也便成了路Hello from wx.Widgets!')")
@@ -284,48 +293,50 @@ class Example(wx.Frame):
         testChartModel = self.chartJSFuncOptionsConfigurationWithSelectedIndex(selectedIndex)
         # testChartModel2 = self.chartConfigurationWithSelectedIndex(listbox.GetSelections())
 
-        self.aa_drawChartWithChartOptions(testChartModel)
+        self.web_view.aa_drawChartWithChartOptions(testChartModel)
+        # self.aa_drawChartWithChartModel(testChartModel)
 
-    def on_webview_error(self, evt):
-        self.URL = evt.GetURL()
-        print(self.URL)
-        self.retries += 1
-        if self.retries > self.max_retries:  # Give up
-            self.Destroy()
-        print("💀💀💀💀💀Error {} of {} attempts to load {}, trying again in 3 seconds.".format(self.retries, self.max_retries,
-                                                                                      self.URL))
-        if self.retries > 5:  # Try alternate
-            self.URL = "http:#wxPython.org"
-            print("Swapping to alternate Url " + self.URL)
-        self.browser.Destroy()
-
-
-    def on_webview_load(self, evt):
-        print("哈哈哈🔥, 图表加载完成事件捕获成功")
-        self.drawChart()
-
-    def drawChart(self):
-        jsStr = f"loadTheHighChartView('{self.optionsJson}','0','0')"
-        self.web_view.RunScript(jsStr)
-
-    def aa_drawChartWithChartModel(self, aaChartModel: AAChartModel):
-        aaOptions = aaChartModel.aa_toAAOptions()
-        self.aa_drawChartWithChartOptions(aaOptions)
-
-    def aa_drawChartWithChartOptions(self, aaOptions: AAOptions):
-        if len(self.optionsJson) < 1:
-            self.configureOptionsJsonStringWithAAOptions(aaOptions)
-            self.web_view.LoadURL("/Users/ios-fn/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
-        else:
-            self.aa_refreshChartWholeContentWithChartOptions(aaOptions)
-
-    def configureOptionsJsonStringWithAAOptions(self, aaOptions: AAOptions):
-        pureJson = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
-        self.optionsJson = pureJson
-
-    def aa_refreshChartWholeContentWithChartOptions(self, aaOptions: AAOptions):
-        self.configureOptionsJsonStringWithAAOptions(aaOptions)
-        self.drawChart()
+    # def on_webview_error(self, evt):
+    #     self.URL = evt.GetURL()
+    #     print(self.URL)
+    #     self.retries += 1
+    #     if self.retries > self.max_retries:  # Give up
+    #         self.Destroy()
+    #     print("💀💀💀💀💀Error {} of {} attempts to load {}, trying again in 3 seconds.".format(self.retries, self.max_retries,
+    #                                                                                   self.URL))
+    #     if self.retries > 5:  # Try alternate
+    #         self.URL = "http:#wxPython.org"
+    #         print("Swapping to alternate Url " + self.URL)
+    #     self.browser.Destroy()
+    #
+    #
+    # def on_webview_load(self, evt):
+    #     print("哈哈哈🔥, 图表加载完成事件捕获成功")
+    #     self.drawChart()
+    #
+    # def drawChart(self):
+    #     # self.optionsJson = self.optionsJson.replace("\"","\\\"")
+    #     jsStr = f"loadTheHighChartView('{self.optionsJson}','0','0')"
+    #     self.web_view.RunScript(jsStr)
+    #
+    # def aa_drawChartWithChartModel(self, aaChartModel: AAChartModel):
+    #     aaOptions = aaChartModel.aa_toAAOptions()
+    #     self.aa_drawChartWithChartOptions(aaOptions)
+    #
+    # def aa_drawChartWithChartOptions(self, aaOptions: AAOptions):
+    #     if len(self.optionsJson) < 1:
+    #         self.configureOptionsJsonStringWithAAOptions(aaOptions)
+    #         self.web_view.LoadURL("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
+    #     else:
+    #         self.aa_refreshChartWholeContentWithChartOptions(aaOptions)
+    #
+    # def configureOptionsJsonStringWithAAOptions(self, aaOptions: AAOptions):
+    #     pureJson = AAJsonConverter.convertChartOptionsToPureJson(aaOptions)
+    #     self.optionsJson = pureJson
+    #
+    # def aa_refreshChartWholeContentWithChartOptions(self, aaOptions: AAOptions):
+    #     self.configureOptionsJsonStringWithAAOptions(aaOptions)
+    #     self.drawChart()
         
     def specialChartConfigurationWithSelectedIndex(self, selectedIndex):
         if selectedIndex == 0: return SpecialChartComposer.configureColumnChart()
@@ -343,7 +354,7 @@ class Example(wx.Frame):
         elif selectedIndex == 12: return SpecialChartComposer.configureFunnelChart()
         elif selectedIndex == 13: return SpecialChartComposer.configureErrorbarChart()
 
-    def chartConfigurationWithSelectedIndex(self, selectedIndex):
+    def customStyleChartModelWithSelectedIndex(self, selectedIndex):
         if selectedIndex == 0:  return CustomStyleChartComposer.configureColorfulBarChart()
         elif selectedIndex == 1:  return CustomStyleChartComposer.configureColorfulGradientColorBarChart()
         elif selectedIndex == 2:  return CustomStyleChartComposer.configureDiscontinuousDataChart()
@@ -504,12 +515,12 @@ class Example(wx.Frame):
 def main():
 
     app = wx.App()
-    ex = Example(None)
+    ex = Example(None, "测试标题")
 
     ex.Show()
     app.MainLoop()
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # app = QApplication(sys.argv)
 
     # testChartOptions = ChartOptionsComposer.configureDoubleYAxesAndColumnLineMixedChart()
@@ -526,9 +537,92 @@ if __name__ == '__main__':
     # json_str2 = json.dumps(aaChartModel2, ensure_ascii=False)
     # print(json_str)
 
-    main()
+    # qtWebView = QWebEngineView()
+    #
+    # main()
 
     # app = wx.App()
     # frm = MyHtmlFrame(None, "Simple HTML Browser")
     # frm.Show()
     # app.MainLoop()
+
+
+class MyWidget(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
+        folderTree = QtWidgets.QTreeWidget()
+
+        header = QtWidgets.QTreeWidgetItem(["Virtual folder tree", "Comment"])
+        # ...
+        folderTree.setHeaderItem(header)  # Another alternative is setHeaderLabels(["Tree","First",...])
+
+        root = QtWidgets.QTreeWidgetItem(folderTree, ["Untagged files"])
+        root.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
+
+        folder1 = QtWidgets.QTreeWidgetItem(root, ["Interiors"])
+        folder1.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
+
+        folder2 = QtWidgets.QTreeWidgetItem(root, ["Exteriors"])
+        folder2.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
+
+        folder1_1 = QtWidgets.QTreeWidgetItem(folder1, ["Bathroom", "Seg was here"])
+        folder1_1.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
+
+        folder1_2 = QtWidgets.QTreeWidgetItem(folder1, ["Living room", "Approved by client"])
+        folder1_2.setData(2, QtCore.Qt.EditRole, 'Some hidden data here')  # Data set to column 2, which is not visible
+
+        def printer(treeItem):
+            foldername = treeItem.text(0)
+            comment = treeItem.text(1)
+            data = treeItem.text(2)
+            print(foldername + ': ' + comment + ' (' + data + ')')
+
+        folderTree.itemClicked.connect(lambda: printer(folderTree.currentItem()))
+
+        self.hello = ["Hallo World", "Hei maailma", "Hola Mundo", "你好，世界"]
+        self.button = QtWidgets.QPushButton("点击我")
+        self.text = QtWidgets.QLabel("Hello World", alignment=QtCore.Qt.AlignCenter)
+
+        self.chartView = PYChartView()
+        testChartModel = CustomStyleChartComposer.configureColorfulBarChart()
+        self.chartView.aa_drawChartWithChartModel(testChartModel)
+        # self.qtWebView = QWebEngineView()
+        # self.qtWebView.load(QUrl("file:///Users/admin/Documents/GitHub/AACharts-PyQt/AAChartView.html"))
+        #
+        # QUrl("file:///" + htmlPath)
+        # self.qtWebView.load("/Users/admin/Documents/GitHub/AACharts-PyQt/aacharts/AAJSFiles/AAChartView.html")
+
+        self.layout = QtWidgets.QVBoxLayout(self)
+        self.layout.addWidget(self.text)
+        self.layout.addWidget(self.button)
+        self.layout.addWidget(self.chartView)
+        self.layout.addWidget(folderTree)
+
+        # self.layout.addWidget(self.qtWebView)
+
+
+        self.button.clicked.connect(self.magic)
+        self.setWindowTitle("你好世界")
+
+    def printer(treeItem):
+        foldername = treeItem.text(0)
+        comment = treeItem.text(1)
+        data = treeItem.text(2)
+        print
+        foldername + ': ' + comment + ' (' + data + ')'
+
+
+    @QtCore.Slot()
+    def magic(self):
+        self.text.setText(random.choice(self.hello))
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+
+    widget = MyWidget()
+    widget.resize(300, 1200)
+    widget.show()
+
+    sys.exit(app.exec())
