@@ -1,30 +1,12 @@
-from enum import Enum
-from typing import List
-from aacharts.aaoptionsmodel.AAStyle import AAStyle
 from aacharts.aaenum.AAEnum import *
-from aacharts.aaoptionsmodel.AAYAxis import AAYAxis
-from aacharts.aaoptionsmodel.AALabels import AALabels
-from aacharts.aaoptionsmodel.AAXAxis import AAXAxis
-from aacharts.aaoptionsmodel.AALabels import AALabels
-from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
-from aacharts.aaoptionsmodel.AAMarker import AAMarker
-from aacharts.aaoptionsmodel.AASeries import AASeries
-from aacharts.aaoptionsmodel.AASubtitle import AASubtitle
-from aacharts.aaoptionsmodel.AAOptions import AAOptions
-from aacharts.aaoptionsmodel.AATitle import AATitle
-from aacharts.aaoptionsmodel.AAChart import AAChart
-from aacharts.aaoptionsmodel.AATooltip import AATooltip
-from aacharts.aaoptionsmodel.AAPlotOptions import AAPlotOptions
-from aacharts.aaoptionsmodel.AAAnimation import AAAnimation
-from aacharts.aaoptionsmodel.AALegend import AALegend
-from aacharts.aaoptionsmodel.AACredits import AACredits
 from aacharts.aaoptionsmodel.AAScrollablePlotArea import AAScrollablePlotArea
+from aacharts.aaoptionsmodel.AAStyle import AAStyle
 
 
 class AAChartModel:
     animationType: AAChartAnimationType = AAChartAnimationType.bounce # The type of chart animation
     animationDuration: int = None # The chart rendering animation duration
-    title: str = None # The chart title
+    title: str = "" # The chart title
     titleStyle: AAStyle = None # The chart title style
     subtitle: str = None # The chart subtitle
     subtitleAlign: AAChartAlignType = None # The chart subtitle text align style
@@ -39,12 +21,12 @@ class AAChartModel:
     yAxisReversed: bool = None # Whether to reverse the axis so that the highest number is closest to the origin. If the chart is inverted, the x axis is reversed by default. Defaults to false
     crosshairs: bool = None # Enable or disable the crosshairs
     polar: bool = None # When true, cartesian charts like line, spline, area and column are transformed into the polar coordinate system. Requires `AAHighchartsMore.js`. Defaults to false
-    margin: List = None
+    margin: list = None
     dataLabelsEnabled: bool = None # Enable or disable the data labels. Defaults to false
     dataLabelsStyle: AAStyle = None # The data labels style
     xAxisLabelsEnabled: bool = None # Enable or disable the axis labels. Defaults to true
     xAxisLabelsStyle: AAStyle = None # The x axis labels style
-    categories: List = None # Set new categories for the axis
+    categories: list = None # Set new categories for the axis
     xAxisGridLineWidth: float = None # The width of the grid lines extending the ticks across the plot area.Defaults to 0
     xAxisVisible: bool = None # Show the x axis or not
     xAxisTickinterval: float = None # Custom x axis tick interval,It is useful when the x categories array is too long to show all of them
@@ -60,8 +42,8 @@ class AAChartModel:
     yAxisAllowDecimals: bool = None # The y axis values label allow decimals or not
     tooltipEnabled: bool = None # Show the tooltip or not
     tooltipValueSuffix: str = None # Custom tooltip value unit suffix
-    colorsTheme: List = None # An array containing the default colors for the chart's series. When all colors are used, new colors are pulled from the start again. Defaults to: ["#bb250c","#f67210","#fde680","#257679","#f1c6c5"]
-    series: List = None # An array of all the chart's series
+    colorsTheme: list = None # An array containing the default colors for the chart's series. When all colors are used, new colors are pulled from the start again. Defaults to: ["#bb250c","#f67210","#fde680","#257679","#f1c6c5"]
+    series: list = None # An array of all the chart's series
     legendEnabled: bool = None # Enable or disable the legend. Defaults to true
     backgroundColor: str = None # The background color or gradient for the outer chart area. Defaults to #FFFFFF
     borderRadius: float = None # The corner radius of the outer chart border. Defaults to 0
@@ -165,7 +147,7 @@ class AAChartModel:
         self.xAxisLabelsStyle = prop
         return self
 
-    def categoriesSet(self, prop: List):
+    def categoriesSet(self, prop: list):
         self.categories = prop
         return self
 
@@ -221,11 +203,11 @@ class AAChartModel:
         self.yAxisGridLineWidth = prop
         return self
 
-    def colorsThemeSet(self, prop: List):
+    def colorsThemeSet(self, prop: list):
         self.colorsTheme = prop
         return self
 
-    def seriesSet(self, prop: List):
+    def seriesSet(self, prop: list):
         self.series = prop
         return self
 
