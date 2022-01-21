@@ -181,7 +181,7 @@ class AAAreaspline:
 
  
 class AAPie:
-     type: AAChartType
+     type: str
      data: List
      dataLabels:AADataLabels
      size: float
@@ -194,7 +194,7 @@ class AAPie:
      center: List
      
      def typeSet(self, prop: AAChartType):
-        self.type = prop
+        self.type = prop.value
         return self
      
      def dataSet(self, prop: List):
