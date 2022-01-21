@@ -1,7 +1,25 @@
 from aacharts.aaenum.AAEnum import *
 from aacharts.aaoptionsmodel.AAScrollablePlotArea import AAScrollablePlotArea
 from aacharts.aaoptionsmodel.AAStyle import AAStyle
-
+from aacharts.aaoptionsmodel.AAStyle import AAStyle
+from aacharts.aaenum.AAEnum import *
+from aacharts.aaoptionsmodel.AAYAxis import AAYAxis
+from aacharts.aaoptionsmodel.AALabels import AALabels
+from aacharts.aaoptionsmodel.AAXAxis import AAXAxis
+from aacharts.aaoptionsmodel.AALabels import AALabels
+from aacharts.aaoptionsmodel.AADataLabels import AADataLabels
+from aacharts.aaoptionsmodel.AAMarker import AAMarker
+from aacharts.aaoptionsmodel.AASeries import AASeries
+from aacharts.aaoptionsmodel.AASubtitle import AASubtitle
+from aacharts.aaoptionsmodel.AAOptions import AAOptions
+from aacharts.aaoptionsmodel.AATitle import AATitle
+from aacharts.aaoptionsmodel.AAChart import AAChart
+from aacharts.aaoptionsmodel.AATooltip import AATooltip
+from aacharts.aaoptionsmodel.AAPlotOptions import AAPlotOptions
+from aacharts.aaoptionsmodel.AAAnimation import AAAnimation
+from aacharts.aaoptionsmodel.AALegend import AALegend
+from aacharts.aaoptionsmodel.AACredits import AACredits
+from aacharts.aaoptionsmodel.AAScrollablePlotArea import AAScrollablePlotArea
 
 class AAChartModel:
     animationType: AAChartAnimationType = AAChartAnimationType.bounce # The type of chart animation
