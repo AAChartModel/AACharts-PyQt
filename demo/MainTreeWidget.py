@@ -3,6 +3,8 @@ from random import random
 from PySide6 import QtWidgets, QtCore
 
 from aacharts.aachartcreator.PYChartView import PYChartView
+from aacharts.aaenum.AAEnum import AAChartType
+from demo.BasicChartComposer import BasicChartComposer
 from demo.MixedChartComposer import MixedChartComposer
 from demo.SpecialChartComposer import SpecialChartComposer
 from demo.CustomStyleChartComposer import CustomStyleChartComposer
@@ -235,6 +237,9 @@ class MainTreeWidget(QtWidgets.QWidget):
             if len(rowIndexStr) > 0:
                 sectionIndexValue = int(sectionIndex)
                 rowIndexValue = int(rowIndexStr) - 1
+                if sectionIndexValue == 1:
+                   aaChartModel = self.basicChartConfigurationWithSelectedIndex(rowIndexValue)
+                   self.chartView.aa_drawChartWithChartModel(aaChartModel)
                 if sectionIndexValue == 2:
                    aaChartModel = self.specialChartConfigurationWithSelectedIndex(rowIndexValue)
                    self.chartView.aa_drawChartWithChartModel(aaChartModel)
@@ -273,6 +278,40 @@ class MainTreeWidget(QtWidgets.QWidget):
     @QtCore.Slot()
     def magic(self):
         self.text.setText(random.choice(self.hello))
+
+    def basicChartConfigurationWithSelectedIndex(self, selectedIndex):
+        chartType = AAChartType.area
+        if selectedIndex == 0:
+            chartType = AAChartType.column
+        elif selectedIndex == 1:
+            chartType = AAChartType.bar
+        elif selectedIndex == 2:
+            chartType = AAChartType.area
+        elif selectedIndex == 3:
+            chartType = AAChartType.areaspline
+        elif selectedIndex == 4:
+            chartType = AAChartType.area
+        elif selectedIndex == 5:
+            chartType = AAChartType.line
+        elif selectedIndex == 6:
+            chartType = AAChartType.line
+        elif selectedIndex == 7:
+            chartType = AAChartType.spline
+        return self.configureTheStyleForDifferentTypeChart(chartType, selectedIndex)
+
+    def configureTheStyleForDifferentTypeChart(self, chartType: AAChartType,position: int):
+        aaChartModel = BasicChartComposer.configureAreaChart()
+        if (chartType == AAChartType.area or chartType == AAChartType.line) and (position == 4 or position == 5):
+            aaChartModel = BasicChartComposer.configureStepAreaChartAndStepLineChart()
+        elif chartType == AAChartType.column or chartType == AAChartType.bar:
+            aaChartModel = BasicChartComposer.configureColumnChartAndBarChart()
+        elif chartType == AAChartType.area or chartType == AAChartType.areaspline:
+            aaChartModel = BasicChartComposer.configureAreaChartAndAreasplineChartStyle(chartType)
+        elif chartType == AAChartType.line or chartType == AAChartType.spline:
+            aaChartModel = BasicChartComposer.configureLineChartAndSplineChartStyle(chartType)
+
+        aaChartModel.chartType = chartType
+        return aaChartModel
 
     def specialChartConfigurationWithSelectedIndex(self, selectedIndex):
         if selectedIndex == 0:
