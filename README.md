@@ -1,1 +1,1 @@
-# AACharts-PyQt
+# AACharts-PyQt(Beta now, coming soon...)
